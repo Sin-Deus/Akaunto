@@ -52,7 +52,7 @@ class Account
     /**
      * @var \SD\UserBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="SD\UserBundle\Entity\User", inversedBy="accounts", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="SD\UserBundle\Entity\User", inversedBy="accounts")
      * @ORM\JoinColumn(name="creator_id", referencedColumnName="id", nullable=false)
      */
     private $creator;

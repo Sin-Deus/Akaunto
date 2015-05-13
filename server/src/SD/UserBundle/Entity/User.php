@@ -2,8 +2,10 @@
 
 namespace SD\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use SD\AppBundle\Entity\Account;
 
 /**
  * User
@@ -23,9 +25,9 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var \SD\AppBundle\Entity\Account
+     * @var Account
      *
-     * @ORM\OneToMany(targetEntity="SD\AppBundle\Entity\Account", mappedBy="creator_id")
+     * @ORM\OneToMany(targetEntity="SD\AppBundle\Entity\Account", mappedBy="creator")
      */
     private $accounts;
 
@@ -34,7 +36,7 @@ class User extends BaseUser
      */
     public function __construct()
     {
-        $this->accounts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->accounts = new ArrayCollection();
     }
     
     /**
@@ -50,10 +52,10 @@ class User extends BaseUser
     /**
      * Add accounts
      *
-     * @param \SD\AppBundle\Entity\Account $accounts
+     * @param Account $accounts
      * @return User
      */
-    public function addAccount(\SD\AppBundle\Entity\Account $accounts)
+    public function addAccount(Account $accounts)
     {
         $this->accounts[] = $accounts;
     
@@ -63,9 +65,9 @@ class User extends BaseUser
     /**
      * Remove accounts
      *
-     * @param \SD\AppBundle\Entity\Account $accounts
+     * @param Account $accounts
      */
-    public function removeAccount(\SD\AppBundle\Entity\Account $accounts)
+    public function removeAccount(Account $accounts)
     {
         $this->accounts->removeElement($accounts);
     }
