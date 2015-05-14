@@ -23,7 +23,10 @@ class UserAccountRestController extends Controller {
             return $this->getDoctrine()->getRepository("SDAppBundle:Account")->findByCreator($id);
         } else {
             // TODO
-            return [];
+            $em = $this->getDoctrine()->getManager();
+            $query = $em->createQuery("SELECT a, au FROM SDAppBundle:Account a JOIN a.associatedUsers au WHERE au.user = :id");
+            $query->setParameters(["id" => $id]);
+            return $query->getResult();
         }
     }
 }

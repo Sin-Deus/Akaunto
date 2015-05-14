@@ -57,6 +57,13 @@ class Account
      */
     private $creator;
 
+    /**
+     * @var \SD\AppBundle\Entity\UserAccountAssociation
+     *
+     * @ORM\OneToMany(targetEntity="SD\AppBundle\Entity\UserAccountAssociation", mappedBy="account", fetch="EXTRA_LAZY")
+     */
+    private $associatedUsers;
+
 
     /**
      * Get id

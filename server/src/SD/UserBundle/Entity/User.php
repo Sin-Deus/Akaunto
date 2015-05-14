@@ -27,9 +27,16 @@ class User extends BaseUser
     /**
      * @var Account
      *
-     * @ORM\OneToMany(targetEntity="SD\AppBundle\Entity\Account", mappedBy="creator")
+     * @ORM\OneToMany(targetEntity="SD\AppBundle\Entity\Account", mappedBy="creator", fetch="EXTRA_LAZY")
      */
     private $accounts;
+
+    /**
+     * @var \SD\AppBundle\Entity\UserAccountAssociation
+     *
+     * @ORM\OneToMany(targetEntity="SD\AppBundle\Entity\UserAccountAssociation", mappedBy="user", fetch="EXTRA_LAZY")
+     */
+    private $associatedAccounts;
 
     /**
      * Constructor
