@@ -13,8 +13,8 @@ class UserAccountRestController extends Controller {
      *
      * @Rest\QueryParam(name="creatorOnly", default=false, description="Whether or not returning only the accounts created by this user")
      *
-     * @param {ParamFetcher} $paramFetcher
-     * @param {number} $id The user id.
+     * @param ParamFetcher $paramFetcher
+     * @param number $id The user id.
      * @return \SD\AppBundle\Entity\Account[]
      */
     public function getAccountsAction(ParamFetcher $paramFetcher, $id) {
@@ -22,7 +22,6 @@ class UserAccountRestController extends Controller {
         if ($creatorOnly) {
             return $this->getDoctrine()->getRepository("SDAppBundle:Account")->findByCreator($id);
         } else {
-            // TODO
             $em = $this->getDoctrine()->getManager();
             $query = $em->createQuery("SELECT a, au FROM SDAppBundle:Account a JOIN a.associatedUsers au WHERE au.user = :id");
             $query->setParameters(["id" => $id]);

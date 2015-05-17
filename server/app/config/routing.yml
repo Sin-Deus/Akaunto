@@ -1,11 +1,3 @@
-sd_app:
-    resource: "@SDAppBundle/Resources/config/routing.yml"
-    prefix:   /
-
-sd_user:
-    resource: "@SDUserBundle/Resources/config/routing.yml"
-    prefix:   /
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
