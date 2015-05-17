@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class UserRestController extends Controller {
 
-    public function getUsersMeAction() {
+    public function meUserAction() {
         $user = $this->container->get('security.context')->getToken()->getUser();
         return $user;
     }

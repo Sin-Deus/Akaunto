@@ -31,7 +31,7 @@ class Account
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isSavings", type="boolean")
+     * @ORM\Column(name="isSavings", type="boolean", options={ "default"=false })
      */
     private $isSavings;
 
@@ -188,5 +188,45 @@ class Account
     public function getCreator()
     {
         return $this->creator;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->associatedUsers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add associatedUsers
+     *
+     * @param \SD\AppBundle\Entity\UserAccountAssociation $associatedUsers
+     * @return Account
+     */
+    public function addAssociatedUser(\SD\AppBundle\Entity\UserAccountAssociation $associatedUsers)
+    {
+        $this->associatedUsers[] = $associatedUsers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove associatedUsers
+     *
+     * @param \SD\AppBundle\Entity\UserAccountAssociation $associatedUsers
+     */
+    public function removeAssociatedUser(\SD\AppBundle\Entity\UserAccountAssociation $associatedUsers)
+    {
+        $this->associatedUsers->removeElement($associatedUsers);
+    }
+
+    /**
+     * Get associatedUsers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAssociatedUsers()
+    {
+        return $this->associatedUsers;
     }
 }
