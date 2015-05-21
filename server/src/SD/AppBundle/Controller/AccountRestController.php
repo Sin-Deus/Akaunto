@@ -6,7 +6,7 @@ use FOS\RestBundle\Util\Codes;
 use SD\AppBundle\Entity\Account;
 use SD\AppBundle\Form\AccountType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class AccountRestController extends Controller {
