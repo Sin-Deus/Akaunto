@@ -16,7 +16,7 @@ class AccountType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('isSavings', 'boolean', array('data' => false))
+            ->add('isSavings', 'choice', array('data' => false))
             ->add('currentBalance', 'integer', array('data' => 0))
             ->add('lastReconciliation')
             ->add('creator')
@@ -29,7 +29,8 @@ class AccountType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'SD\AppBundle\Entity\Account'
+            'data_class' => 'SD\AppBundle\Entity\Account',
+            'csrf_protection' => false
         ));
     }
 
