@@ -42,7 +42,7 @@ class AccountRestController extends Controller {
     public function postAccountAction(Request $request) {
         $account = new Account();
         $form = $this->createForm(new AccountType(), $account);
-        $form->submit($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -57,6 +57,7 @@ class AccountRestController extends Controller {
                 Codes::HTTP_CREATED
             );
         } else {
+            return $form;
             throw new BadRequestHttpException();
         }
     }

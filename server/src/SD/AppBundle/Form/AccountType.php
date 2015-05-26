@@ -39,6 +39,6 @@ class AccountType extends AbstractType
      */
     public function getName()
     {
-        return 'sd_appbundle_account';
+        return '';
     }
 }
