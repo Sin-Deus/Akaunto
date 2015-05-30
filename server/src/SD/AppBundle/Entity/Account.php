@@ -3,6 +3,7 @@
 namespace SD\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use SD\UserBundle\Entity\User;
 
 /**
  * Account
@@ -31,7 +32,7 @@ class Account
     /**
      * @var boolean
      *
-     * @ORM\Column(name="isSavings", type="boolean", options={ "default"=false })
+     * @ORM\Column(name="isSavings", type="boolean", options={ "default"=0 })
      */
     private $isSavings;
 
@@ -45,12 +46,12 @@ class Account
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastReconciliation", type="date")
+     * @ORM\Column(name="lastReconciliation", type="date", nullable=true)
      */
     private $lastReconciliation;
 
     /**
-     * @var \SD\UserBundle\Entity\User
+     * @var User
      *
      * @ORM\ManyToOne(targetEntity="SD\UserBundle\Entity\User", inversedBy="accounts")
      * @ORM\JoinColumn(name="creator_id", referencedColumnName="id", nullable=false)
@@ -60,7 +61,7 @@ class Account
     /**
      * @var \SD\AppBundle\Entity\UserAccountAssociation
      *
-     * @ORM\OneToMany(targetEntity="SD\AppBundle\Entity\UserAccountAssociation", mappedBy="account", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="SD\AppBundle\Entity\UserAccountAssociation", mappedBy="account", fetch="EXTRA_LAZY", cascade={"persist", "remove"})
      */
     private $associatedUsers;
 
@@ -170,7 +171,7 @@ class Account
     /**
      * Set creator
      *
-     * @param \SD\UserBundle\Entity\User $creator
+     * @param User $creator
      * @return Account
      */
     public function setCreator($creator)
@@ -183,7 +184,7 @@ class Account
     /**
      * Get creator
      *
-     * @return \SD\UserBundle\Entity\User
+     * @return User
      */
     public function getCreator()
     {
@@ -233,7 +234,7 @@ class Account
     /**
      * Checks whether or not the specified user is associated to this account.
      *
-     * @param \SD\UserBundle\Entity\User $user
+     * @param User $user
      * @return boolean
      */
     public function isUserAssociated($user) {
@@ -242,5 +243,21 @@ class Account
             $isUserAssociated = $isUserAssociated || $associatedUser->getUser()->getId() === $user->getId();
         }
         return $isUserAssociated;
+    }
+
+    /**
+     * Checks whether or not the specified user is associated to this account.
+     *
+     * @param User $user
+     * @return boolean
+     */
+    public function hasUserPermissionToEdit($user) {
+        $hasUserPermissionToEdit = false;
+        foreach ($this->associatedUsers as $associatedUser) {
+            /** @var $associatedUser UserAccountAssociation */
+            $hasUserPermissionToEdit = $hasUserPermissionToEdit ||
+                ($associatedUser->getUser()->getId() === $user->getId() && $associatedUser->getPermission() >= UserAccountAssociation::PERMISSION_EDIT);
+        }
+        return $hasUserPermissionToEdit;
     }
 }
