@@ -16,10 +16,16 @@ class AccountType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('isSavings', 'choice', array('data' => false))
-            ->add('currentBalance', 'integer', array('data' => 0))
-            ->add('lastReconciliation')
-            ->add('creator')
+            ->add('isSavings', 'checkbox', array(
+                'required' => false,
+                'data' => false
+            ))
+            ->add('currentBalance', 'integer', array(
+                'data' => 0
+            ))
+            ->add('lastReconciliation', 'date', array(
+                'required' => false
+            ))
         ;
     }
     
