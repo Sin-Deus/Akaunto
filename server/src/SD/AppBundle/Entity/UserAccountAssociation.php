@@ -17,16 +17,22 @@ class UserAccountAssociation
 {
 
     /**
-     * List of permissions a user can have when they have access to an account.
+     * Permission for a user to view an account.
      *
-     * @var array
+     * @var number
      *
      * @Exclude
      */
-    public static $PERMISSIONS = [
-        'VIEW' => 0,
-        'EDIT' => 1,
-    ];
+    const PERMISSION_VIEW = 0;
+
+    /**
+     * Permission for a user to edit an account.
+     *
+     * @var number
+     *
+     * @Exclude
+     */
+    const PERMISSION_EDIT = 1;
 
     /**
      * @var integer
