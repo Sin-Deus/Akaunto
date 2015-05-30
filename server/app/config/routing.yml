@@ -1,7 +1,3 @@
-sd_user:
-    resource: "@SDUserBundle/Resources/config/routing.yml"
-    prefix:   /
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
@@ -9,4 +5,4 @@ fos_user:
 rest:
     type: rest
     resource: "routing_rest.yml"
-    prefix: /api
+    prefix: /api/v1

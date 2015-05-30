@@ -1,0 +1,4 @@
+accounts:
+    type: rest
+    resource: "SDAppBundle:AccountRest"
+    name_prefix: api_
