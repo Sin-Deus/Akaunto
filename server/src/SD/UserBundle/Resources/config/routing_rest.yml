@@ -2,9 +2,3 @@ users:
     type: rest
     resource: "SDUserBundle:UserRest"
     name_prefix: api_
-
-accounts:
-    type: rest
-    parent: users
-    resource: "SDUserBundle:UserAccountRest"
-    name_prefix: api_

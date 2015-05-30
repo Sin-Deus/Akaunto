@@ -229,4 +229,18 @@ class Account
     {
         return $this->associatedUsers;
     }
+
+    /**
+     * Checks whether or not the specified user is associated to this account.
+     *
+     * @param \SD\UserBundle\Entity\User $user
+     * @return boolean
+     */
+    public function isUserAssociated($user) {
+        $isUserAssociated = false;
+        foreach ($this->associatedUsers as $associatedUser) {
+            $isUserAssociated = $isUserAssociated || $associatedUser->getUser()->getId() === $user->getId();
+        }
+        return $isUserAssociated;
+    }
 }
