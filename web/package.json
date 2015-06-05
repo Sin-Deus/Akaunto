@@ -1,0 +1,29 @@
+{
+  "name": "Akaunto-web",
+  "version": "0.0.1",
+  "description": "Front-side application for the Akaunto service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sin-Deus/Akaunto"
+  },
+  "keywords": [
+    "Account",
+    "Manager",
+    "Web"
+  ],
+  "author": "SinDeus <Sin-Deus@users.noreply.github.com>",
+  "license": "GNU GPLv2",
+  "bugs": {
+    "url": "https://github.com/Sin-Deus/Akaunto/issues"
+  },
+  "homepage": "https://github.com/Sin-Deus/Akaunto",
+  "devDependencies": {
+    "bower": "^1.4.1",
+    "gulp": "^3.9.0",
+    "gulp-less": "^3.0.3"
+  }
+}
