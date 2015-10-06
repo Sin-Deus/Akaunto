@@ -1,8 +1,13 @@
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+#fos_user:
+    #resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
 #REST
 rest:
     type: rest
     resource: "routing_rest.yml"
     prefix: /api/v1
+
+wsse:
+    type: rest
+    resource: "@SDUserBundle/Resources/config/routing_wsse.yml"
+    prefix: /wsse
