@@ -7,6 +7,7 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Util\Codes;
 use FOS\RestBundle\View\View;
 use SD\AppBundle\Entity\Account;
+use SD\AppBundle\Entity\AccountRepository;
 use SD\AppBundle\Entity\UserAccountAssociation;
 use SD\AppBundle\Form\AccountType;
 use SD\UserBundle\Entity\User;
@@ -48,13 +49,12 @@ class AccountRestController extends Controller {
         $creatorOnly = $paramFetcher->get("creatorOnly");
         /** @var $user User */
         $user = $this->container->get('security.context')->getToken()->getUser();
+        /** @var $accountRepository AccountRepository */
+        $accountRepository = $this->getDoctrine()->getRepository("SDAppBundle:Account");
         if ($creatorOnly) {
-            return $this->getDoctrine()->getRepository("SDAppBundle:Account")->findByCreator($user);
+            return $accountRepository->findByCreator($user);
         } else {
-            $em = $this->getDoctrine()->getManager();
-            $query = $em->createQuery("SELECT a, au FROM SDAppBundle:Account a JOIN a.associatedUsers au WHERE au.user = :id");
-            $query->setParameters(["id" => $user->getId()]);
-            return $query->getResult();
+            return $accountRepository->findAccountsForUser($user);
         }
     }
 

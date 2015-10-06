@@ -9,7 +9,7 @@ use SD\UserBundle\Entity\User;
  * Account
  *
  * @ORM\Table(name="account")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AccountRepository")
  */
 class Account
 {
