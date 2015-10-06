@@ -2,6 +2,7 @@
 
 namespace SD\UserBundle\Controller;
 
+use Doctrine\ORM\NoResultException;
 use SD\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -18,10 +19,10 @@ class WsseRestController extends Controller {
      */
     public function saltAction($username) {
         /** @var $user User */
-        $user = $this->getDoctrine()->getRepository("SDUserBundle:User")->findOneByUsername($username);
-        if (!is_object($user)) {
+        try {
+            return $this->getDoctrine()->getRepository("SDUserBundle:User")->getSaltByUsername($username);
+        } catch (NoResultException $e) {
             throw $this->createNotFoundException();
         }
-        return $user->getSalt();
     }
 }

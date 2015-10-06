@@ -11,7 +11,7 @@ use SD\AppBundle\Entity\Account;
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="UserRepository")
  */
 class User extends BaseUser
 {
@@ -88,5 +88,38 @@ class User extends BaseUser
     public function getAccounts()
     {
         return $this->accounts;
+    }
+
+    /**
+     * Add associatedAccounts
+     *
+     * @param \SD\AppBundle\Entity\UserAccountAssociation $associatedAccounts
+     * @return User
+     */
+    public function addAssociatedAccount(\SD\AppBundle\Entity\UserAccountAssociation $associatedAccounts)
+    {
+        $this->associatedAccounts[] = $associatedAccounts;
+    
+        return $this;
+    }
+
+    /**
+     * Remove associatedAccounts
+     *
+     * @param \SD\AppBundle\Entity\UserAccountAssociation $associatedAccounts
+     */
+    public function removeAssociatedAccount(\SD\AppBundle\Entity\UserAccountAssociation $associatedAccounts)
+    {
+        $this->associatedAccounts->removeElement($associatedAccounts);
+    }
+
+    /**
+     * Get associatedAccounts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAssociatedAccounts()
+    {
+        return $this->associatedAccounts;
     }
 }

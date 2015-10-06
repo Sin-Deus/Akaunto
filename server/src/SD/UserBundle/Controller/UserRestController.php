@@ -13,8 +13,7 @@ class UserRestController extends Controller {
      */
     public function meUserAction() {
         /** @var $user User */
-        $user = $this->container->get('security.context')->getToken()->getUser();
-        return $user;
+        return $this->container->get('security.context')->getToken()->getUser();
     }
 
     /**
