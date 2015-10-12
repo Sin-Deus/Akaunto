@@ -1,0 +1,4 @@
+wsse:
+    type: rest
+    resource: "SDUserBundle:WsseRest"
+    name_prefix: wsse_
