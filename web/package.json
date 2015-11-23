@@ -13,7 +13,8 @@
   "keywords": [
     "Account",
     "Manager",
-    "Web"
+    "Web",
+    "Test"
   ],
   "author": "SinDeus <Sin-Deus@users.noreply.github.com>",
   "license": "GNU GPLv2",
@@ -22,8 +23,30 @@
   },
   "homepage": "https://github.com/Sin-Deus/Akaunto",
   "devDependencies": {
-    "bower": "^1.4.1",
     "gulp": "^3.9.0",
-    "gulp-less": "^3.0.3"
+    "gulp-clean": "^0.3.1",
+    "gulp-connect": "^2.2.0",
+    "gulp-if": "^2.0.0",
+    "gulp-jspm": "0.5.4",
+    "gulp-less": "^3.0.5",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-open": "^1.0.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-watch": "^4.3.5",
+    "jspm": "^0.16.15",
+    "run-sequence": "^1.1.4",
+    "yargs": "^3.30.0"
+  },
+  "jspm": {
+    "directories": {
+      "packages": "src/jspm_packages",
+      "baseURL": ""
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
   }
 }

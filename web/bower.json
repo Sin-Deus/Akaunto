@@ -1,31 +1,31 @@
 {
-  "name": "Akaunto-web",
-  "version": "0.0.1",
-  "homepage": "https://github.com/Sin-Deus/Akaunto",
-  "authors": [
-    "SinDeus <Sin-Deus@users.noreply.github.com>"
-  ],
-  "description": "Front-side application for the Akaunto service",
-  "main": "index.js",
-  "moduleType": [
-    "amd"
-  ],
-  "keywords": [
-    "Account",
-    "Manager",
-    "Web"
-  ],
-  "license": "GNU GPLv2",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular": "~1.4.0",
-    "angular-material": "~0.9.7",
-    "lodash": "~3.9.3"
-  }
+    "name": "Akaunto-web",
+    "version": "0.0.1",
+    "homepage": "https://github.com/Sin-Deus/Akaunto",
+    "authors": [
+        "SinDeus <Sin-Deus@users.noreply.github.com>"
+    ],
+    "description": "Front-side application for the Akaunto service",
+    "main": "index.js",
+    "moduleType": [
+        "amd"
+    ],
+    "keywords": [
+        "Account",
+        "Manager",
+        "Web"
+    ],
+    "license": "GNU GPLv2",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "~1.4.0",
+        "angular-material": "~0.9.7",
+        "lodash": "~3.9.3"
+    }
 }
