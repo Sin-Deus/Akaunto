@@ -43,6 +43,9 @@
       "packages": "src/jspm_packages",
       "baseURL": ""
     },
+    "dependencies": {
+      "angular": "github:angular/bower-angular@1.5.0-beta.2"
+    },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
       "babel-runtime": "npm:babel-runtime@^5.8.24",

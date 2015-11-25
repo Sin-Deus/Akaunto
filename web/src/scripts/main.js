@@ -1,9 +1,8 @@
 'use strict';
 
-import tata from './tata';
+import angular from 'angular';
+import app from './akaunto';
 
-document.addEventListener('click', function () {
-    let list = tata();
-
-    list.forEach(el => alert(el));
+angular.element(document).ready(function () {
+    angular.bootstrap(document, [app.name]);
 });
