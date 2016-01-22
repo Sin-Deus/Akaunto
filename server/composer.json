@@ -22,7 +22,8 @@
     "sensio/distribution-bundle" : "2.3.*",
     "friendsofsymfony/user-bundle" : "2.0.*@dev",
     "friendsofsymfony/rest-bundle" : "1.5",
-	"jms/serializer-bundle": "0.13.0"
+	"jms/serializer-bundle": "0.13.0",
+    "nelmio/cors-bundle": "^1.4"
   },
   "autoload" : {
     "psr-0" : {

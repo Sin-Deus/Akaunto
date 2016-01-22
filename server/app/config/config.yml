@@ -95,3 +95,13 @@ jms_serializer:
             FOSUserBundle:
                 namespace_prefix: "FOS\\UserBundle"
                 path: "%kernel.root_dir%/serializer/FOSUserBundle"
+
+# CORS
+nelmio_cors:
+    paths:
+        '^/':
+            origin_regex: true
+            allow_origin: ['^http://localhost:[0-9]+']
+            allow_headers: ['x-wsse']
+            allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
+            max_age: 3600
