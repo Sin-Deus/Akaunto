@@ -18,7 +18,7 @@ export default function () {
          */
         'getWSSEHeader': function (userName, password) {
             var token = wsse({ 'username': userName, 'password': password });
-            return token.getWSSEHeader();
+            return token.getWSSEHeader({ nonceBase64: true });
         },
 
         /**
