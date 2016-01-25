@@ -1,8 +1,12 @@
+'use strict';
+
 function saltService(baseConstants, $http) {
     return {
 
         /**
          * Returns the salt of the specified user.
+         * @method
+         * @static
          * @param {string} userName The user name.
          * @returns {Promise}
          */
@@ -10,6 +14,8 @@ function saltService(baseConstants, $http) {
             return $http({
                 'method': 'GET',
                 'url': `${ baseConstants.baseURL }wsse/${ userName }/salt`
+            }).then(function (response) {
+                return response.data;
             });
         }
     }

@@ -1,6 +1,10 @@
-function wsseInterceptor(wsseService, userService) {
+'use strict';
+
+function wsseInterceptor($injector) {
     return {
         'request': function (config) {
+            let wsseService = $injector.get('wsseService');
+            let userService = $injector.get('userService');
             let name, password;
             ({ name, password } = userService.getUserCredentials());
             config.headers['x-wsse'] = wsseService.getWSSEHeader(name, password);
@@ -9,6 +13,6 @@ function wsseInterceptor(wsseService, userService) {
     }
 }
 
-wsseInterceptor.$inject = ['wsseService', 'userService'];
+wsseInterceptor.$inject = ['$injector'];
 
 export default wsseInterceptor;

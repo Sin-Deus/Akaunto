@@ -20,4 +20,18 @@ app.factory('userService', userService);
 app.factory('wsseService', wsseService);
 app.factory('wsseInterceptor', wsseInterceptor);
 
+app.controller('myCtrl', ['saltService', 'userService', function (saltService, userService) {
+
+    saltService.getSalt('marc').then(function (salt) {
+        console.log(salt);
+
+        userService.storeUserCredentials('marc', 'emerald', salt);
+
+        userService.getMe().then(function (response) {
+            debugger;
+        })
+    });
+}]);
+
+
 export default app;
