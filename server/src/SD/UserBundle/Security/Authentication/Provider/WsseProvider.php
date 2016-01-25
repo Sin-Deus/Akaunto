@@ -74,7 +74,7 @@ class WsseProvider implements AuthenticationProviderInterface {
         // Validate Secret
         $expected = base64_encode(sha1(base64_decode($nonce) . $created . $secret, true));
 
-        return StringUtils::equals($expected, $digest);
+        return hash_equals($expected, $digest);
     }
 
     public function supports(TokenInterface $token) {
