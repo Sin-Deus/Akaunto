@@ -1,9 +1,13 @@
-'use strict';
-
+/**
+ * Service for user.
+ * @param {object} wsseService
+ * @param {function} $http
+ * @param {object} baseConstants
+ * @return {{getUserCredentials: function, storeUserCredentials: function, getMe: function}}
+ */
 function userService(wsseService, $http, baseConstants) {
-
-    var USER_NAME = 'username',
-        PASSWORD = 'password';
+    const USER_NAME = 'username';
+    const PASSWORD = 'password';
 
     return {
 
@@ -18,12 +22,12 @@ function userService(wsseService, $http, baseConstants) {
          * Returns the logged user credentials.
          * @method
          * @static
-         * @returns {{name, password}}
+         * @return {{name, password}}
          */
-        'getUserCredentials': function () {
+        getUserCredentials() {
             return {
-                'name': sessionStorage.getItem(USER_NAME),
-                'password': sessionStorage.getItem(PASSWORD)
+                name: sessionStorage.getItem(USER_NAME),
+                password: sessionStorage.getItem(PASSWORD)
             };
         },
 
@@ -35,7 +39,7 @@ function userService(wsseService, $http, baseConstants) {
          * @param {string} password The user password.
          * @param {string} salt The user salt.
          */
-        'storeUserCredentials': function (userName, password, salt) {
+        storeUserCredentials(userName, password, salt) {
             sessionStorage.setItem(USER_NAME, userName);
             sessionStorage.setItem(PASSWORD, wsseService.cipher(password, salt));
         },
@@ -44,15 +48,15 @@ function userService(wsseService, $http, baseConstants) {
          * Returns the currently logged user.
          * @method
          * @static
-         * @returns {User}
+         * @return {User}
          */
-        'getMe': function () {
+        getMe() {
             return $http({
-                'method': 'GET',
-                'url': `${ baseConstants.apiBaseURL }users/me`
-            })
+                method: 'GET',
+                url: `${ baseConstants.apiBaseURL }users/me`
+            });
         }
-    }
+    };
 }
 
 userService.$inject = ['wsseService', '$http', 'baseConstants'];

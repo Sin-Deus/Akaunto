@@ -1,5 +1,3 @@
-'use strict';
-
 import angular from 'angular';
 
 import baseConstants from './constants/base';

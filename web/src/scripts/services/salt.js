@@ -1,5 +1,9 @@
-'use strict';
-
+/**
+ * Service for salt.
+ * @param {Object} baseConstants
+ * @param {Function} $http
+ * @return {{getSalt: function}}
+ */
 function saltService(baseConstants, $http) {
     return {
 
@@ -8,17 +12,15 @@ function saltService(baseConstants, $http) {
          * @method
          * @static
          * @param {string} userName The user name.
-         * @returns {Promise}
+         * @return {Promise}
          */
-        'getSalt': function (userName) {
+        getSalt(userName) {
             return $http({
-                'method': 'GET',
-                'url': `${ baseConstants.baseURL }wsse/${ userName }/salt`
-            }).then(function (response) {
-                return response.data;
-            });
+                method: 'GET',
+                url: `${ baseConstants.baseURL }wsse/${ userName }/salt`
+            }).then(response => response.data);
         }
-    }
+    };
 }
 
 saltService.$inject = ['baseConstants', '$http'];
