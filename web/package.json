@@ -45,7 +45,7 @@
       "packages": "src/jspm_packages"
     },
     "dependencies": {
-      "angular": "github:angular/bower-angular@1.5.0-beta.2",
+      "angular": "github:angular/bower-angular@1.5",
       "crypto-js": "npm:crypto-js@^3.1.6",
       "wsse": "npm:wsse@^2.3.0"
     },

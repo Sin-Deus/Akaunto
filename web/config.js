@@ -14,7 +14,7 @@ System.config({
   },
 
   map: {
-    "angular": "github:angular/bower-angular@1.5.0-beta.2",
+    "angular": "github:angular/bower-angular@1.5.0",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "core-js": "npm:core-js@1.2.6",
@@ -177,9 +177,6 @@ System.config({
     },
     "npm:crypto-js@3.1.6": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:cryptojs@2.5.3": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:des.js@1.0.0": {
