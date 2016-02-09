@@ -35,13 +35,23 @@ function userService(wsseService, $http, baseConstants) {
          * Stores the user credentials in the session storage.
          * @method
          * @static
-         * @param {string} userName The user name.
+         * @param {string} username The user name.
          * @param {string} password The user password.
          * @param {string} salt The user salt.
          */
-        storeUserCredentials(userName, password, salt) {
-            sessionStorage.setItem(USER_NAME, userName);
+        storeUserCredentials(username, password, salt) {
+            sessionStorage.setItem(USER_NAME, username);
             sessionStorage.setItem(PASSWORD, wsseService.cipher(password, salt));
+        },
+
+        /**
+         * Stores the user credentials in the session storage.
+         * @method
+         * @static
+         */
+        clearUserCredentials() {
+            sessionStorage.removeItem(USER_NAME);
+            sessionStorage.removeItem(PASSWORD);
         },
 
         /**
@@ -54,7 +64,7 @@ function userService(wsseService, $http, baseConstants) {
             return $http({
                 method: 'GET',
                 url: `${ baseConstants.apiBaseURL }users/me`
-            });
+            }).then(response => response.data);
         }
     };
 }
