@@ -34,7 +34,7 @@ export default function () {
          * @return {string} The encrypted user password.
          */
         cipher(password, salt) {
-            const salted = `${ password } {${ salt }}`;
+            const salted = `${ password }{${ salt }}`;
             let digest = sha512(salted);
             for (let increment = 1; increment < MAX_INCREMENT; increment++) {
                 digest = sha512(digest.concat(encUTF8.parse(salted)));
