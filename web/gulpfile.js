@@ -38,7 +38,8 @@ gulp.task('clean:dist', function () {
 gulp.task('webserver', function () {
     return connect.server({
         'livereload': true,
-        'root': [__dirname, paths.tmp]
+        'root': [__dirname, paths.tmp],
+        'port': 8181
     });
 });
 
@@ -65,7 +66,7 @@ gulp.task('build', function () {
 });
 
 gulp.task('copy:html', function () {
-    return gulp.src(['src/index.html'])
+    return gulp.src(['src/index.html', 'src/**/*.html', '!src/jspm_packages/**'])
         .pipe(gulpIf(argv.production, gulp.dest(paths.dist), gulp.dest(paths.tmp)));
 });
 
@@ -76,13 +77,13 @@ gulp.task('copy:js', function () {
 
 gulp.task('watch', function () {
     gulp.watch('src/styles/*.less', ['less']);
-    gulp.watch('src/*.html', ['copy:html']);
+    gulp.watch(['src/*.html', 'src/**/*.html'], ['copy:html']);
     gulp.watch(['src/scripts/*.js', 'src/scripts/**/*.js'], ['build']);
 });
 
 gulp.task('open', function () {
     gulp.src(__filename)
-        .pipe(gulpOpen({'uri': 'http://localhost:8080'}));
+        .pipe(gulpOpen({'uri': 'http://localhost:8181'}));
 });
 
 /************* Main tasks *************/
