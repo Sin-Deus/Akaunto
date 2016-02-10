@@ -52,6 +52,7 @@
     "dependencies": {
       "angular": "github:angular/bower-angular@1.5",
       "angular-material": "github:angular/bower-material@^1.0.5",
+      "angular-mocks": "github:angular/bower-angular-mocks@^1.5.0",
       "angular-ui-router": "github:angular-ui/ui-router@^0.2.18",
       "crypto-js": "npm:crypto-js@^3.1.6",
       "wsse": "npm:wsse@^2.3.0"
