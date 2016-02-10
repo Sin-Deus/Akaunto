@@ -4,12 +4,15 @@
  * @return {{request: function}}
  */
 function wsseInterceptor($injector) {
+    const WSSE_HEADER = 'x-wsse';
+
     return {
         request(config) {
             const wsseService = $injector.get('wsseService');
             const userService = $injector.get('userService');
             const { name, password } = userService.getUserCredentials();
-            config.headers['x-wsse'] = wsseService.getWSSEHeader(name, password);
+
+            config.headers[WSSE_HEADER] = wsseService.getWSSEHeader(name, password);
             return config;
         }
     };
