@@ -1,5 +1,6 @@
 import angular from 'angular';
 import 'angular-ui-router';
+import 'angular-material';
 
 import baseConstants from './constants/base';
 
@@ -14,7 +15,7 @@ import responseObserver from './services/response-observer';
 
 import loginController from './controllers/login';
 
-const app = angular.module('akaunto', ['ui.router']);
+const app = angular.module('akaunto', ['ui.router', 'ngMaterial']);
 
 app.constant('baseConstants', baseConstants);
 app.config(httpConfiguration);

@@ -9,7 +9,7 @@ var argv = require('yargs').argv,
     gulpIf = require('gulp-if'),
     jspm = require('gulp-jspm'),
     clean = require('gulp-clean'),
-    less = require('gulp-less'),
+    sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     uglify = require('gulp-uglify'),
     minifyCss = require('gulp-minify-css'),
@@ -50,9 +50,9 @@ gulp.task('livereload', function () {
         .pipe(connect.reload());
 });
 
-gulp.task('less', function () {
-    return gulp.src('src/styles/main.less')
-        .pipe(less())
+gulp.task('sass', function () {
+    return gulp.src('src/styles/main.scss')
+        .pipe(sass())
         .pipe(minifyCss())
         .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/styles'), gulp.dest(paths.tmp + '/styles')));
 });
@@ -77,7 +77,7 @@ gulp.task('copy:js', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch('src/styles/*.less', ['less']);
+    gulp.watch('src/styles/*.scss', ['sass']);
     gulp.watch(['src/*.html', 'src/**/*.html'], ['copy:html']);
     gulp.watch(['src/scripts/*.js', 'src/scripts/**/*.js'], ['build']);
 });
@@ -93,7 +93,7 @@ gulp.task('serve',
     function () {
         return runSequence(
             'clean:tmp',
-            'less',
+            'sass',
             'build',
             [
                 'copy:html',
@@ -115,7 +115,7 @@ gulp.task('default',
 
         return runSequence(
             cleanTask,
-            'less',
+            'sass',
             'build',
             [
                 'copy:html',
