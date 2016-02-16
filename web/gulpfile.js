@@ -16,7 +16,8 @@ var argv = require('yargs').argv,
     connect = require('gulp-connect'),
     watch = require('gulp-watch'),
     runSequence = require('run-sequence'),
-    gulpOpen = require('gulp-open');
+    gulpOpen = require('gulp-open'),
+    KarmaServer = require('karma').Server;
 
 var paths = {
     'tmp': '.tmp',
@@ -66,12 +67,12 @@ gulp.task('build', function () {
 });
 
 gulp.task('copy:html', function () {
-    return gulp.src(['src/index.html', 'src/**/*.html', '!src/jspm_packages/**'])
+    return gulp.src(['src/index.html', 'src/**/*.html'])
         .pipe(gulpIf(argv.production, gulp.dest(paths.dist), gulp.dest(paths.tmp)));
 });
 
 gulp.task('copy:js', function () {
-    return gulp.src(['src/jspm_packages/system.js'])
+    return gulp.src(['jspm_packages/system.js'])
         .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/scripts'), gulp.dest(paths.tmp + '/scripts')));
 });
 
@@ -121,5 +122,14 @@ gulp.task('default',
                 'copy:js'
             ]
         );
+    }
+);
+
+gulp.task('test',
+    function (done) {
+        new KarmaServer({
+            configFile: __dirname + '/karma.conf.js',
+            singleRun: true
+        }, done).start();
     }
 );

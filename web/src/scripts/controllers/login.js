@@ -7,6 +7,7 @@ class LoginController {
      * @constructor
      * @param {object} saltService
      * @param {object} userService
+     * @param {object} $state
      */
     constructor(saltService, userService, $state) {
         this.saltService = saltService;

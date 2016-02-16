@@ -1,4 +1,5 @@
 node_modules
-src/jspm_packages
+jspm_packages
 dist
 .tmp
+test-reports

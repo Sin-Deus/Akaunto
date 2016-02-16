@@ -1,5 +1,4 @@
 System.config({
-  baseURL: "src",
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {
@@ -9,13 +8,14 @@ System.config({
     ]
   },
   paths: {
-    "github:*": "src/jspm_packages/github/*",
-    "npm:*": "src/jspm_packages/npm/*"
+    "github:*": "jspm_packages/github/*",
+    "npm:*": "jspm_packages/npm/*"
   },
 
   map: {
     "angular": "github:angular/bower-angular@1.5.0",
     "angular-material": "github:angular/bower-material@1.0.5",
+    "angular-mocks": "github:angular/bower-angular-mocks@1.5.0",
     "angular-ui-router": "github:angular-ui/ui-router@0.2.18",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
@@ -29,6 +29,9 @@ System.config({
       "angular": "github:angular/bower-angular@1.5.0"
     },
     "github:angular/bower-angular-aria@1.5.0": {
+      "angular": "github:angular/bower-angular@1.5.0"
+    },
+    "github:angular/bower-angular-mocks@1.5.0": {
       "angular": "github:angular/bower-angular@1.5.0"
     },
     "github:angular/bower-material@1.0.5": {
