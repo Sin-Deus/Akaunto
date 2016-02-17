@@ -1,11 +1,19 @@
-<form name="loginForm" novalidate ng-submit="loginForm.$valid && loginController.login(username, password)">
-    <label>
-        <span>User name</span>
-        <input type="text" ng-model="username" ng-required="true" />
-    </label>
-    <label>
-        <span>Password</span>
-        <input type="password" ng-model="password" ng-required="true" />
-    </label>
-    <button>Login</button>
-</form>
+<md-content layout-padding class="ak-login md-whiteframe-z3">
+    <form name="loginForm" novalidate ng-submit="loginForm.$valid && loginController.login(username, password)">
+        <md-input-container class="md-block">
+            <label>User name</label>
+            <input type="text" ng-model="username" name="username" ng-required="true" autofocus />
+            <div ng-messages="loginForm.username.$error">
+                <div ng-message="required">The user name is required.</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Password</label>
+            <input type="password" ng-model="password" name="password" ng-required="true"/>
+            <div ng-messages="loginForm.password.$error">
+                <div ng-message="required">The password is required.</div>
+            </div>
+        </md-input-container>
+        <md-button class="md-raised md-primary ak-login__submit">Login</md-button>
+    </form>
+</md-content>
