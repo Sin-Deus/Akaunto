@@ -1,0 +1,17 @@
+{
+    "login": {
+        "username": {
+            "label": "User name",
+            "errors": {
+                "required": "The user name is required."
+            }
+        },
+        "password": {
+            "label": "Password",
+            "errors": {
+                "required": "The password is required."
+            }
+        },
+        "submit": "Login"
+    }
+}

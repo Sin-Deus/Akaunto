@@ -1,0 +1,17 @@
+{
+    "login": {
+        "username": {
+            "label": "Utilisateur",
+            "errors": {
+                "required": "Le nom d'utilisateur est obligatoire."
+            }
+        },
+        "password": {
+            "label": "Mot de passe",
+            "errors": {
+                "required": "Le mot de passe est obligatoire."
+            }
+        },
+        "submit": "Se connecter"
+    }
+}

@@ -2,9 +2,12 @@ import angular from 'angular';
 import 'angular-ui-router';
 import 'angular-material';
 import 'angular-messages';
+import 'angular-translate';
+import 'angular-translate-loader-static-files';
 
 import baseConstants from './constants/base';
 
+import translateConfiguration from './configuration/translate';
 import httpConfiguration from './configuration/http';
 import stateConfiguration from './configuration/state';
 
@@ -16,9 +19,15 @@ import responseObserver from './services/response-observer';
 
 import loginController from './controllers/login';
 
-const app = angular.module('akaunto', ['ui.router', 'ngMaterial', 'ngMessages']);
+const app = angular.module('akaunto', [
+    'ui.router',
+    'ngMaterial',
+    'ngMessages',
+    'pascalprecht.translate'
+]);
 
 app.constant('baseConstants', baseConstants);
+app.config(translateConfiguration);
 app.config(httpConfiguration);
 app.config(stateConfiguration);
 app.factory('saltService', saltService);

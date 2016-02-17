@@ -71,6 +71,11 @@ gulp.task('copy:html', function () {
         .pipe(gulpIf(argv.production, gulp.dest(paths.dist), gulp.dest(paths.tmp)));
 });
 
+gulp.task('copy:locales', function () {
+    return gulp.src(['src/locales/*'])
+        .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/locales'), gulp.dest(paths.tmp + '/locales')));
+});
+
 gulp.task('copy:js', function () {
     return gulp.src(['jspm_packages/system.js'])
         .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/scripts'), gulp.dest(paths.tmp + '/scripts')));
@@ -79,6 +84,7 @@ gulp.task('copy:js', function () {
 gulp.task('watch', function () {
     gulp.watch('src/styles/*.scss', ['sass']);
     gulp.watch(['src/*.html', 'src/**/*.html'], ['copy:html']);
+    gulp.watch(['src/locales/*'], ['copy:locales']);
     gulp.watch(['src/scripts/*.js', 'src/scripts/**/*.js'], ['build']);
 });
 
@@ -97,7 +103,8 @@ gulp.task('serve',
             'build',
             [
                 'copy:html',
-                'copy:js'
+                'copy:js',
+                'copy:locales'
             ],
             'webserver',
             [
@@ -119,7 +126,8 @@ gulp.task('default',
             'build',
             [
                 'copy:html',
-                'copy:js'
+                'copy:js',
+                'copy:locales'
             ]
         );
     }
