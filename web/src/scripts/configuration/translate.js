@@ -11,6 +11,8 @@ function translateConfiguration($translateProvider) {
     });
 
     $translateProvider.useSanitizeValueStrategy('escape');
+
+    $translateProvider.useLocalStorage();
 }
 
 translateConfiguration.$inject = ['$translateProvider'];
