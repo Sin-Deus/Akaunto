@@ -12,6 +12,12 @@
                 "required": "Le mot de passe est obligatoire."
             }
         },
-        "submit": "Se connecter"
+        "submit": "Se connecter",
+        "error": "Une erreur est survenue. Merci de vérifier vos identifiants et de réessayer."
+    },
+    "toasts": {
+        "error": {
+            "action": "OK"
+        }
     }
 }

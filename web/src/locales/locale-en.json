@@ -12,6 +12,12 @@
                 "required": "The password is required."
             }
         },
-        "submit": "Login"
+        "submit": "Login",
+        "error": "An error has occured. Please check your credentials and try again."
+    },
+    "toasts": {
+        "error": {
+            "action": "OK"
+        }
     }
 }

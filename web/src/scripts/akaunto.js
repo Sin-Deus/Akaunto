@@ -15,6 +15,7 @@ import httpConfiguration from './configuration/http';
 import stateConfiguration from './configuration/state';
 
 import saltService from './services/salt';
+import toastService from './services/toast';
 import userService from './services/user';
 import wsseService from './services/wsse';
 import wsseInterceptor from './services/wsse-interceptor';
@@ -37,6 +38,7 @@ app.config(translateConfiguration);
 app.config(httpConfiguration);
 app.config(stateConfiguration);
 app.factory('saltService', saltService);
+app.factory('toastService', toastService);
 app.factory('userService', userService);
 app.factory('wsseService', wsseService);
 app.factory('wsseInterceptor', wsseInterceptor);
