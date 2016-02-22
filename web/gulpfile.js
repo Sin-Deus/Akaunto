@@ -88,6 +88,12 @@ gulp.task('copy:fonts', function () {
         .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/fonts'), gulp.dest(paths.tmp + '/fonts')));
 });
 
+gulp.task('copy:icons', function () {
+    return gulp.src(['jspm_packages/npm/material-design-icons*/iconfont/MaterialIcons-Regular*'])
+        .pipe(flatten())
+        .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/styles'), gulp.dest(paths.tmp + '/styles')));
+});
+
 gulp.task('watch', function () {
     gulp.watch('src/styles/**/*.scss', ['sass']);
     gulp.watch(['src/*.html', 'src/**/*.html'], ['copy:html']);
@@ -112,7 +118,8 @@ gulp.task('serve',
                 'copy:html',
                 'copy:js',
                 'copy:locales',
-                'copy:fonts'
+                'copy:fonts',
+                'copy:icons'
             ],
             'webserver',
             [
@@ -136,7 +143,8 @@ gulp.task('default',
                 'copy:html',
                 'copy:js',
                 'copy:locales',
-                'copy:fonts'
+                'copy:fonts',
+                'copy:icons'
             ]
         );
     }
