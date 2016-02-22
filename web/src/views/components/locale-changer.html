@@ -5,8 +5,11 @@
         </md-button>
     </md-fab-trigger>
     <md-fab-actions>
-        <md-button aria-label="{{ localeName }}" class="md-fab md-raised md-mini" ng-repeat="(localeKey, localeName) in $ctrl.locales" ng-click="$ctrl.switchToLocale(localeKey)">
-            <md-icon md-svg-src="img/icons/locale-{{ localeKey }}.svg" aria-label="{{ localeName }}"></md-icon>
+        <md-button aria-label="{{ 'locale.en' | translate }}" class="md-fab md-raised md-mini" ng-click="$ctrl.switchToLocale('en')">
+            <md-icon md-svg-src="img/icons/locale-en.svg" aria-label="{{ 'locale.en' | translate }}"></md-icon>
+        </md-button>
+        <md-button aria-label="{{ 'locale.fr' | translate }}" class="md-fab md-raised md-mini" ng-click="$ctrl.switchToLocale('fr')">
+            <md-icon md-svg-src="img/icons/locale-fr.svg" aria-label="{{ 'locale.fr' | translate }}"></md-icon>
         </md-button>
     </md-fab-actions>
 </md-fab-speed-dial>

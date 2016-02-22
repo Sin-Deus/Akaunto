@@ -1,4 +1,8 @@
 {
+    "locale": {
+        "en": "English",
+        "fr": "French"
+    },
     "login": {
         "username": {
             "label": "User name",

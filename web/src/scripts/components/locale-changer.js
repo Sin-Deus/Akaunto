@@ -9,10 +9,6 @@ class LocaleChangerController {
      */
     constructor($translate) {
         this.$translate = $translate;
-        this.locales = {
-            en: 'English',
-            fr: 'Français'
-        };
     }
 
     /**
