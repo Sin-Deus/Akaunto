@@ -29,6 +29,7 @@
     "gulp": "^3.9.0",
     "gulp-clean": "^0.3.1",
     "gulp-connect": "^2.2.0",
+    "gulp-flatten": "^0.2.0",
     "gulp-if": "^2.0.0",
     "gulp-jspm": "0.5.6",
     "gulp-minify-css": "^1.2.1",
@@ -54,7 +55,7 @@
     "dependencies": {
       "angular": "github:angular/bower-angular@1.5",
       "angular-cookies": "github:angular/bower-angular-cookies@^1.5.0",
-      "angular-material": "github:angular/bower-material@^1.0.5",
+      "angular-material": "github:angular/bower-material@1.0.5",
       "angular-messages": "github:angular/bower-angular-messages@^1.5.0",
       "angular-mocks": "github:angular/bower-angular-mocks@^1.5.0",
       "angular-translate": "github:angular-translate/bower-angular-translate@^2.9.1",
@@ -63,6 +64,7 @@
       "angular-translate-storage-local": "github:angular-translate/bower-angular-translate-storage-local@^2.9.1",
       "angular-ui-router": "github:angular-ui/ui-router@^0.2.18",
       "crypto-js": "npm:crypto-js@^3.1.6",
+      "roboto-fontface": "npm:roboto-fontface@0.4.3",
       "wsse": "npm:wsse@^2.3.0"
     },
     "devDependencies": {

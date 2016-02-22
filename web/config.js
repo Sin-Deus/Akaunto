@@ -27,6 +27,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "core-js": "npm:core-js@1.2.6",
     "crypto-js": "npm:crypto-js@3.1.6",
+    "roboto-fontface": "npm:roboto-fontface@0.4.3",
     "wsse": "npm:wsse@2.3.0",
     "github:angular-translate/bower-angular-translate-loader-static-files@2.9.1": {
       "angular-translate": "github:angular-translate/bower-angular-translate@2.9.1"

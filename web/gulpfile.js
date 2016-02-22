@@ -7,6 +7,7 @@
 var argv = require('yargs').argv,
     gulp = require('gulp'),
     gulpIf = require('gulp-if'),
+    flatten = require('gulp-flatten'),
     jspm = require('gulp-jspm'),
     clean = require('gulp-clean'),
     sass = require('gulp-sass'),
@@ -81,6 +82,12 @@ gulp.task('copy:js', function () {
         .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/scripts'), gulp.dest(paths.tmp + '/scripts')));
 });
 
+gulp.task('copy:fonts', function () {
+    return gulp.src(['jspm_packages/npm/roboto-fontface*/fonts/*'])
+        .pipe(flatten())
+        .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/fonts'), gulp.dest(paths.tmp + '/fonts')));
+});
+
 gulp.task('watch', function () {
     gulp.watch('src/styles/**/*.scss', ['sass']);
     gulp.watch(['src/*.html', 'src/**/*.html'], ['copy:html']);
@@ -104,7 +111,8 @@ gulp.task('serve',
             [
                 'copy:html',
                 'copy:js',
-                'copy:locales'
+                'copy:locales',
+                'copy:fonts'
             ],
             'webserver',
             [
@@ -127,7 +135,8 @@ gulp.task('default',
             [
                 'copy:html',
                 'copy:js',
-                'copy:locales'
+                'copy:locales',
+                'copy:fonts'
             ]
         );
     }
