@@ -82,7 +82,7 @@ gulp.task('copy:js', function () {
 });
 
 gulp.task('watch', function () {
-    gulp.watch('src/styles/*.scss', ['sass']);
+    gulp.watch('src/styles/**/*.scss', ['sass']);
     gulp.watch(['src/*.html', 'src/**/*.html'], ['copy:html']);
     gulp.watch(['src/locales/*'], ['copy:locales']);
     gulp.watch(['src/scripts/*.js', 'src/scripts/**/*.js'], ['build']);
