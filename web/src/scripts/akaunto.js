@@ -7,19 +7,22 @@ import 'angular-translate-loader-static-files';
 import 'angular-translate-storage-local';
 import 'angular-translate-storage-cookie';
 import 'angular-cookies';
+import 'angular-loading-overlay';
 
 import baseConstants from './constants/base';
 
-import translateConfiguration from './configuration/translate';
 import httpConfiguration from './configuration/http';
+import overlayConfiguration from './configuration/overlay';
 import stateConfiguration from './configuration/state';
+import translateConfiguration from './configuration/translate';
 
+import responseObserver from './services/response-observer';
 import saltService from './services/salt';
 import toastService from './services/toast';
 import userService from './services/user';
+import utilsService from './services/utils';
 import wsseService from './services/wsse';
 import wsseInterceptor from './services/wsse-interceptor';
-import responseObserver from './services/response-observer';
 
 import LoginController from './controllers/login';
 
@@ -30,19 +33,22 @@ const app = angular.module('akaunto', [
     'ngMaterial',
     'ngMessages',
     'pascalprecht.translate',
-    'ngCookies'
+    'ngCookies',
+    'bsLoadingOverlay'
 ]);
 
 app.constant('baseConstants', baseConstants);
-app.config(translateConfiguration);
 app.config(httpConfiguration);
 app.config(stateConfiguration);
+app.config(translateConfiguration);
+app.run(overlayConfiguration);
+app.factory('responseObserver', responseObserver);
 app.factory('saltService', saltService);
 app.factory('toastService', toastService);
 app.factory('userService', userService);
+app.factory('utilsService', utilsService);
 app.factory('wsseService', wsseService);
 app.factory('wsseInterceptor', wsseInterceptor);
-app.factory('responseObserver', responseObserver);
 app.controller('LoginController', LoginController);
 app.component('localeChanger', LocaleChangerComponent);
 

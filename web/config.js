@@ -15,6 +15,7 @@ System.config({
   map: {
     "angular": "github:angular/bower-angular@1.5.0",
     "angular-cookies": "github:angular/bower-angular-cookies@1.5.0",
+    "angular-loading-overlay": "npm:angular-loading-overlay@0.3.1",
     "angular-material": "github:angular/bower-material@1.0.5",
     "angular-messages": "github:angular/bower-angular-messages@1.5.0",
     "angular-mocks": "github:angular/bower-angular-mocks@1.5.0",
