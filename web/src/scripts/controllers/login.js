@@ -30,8 +30,10 @@ class LoginController {
         this.saltService.getSalt(username)
             .then(
                 salt => this._storeCredentialsAndRedirect(username, password, salt),
-                () => this.toastService.error('login.error'))
-            .finally(this.utilsService.stopLoading);
+                () => {
+                    this.toastService.error('login.error');
+                    this.utilsService.stopLoading();
+                });
     }
 
     /**
