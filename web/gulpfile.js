@@ -7,6 +7,7 @@
 var argv = require('yargs').argv,
     gulp = require('gulp'),
     gulpIf = require('gulp-if'),
+    flatten = require('gulp-flatten'),
     jspm = require('gulp-jspm'),
     clean = require('gulp-clean'),
     sass = require('gulp-sass'),
@@ -71,14 +72,32 @@ gulp.task('copy:html', function () {
         .pipe(gulpIf(argv.production, gulp.dest(paths.dist), gulp.dest(paths.tmp)));
 });
 
+gulp.task('copy:locales', function () {
+    return gulp.src(['src/locales/*'])
+        .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/locales'), gulp.dest(paths.tmp + '/locales')));
+});
+
 gulp.task('copy:js', function () {
     return gulp.src(['jspm_packages/system.js'])
         .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/scripts'), gulp.dest(paths.tmp + '/scripts')));
 });
 
+gulp.task('copy:fonts', function () {
+    return gulp.src(['jspm_packages/npm/roboto-fontface*/fonts/*'])
+        .pipe(flatten())
+        .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/fonts'), gulp.dest(paths.tmp + '/fonts')));
+});
+
+gulp.task('copy:icons', function () {
+    return gulp.src(['jspm_packages/npm/material-design-icons*/iconfont/MaterialIcons-Regular*'])
+        .pipe(flatten())
+        .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/styles'), gulp.dest(paths.tmp + '/styles')));
+});
+
 gulp.task('watch', function () {
-    gulp.watch('src/styles/*.scss', ['sass']);
+    gulp.watch('src/styles/**/*.scss', ['sass']);
     gulp.watch(['src/*.html', 'src/**/*.html'], ['copy:html']);
+    gulp.watch(['src/locales/*'], ['copy:locales']);
     gulp.watch(['src/scripts/*.js', 'src/scripts/**/*.js'], ['build']);
 });
 
@@ -97,7 +116,10 @@ gulp.task('serve',
             'build',
             [
                 'copy:html',
-                'copy:js'
+                'copy:js',
+                'copy:locales',
+                'copy:fonts',
+                'copy:icons'
             ],
             'webserver',
             [
@@ -119,7 +141,10 @@ gulp.task('default',
             'build',
             [
                 'copy:html',
-                'copy:js'
+                'copy:js',
+                'copy:locales',
+                'copy:fonts',
+                'copy:icons'
             ]
         );
     }

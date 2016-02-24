@@ -1,0 +1,27 @@
+{
+    "locale": {
+        "en": "Anglais",
+        "fr": "Français"
+    },
+    "login": {
+        "username": {
+            "label": "Utilisateur",
+            "errors": {
+                "required": "Le nom d'utilisateur est obligatoire."
+            }
+        },
+        "password": {
+            "label": "Mot de passe",
+            "errors": {
+                "required": "Le mot de passe est obligatoire."
+            }
+        },
+        "submit": "Se connecter",
+        "error": "Une erreur est survenue. Merci de vérifier vos identifiants et de réessayer."
+    },
+    "toasts": {
+        "error": {
+            "action": "OK"
+        }
+    }
+}

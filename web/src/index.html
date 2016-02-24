@@ -15,8 +15,10 @@
 		<link rel="stylesheet" href="styles/main.css" />
     </head>
 
-    <body>
-        <div ui-view layout="column"></div>
+    <body layout="column" bs-loading-overlay bs-loading-overlay-reference-id="root">
+        <div ui-view layout="row" layout-align="center center" layout-padding flex></div>
+
+        <locale-changer class="ak-localeChanger" ng-cloak></locale-changer>
 
         <script type="text/javascript" src="scripts/system.js"></script>
         <script type="text/javascript">System.import('./scripts/main.bundle.js')</script>

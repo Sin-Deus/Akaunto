@@ -14,14 +14,35 @@ System.config({
 
   map: {
     "angular": "github:angular/bower-angular@1.5.0",
+    "angular-cookies": "github:angular/bower-angular-cookies@1.5.0",
+    "angular-loading-overlay": "npm:angular-loading-overlay@0.3.1",
     "angular-material": "github:angular/bower-material@1.0.5",
+    "angular-messages": "github:angular/bower-angular-messages@1.5.0",
     "angular-mocks": "github:angular/bower-angular-mocks@1.5.0",
+    "angular-translate": "github:angular-translate/bower-angular-translate@2.9.1",
+    "angular-translate-loader-static-files": "github:angular-translate/bower-angular-translate-loader-static-files@2.9.1",
+    "angular-translate-storage-cookie": "github:angular-translate/bower-angular-translate-storage-cookie@2.9.1",
+    "angular-translate-storage-local": "github:angular-translate/bower-angular-translate-storage-local@2.9.1",
     "angular-ui-router": "github:angular-ui/ui-router@0.2.18",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "core-js": "npm:core-js@1.2.6",
     "crypto-js": "npm:crypto-js@3.1.6",
+    "material-design-icons": "npm:material-design-icons@2.2.0",
+    "roboto-fontface": "npm:roboto-fontface@0.4.3",
     "wsse": "npm:wsse@2.3.0",
+    "github:angular-translate/bower-angular-translate-loader-static-files@2.9.1": {
+      "angular-translate": "github:angular-translate/bower-angular-translate@2.9.1"
+    },
+    "github:angular-translate/bower-angular-translate-storage-cookie@2.9.1": {
+      "angular-translate": "github:angular-translate/bower-angular-translate@2.9.1"
+    },
+    "github:angular-translate/bower-angular-translate-storage-local@2.9.1": {
+      "angular-translate": "github:angular-translate/bower-angular-translate@2.9.1"
+    },
+    "github:angular-translate/bower-angular-translate@2.9.1": {
+      "angular": "github:angular/bower-angular@1.5.0"
+    },
     "github:angular-ui/ui-router@0.2.18": {
       "angular": "github:angular/bower-angular@1.5.0"
     },
@@ -29,6 +50,9 @@ System.config({
       "angular": "github:angular/bower-angular@1.5.0"
     },
     "github:angular/bower-angular-aria@1.5.0": {
+      "angular": "github:angular/bower-angular@1.5.0"
+    },
+    "github:angular/bower-angular-cookies@1.5.0": {
       "angular": "github:angular/bower-angular@1.5.0"
     },
     "github:angular/bower-angular-mocks@1.5.0": {

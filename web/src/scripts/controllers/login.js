@@ -8,11 +8,15 @@ class LoginController {
      * @param {object} saltService
      * @param {object} userService
      * @param {object} $state
+     * @param {object} toastService
+     * @param {object} utilsService
      */
-    constructor(saltService, userService, $state) {
+    constructor(saltService, userService, $state, toastService, utilsService) {
         this.saltService = saltService;
         this.userService = userService;
         this.$state = $state;
+        this.toastService = toastService;
+        this.utilsService = utilsService;
     }
 
     /**
@@ -22,8 +26,14 @@ class LoginController {
      * @method
      */
     login(username, password) {
+        this.utilsService.startLoading();
         this.saltService.getSalt(username)
-            .then(salt => this._storeCredentialsAndRedirect(username, password, salt));
+            .then(
+                salt => this._storeCredentialsAndRedirect(username, password, salt),
+                () => {
+                    this.toastService.error('login.error');
+                    this.utilsService.stopLoading();
+                });
     }
 
     /**
@@ -40,6 +50,6 @@ class LoginController {
     }
 }
 
-LoginController.$inject = ['saltService', 'userService', '$state'];
+LoginController.$inject = ['saltService', 'userService', '$state', 'toastService', 'utilsService'];
 
 export default LoginController;
