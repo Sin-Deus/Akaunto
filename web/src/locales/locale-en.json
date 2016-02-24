@@ -1,4 +1,7 @@
 {
+    "application": {
+        "title": "Akaunto"
+    },
     "locale": {
         "en": "English",
         "fr": "French"
@@ -18,6 +21,10 @@
         },
         "submit": "Login",
         "error": "An error has occured. Please check your credentials and try again."
+    },
+    "header": {
+        "menu": "Open user menu",
+        "logout": "Log out"
     },
     "toasts": {
         "error": {

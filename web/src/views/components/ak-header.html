@@ -1,0 +1,21 @@
+<md-toolbar layout="row" layout-padding layout-align="center center">
+    <h2 flex class="md-display-1 ak-header__title" ng-click="$ctrl.goHome()">
+        <md-icon md-menu-origin>home</md-icon>
+        <span translate="application.title"></span>
+    </h2>
+    <md-menu>
+        <md-button aria-label="{{ 'header.menu' | translate }}" ng-click="$mdOpenMenu($event)">
+            <md-tooltip md-direction="left">{{ 'header.menu' | translate }}</md-tooltip>
+            <span ng-bind="$ctrl.user.username"></span>
+            <md-icon md-menu-origin>account_box</md-icon>
+        </md-button>
+        <md-menu-content width="4">
+            <md-menu-item>
+                <md-button ng-click="$ctrl.logout()">
+                    <md-icon md-menu-origin>lock_outline</md-icon>
+                    <span translate="header.logout"></span>
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+</md-toolbar>

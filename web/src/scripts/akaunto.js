@@ -27,6 +27,7 @@ import wsseInterceptor from './services/wsse-interceptor';
 
 import LoginController from './controllers/login';
 
+import AkHeaderComponent from './components/ak-header';
 import LocaleChangerComponent from './components/locale-changer';
 
 const app = angular.module('akaunto', [
@@ -52,6 +53,7 @@ app.factory('utilsService', utilsService);
 app.factory('wsseService', wsseService);
 app.factory('wsseInterceptor', wsseInterceptor);
 app.controller('LoginController', LoginController);
+app.component('akHeader', AkHeaderComponent);
 app.component('localeChanger', LocaleChangerComponent);
 
 export default app;
