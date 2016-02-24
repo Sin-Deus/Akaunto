@@ -24,9 +24,6 @@ class LocaleChangerController {
 LocaleChangerController.$inject = ['$translate'];
 
 export default {
-    bindings: {
-        currentLocale: '='
-    },
     templateUrl: 'views/components/locale-changer.html',
     controller: LocaleChangerController
 };
