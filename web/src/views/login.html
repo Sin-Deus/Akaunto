@@ -1,19 +1,21 @@
 <md-content layout-padding class="ak-login md-whiteframe-z3">
     <form name="loginForm" novalidate ng-submit="loginForm.$valid && loginController.login(username, password)">
         <md-input-container class="md-block">
-            <label translate="login.username.label"></label>
+            <label translate>login.username.label</label>
             <input type="text" ng-model="username" name="username" ng-required="true" autofocus />
             <div ng-messages="loginForm.username.$error">
-                <div ng-message="required" translate="login.username.errors.required"></div>
+                <div ng-message="required" translate>login.username.errors.required</div>
             </div>
         </md-input-container>
         <md-input-container class="md-block">
-            <label translate="login.password.label"></label>
+            <label translate>login.password.label</label>
             <input type="password" ng-model="password" name="password" ng-required="true"/>
             <div ng-messages="loginForm.password.$error">
-                <div ng-message="required" translate="login.password.errors.required"></div>
+                <div ng-message="required" translate>login.password.errors.required</div>
             </div>
         </md-input-container>
-        <md-button type="submit" class="md-raised md-primary ak-login__submit" translate="login.submit" aria-label="{{ 'login.submit' | translate }}"></md-button>
+        <md-button type="submit" class="md-raised md-primary ak-login__submit" aria-label="{{ 'login.submit' | translate }}">
+            <span translate>login.submit</span>
+        </md-button>
     </form>
 </md-content>

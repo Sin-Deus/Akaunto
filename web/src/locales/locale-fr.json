@@ -1,4 +1,7 @@
 {
+    "application": {
+        "title": "Akaunto"
+    },
     "locale": {
         "en": "Anglais",
         "fr": "Français"
@@ -18,6 +21,10 @@
         },
         "submit": "Se connecter",
         "error": "Une erreur est survenue. Merci de vérifier vos identifiants et de réessayer."
+    },
+    "header": {
+        "menu": "Ouvrir le menu utilisateur",
+        "logout": "Se déconnecter"
     },
     "toasts": {
         "error": {
