@@ -7,10 +7,10 @@
             <span translate="application.title"></span>
         </h2>
         <span flex></span>
+        <span ng-bind="$ctrl.user.username"></span>
         <md-menu>
-            <md-button aria-label="{{ 'header.menu' | translate }}" ng-click="$mdOpenMenu($event)">
-                <md-tooltip md-direction="left">{{ 'header.menu' | translate }}</md-tooltip>
-                <span ng-bind="$ctrl.user.username"></span>
+            <md-button class="md-icon-button" aria-label="{{ 'header.menu' | translate }}" ng-click="$mdOpenMenu($event)">
+                <md-tooltip md-direction="bottom left">{{ 'header.menu' | translate }}</md-tooltip>
                 <md-icon md-menu-origin>account_box</md-icon>
             </md-button>
             <md-menu-content width="4">
