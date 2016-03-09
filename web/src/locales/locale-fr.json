@@ -26,8 +26,12 @@
         "menu": "Ouvrir le menu utilisateur",
         "logout": "Se déconnecter"
     },
+    "user": {
+        "success": "Vos informations ont été correctement mises à jour."
+    },
     "toasts": {
         "error": {
+            "standardMessage": "Une erreur est survenue. Merci de réessayer plus tard.",
             "action": "OK"
         }
     }

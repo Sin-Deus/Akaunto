@@ -24,6 +24,7 @@ System.config({
     "angular-translate-storage-cookie": "github:angular-translate/bower-angular-translate-storage-cookie@2.9.1",
     "angular-translate-storage-local": "github:angular-translate/bower-angular-translate-storage-local@2.9.1",
     "angular-ui-router": "github:angular-ui/ui-router@0.2.18",
+    "angular-validation-match": "npm:angular-validation-match@1.7.1",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "core-js": "npm:core-js@1.2.6",
@@ -99,6 +100,10 @@ System.config({
     },
     "github:jspm/nodelibs-vm@0.1.0": {
       "vm-browserify": "npm:vm-browserify@0.0.4"
+    },
+    "npm:angular-validation-match@1.7.1": {
+      "angular": "npm:angular@1.5.0",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:asn1.js@4.3.0": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",

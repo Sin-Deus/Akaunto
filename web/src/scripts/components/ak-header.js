@@ -36,6 +36,14 @@ class AkHeaderController {
     }
 
     /**
+     * Navigates to the user edition page.
+     * @method
+     */
+    edit() {
+        this.$state.go('user');
+    }
+
+    /**
      * Navigates to the home page.
      * @method
      */

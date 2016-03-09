@@ -20,14 +20,18 @@
             }
         },
         "submit": "Login",
-        "error": "An error has occured. Please check your credentials and try again."
+        "error": "An error has occurred. Please check your credentials and try again."
     },
     "header": {
         "menu": "Open user menu",
         "logout": "Log out"
     },
+    "user": {
+        "success": "Your information has been successfully updated."
+    },
     "toasts": {
         "error": {
+            "standardMessage": "An error has occurred. Please try again later.",
             "action": "OK"
         }
     }
