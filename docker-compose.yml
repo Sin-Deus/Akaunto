@@ -1,0 +1,23 @@
+node:
+  build: ./docker/node
+  volumes:
+  - ./server:/usr/src/app
+  - ./docker/node/run.sh:/usr/src/run.sh
+  links:
+  - mongodb:mongodb
+  ports:
+  - 8181:8181
+  command: bash /usr/src/run.sh
+
+mongodb:
+  image: mongo
+  volumes:
+  - ./docker/db:/data/db
+
+# Administration interface for MongoDB, accessible on http://localhost:5678/
+genghis:
+  image: dockervan/genghis
+  links:
+  - mongodb:db
+  ports:
+  - 5678:5678
