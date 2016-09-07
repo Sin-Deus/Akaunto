@@ -1,7 +1,0 @@
-Rest_user:
-    type: rest
-    resource: "@SDUserBundle/Resources/config/routing_rest.yml"
-
-Rest_app:
-    type: rest
-    resource: "@SDAppBundle/Resources/config/routing_rest.yml"

@@ -1,7 +1,0 @@
-parameters:
-#    sd_app.example.class: SD\AppBundle\Example
-
-services:
-#    sd_app.example:
-#        class: %sd_app.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
