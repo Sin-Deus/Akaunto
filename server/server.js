@@ -6,9 +6,12 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
+const protectedRouter = express.Router();
 
 const port = process.env.PORT || 8181;
 mongoose.connect(config.database);
+
+const jwtMiddleware = require('./app/middlewares/jwt');
 
 const usersRoute = require('./app/routes/users');
 const authenticationRoute = require('./app/routes/authentication');
@@ -26,8 +29,11 @@ app.use(express.static('app/public'));
 // Expose the authentication route before any middleware, and outside the API.
 app.use('/authenticate', authenticationRoute);
 
+// Protect the router with the JWT token middleware.
+protectedRouter.use(jwtMiddleware);
+
 // API routes.
-app.use('/api/users', usersRoute);
+app.use('/api/users', usersRoute(protectedRouter));
 
 // Start the server.
 app.listen(port);
