@@ -1,0 +1,40 @@
+{
+  "name": "akaunto-server",
+  "version": "0.0.1",
+  "description": "Server-side application for the Akaunto service",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sin-Deus/Akaunto.git"
+  },
+  "keywords": [
+    "Account",
+    "Manager",
+    "Node",
+    "Express",
+    "Mongo",
+    "MEAN"
+  ],
+  "author": "SinDeus <Sin-Deus@users.noreply.github.com>",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/Sin-Deus/Akaunto/issues"
+  },
+  "homepage": "https://github.com/Sin-Deus/Akaunto#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.1.9",
+    "lodash": "^4.15.0",
+    "mongoose": "^4.6.0",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "prompt": "^1.0.0"
+  }
+}

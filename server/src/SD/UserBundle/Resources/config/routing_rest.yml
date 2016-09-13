@@ -1,4 +1,0 @@
-users:
-    type: rest
-    resource: "SDUserBundle:UserRest"
-    name_prefix: api_
