@@ -8,11 +8,13 @@ node:
   ports:
   - 8181:8181
   command: bash /usr/src/run.sh
+  container_name: Akaunto_node
 
 mongodb:
   image: mongo
   volumes:
   - ./docker/db:/data/db
+  container_name: Akaunto_mongodb
 
 # Administration interface for MongoDB, accessible on http://localhost:5678/
 genghis:

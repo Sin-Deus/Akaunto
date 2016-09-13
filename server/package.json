@@ -32,5 +32,8 @@
     "jsonwebtoken": "^7.1.9",
     "mongoose": "^4.6.0",
     "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "prompt": "^1.0.0"
   }
 }
