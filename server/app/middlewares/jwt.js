@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
             if (err) {
                 return res.sendStatus(403);
             } else {
-                req.decoded = decoded;
+                req.user = decoded._doc;
                 next();
             }
         });
