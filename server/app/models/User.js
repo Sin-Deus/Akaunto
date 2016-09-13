@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const _ = require('lodash');
 const Schema = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
 
@@ -42,5 +43,11 @@ UserSchema.methods.comparePassword = function (candidatePassword, cb) {
         cb(null, isMatch);
     });
 };
+
+UserSchema.set('toJSON', {
+    transform: (doc, ret) => {
+        return _.omit(ret, 'password');
+    }
+});
 
 module.exports = mongoose.model('User', UserSchema);
