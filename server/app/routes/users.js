@@ -19,7 +19,7 @@ module.exports = router => {
             if (err) {
                 res.sendStatus(400);
             } else {
-                res.json(user);
+                res.statusCode(201).json(user);
             }
         })
     });
@@ -36,6 +36,20 @@ module.exports = router => {
                 res.json(user);
             }
         });
+    });
+
+    router.route('/:id').delete((req, res) => {
+        if (!req.user.isAdmin) {
+            res.sendStatus(401);
+        } else {
+            User.findByIdAndRemove(req.params.id, (err) => {
+                if (err) {
+                    res.sendStatus(404);
+                } else {
+                    res.sendStatus(204);
+                }
+            });
+        }
     });
 
     router.route('/:id').put((req, res) => {
