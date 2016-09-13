@@ -2,6 +2,7 @@
 
 const config = require('../../config');
 const jwt = require('jsonwebtoken');
+const _ = require('lodash');
 
 module.exports = (req, res, next) => {
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -11,7 +12,7 @@ module.exports = (req, res, next) => {
             if (err) {
                 return res.sendStatus(403);
             } else {
-                req.user = decoded._doc;
+                req.user = _.omit(decoded._doc, 'password', 'accounts');
                 next();
             }
         });

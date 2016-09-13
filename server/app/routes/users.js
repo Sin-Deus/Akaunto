@@ -10,6 +10,11 @@ module.exports = router => {
     router.route('/').post((req, res) => {
         let user = new User(req.body);
 
+        // Prevent non-admin users to create admins.
+        if (!req.user.isAdmin) {
+            user.isAdmin = false;
+        }
+
         user.save(err => {
             if (err) {
                 res.sendStatus(400);
@@ -17,6 +22,10 @@ module.exports = router => {
                 res.json(user);
             }
         })
+    });
+
+    router.route('/me').get((req, res) => {
+        res.json(req.user);
     });
 
     router.route('/:id').get((req, res) => {
@@ -30,13 +39,17 @@ module.exports = router => {
     });
 
     router.route('/:id').put((req, res) => {
-        User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
-            if (err || !user) {
-                res.sendStatus(400);
-            } else {
-                res.json(user);
-            }
-        });
+        if (!req.user.isAdmin && (req.user._id !== req.params.id)) {
+            res.sendStatus(401);
+        } else {
+            User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
+                if (err || !user) {
+                    res.sendStatus(400);
+                } else {
+                    res.json(user);
+                }
+            });
+        }
     });
 
     return router;
