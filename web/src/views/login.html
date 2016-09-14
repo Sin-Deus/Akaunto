@@ -1,10 +1,10 @@
 <md-content layout-padding class="ak-login md-whiteframe-z3">
-    <form name="loginForm" novalidate ng-submit="loginForm.$valid && loginController.login(username, password)">
+    <form name="loginForm" novalidate ng-submit="loginForm.$valid && loginController.login(email, password)">
         <md-input-container class="md-block">
-            <label translate>login.username.label</label>
-            <input type="text" ng-model="username" name="username" ng-required="true" autofocus />
-            <div ng-messages="loginForm.username.$error">
-                <div ng-message="required" translate>login.username.errors.required</div>
+            <label translate>login.email.label</label>
+            <input type="text" ng-model="email" name="email" ng-required="true" autofocus />
+            <div ng-messages="loginForm.email.$error">
+                <div ng-message="required" translate>login.email.errors.required</div>
             </div>
         </md-input-container>
         <md-input-container class="md-block">
