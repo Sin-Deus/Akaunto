@@ -18,12 +18,11 @@ import stateTransitionConfiguration from './configuration/state-transition';
 import translateConfiguration from './configuration/translate';
 
 import responseObserver from './services/response-observer';
-import saltService from './services/salt';
+import authenticationService from './services/authentication';
 import toastService from './services/toast';
 import userService from './services/user';
 import utilsService from './services/utils';
-import wsseService from './services/wsse';
-import wsseInterceptor from './services/wsse-interceptor';
+import jwtInterceptor from './services/jwt-interceptor';
 
 import LoginController from './controllers/login';
 
@@ -46,12 +45,11 @@ app.config(translateConfiguration);
 app.run(overlayConfiguration);
 app.run(stateTransitionConfiguration);
 app.factory('responseObserver', responseObserver);
-app.factory('saltService', saltService);
 app.factory('toastService', toastService);
 app.factory('userService', userService);
 app.factory('utilsService', utilsService);
-app.factory('wsseService', wsseService);
-app.factory('wsseInterceptor', wsseInterceptor);
+app.factory('authenticationService', authenticationService);
+app.factory('jwtInterceptor', jwtInterceptor);
 app.controller('LoginController', LoginController);
 app.component('akHeader', AkHeaderComponent);
 app.component('localeChanger', LocaleChangerComponent);

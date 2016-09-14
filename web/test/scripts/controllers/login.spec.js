@@ -24,16 +24,16 @@ describe('LoginController', () => {
     });
 
     it('store the credentials and redirect to home', () => {
-        spyOn(controller, '_storeCredentialsAndRedirect').and.callThrough();
+        spyOn(controller, '_storeTokenAndRedirect').and.callThrough();
         spyOn(controller.$state, 'go');
 
-        $httpBackend.expectGET(baseConstants.baseURL + 'wsse/Test/salt').respond('mysalt');
+        $httpBackend.expectGET(baseConstants.baseURL + 'authentication').respond('regrgergergerg');
 
         controller.login(username, password);
 
         $httpBackend.flush();
 
-        expect(controller._storeCredentialsAndRedirect).toHaveBeenCalledWith('Test', 'password', 'mysalt');
+        expect(controller._storeTokenAndRedirect).toHaveBeenCalledWith('mytoken');
         expect(controller.$state.go).toHaveBeenCalledWith('home');
     });
 });

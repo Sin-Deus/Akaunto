@@ -5,15 +5,13 @@ class LoginController {
 
     /**
      * @constructor
-     * @param {object} saltService
-     * @param {object} userService
+     * @param {object} authenticationService
      * @param {object} $state
      * @param {object} toastService
      * @param {object} utilsService
      */
-    constructor(saltService, userService, $state, toastService, utilsService) {
-        this.saltService = saltService;
-        this.userService = userService;
+    constructor(authenticationService, $state, toastService, utilsService) {
+        this.authenticationService = authenticationService;
         this.$state = $state;
         this.toastService = toastService;
         this.utilsService = utilsService;
@@ -21,15 +19,15 @@ class LoginController {
 
     /**
      * Logs the user in the application, with the specified credentials.
-     * @param {string} username The user name.
+     * @param {string} email The user email.
      * @param {string} password The user password.
      * @method
      */
-    login(username, password) {
+    login(email, password) {
         this.utilsService.startLoading();
-        this.saltService.getSalt(username)
+        this.authenticationService.authenticate(email, password)
             .then(
-                salt => this._storeCredentialsAndRedirect(username, password, salt),
+                token => this._storeTokenAndRedirect(token),
                 () => {
                     this.toastService.error('login.error');
                     this.utilsService.stopLoading();
@@ -38,18 +36,16 @@ class LoginController {
 
     /**
      * Stores the user credentials in the session storage, and redirects to the home page.
-     * @param {string} username The user name.
-     * @param {string} password The user password.
-     * @param {string} salt The user salt.
+     * @param {string} token The JWT.
      * @method
      * @private
      */
-    _storeCredentialsAndRedirect(username, password, salt) {
-        this.userService.storeUserCredentials(username, password, salt);
+    _storeTokenAndRedirect(token) {
+        this.authenticationService.storeToken(token);
         this.$state.go('home');
     }
 }
 
-LoginController.$inject = ['saltService', 'userService', '$state', 'toastService', 'utilsService'];
+LoginController.$inject = ['authenticationService', '$state', 'toastService', 'utilsService'];
 
 export default LoginController;

@@ -6,10 +6,12 @@ class AkHeaderController {
     /**
      * @constructor
      * @param {object} userService The user service.
+     * @param {object} authenticationService The authentication service.
      * @param {object} $state The Angular UI router service.
      */
-    constructor(userService, $state) {
+    constructor(userService, authenticationService, $state) {
         this.userService = userService;
+        this.authenticationService = authenticationService;
         this.$state = $state;
 
         this._fetchUser();
@@ -29,7 +31,7 @@ class AkHeaderController {
      * @method
      */
     logout() {
-        this.userService.clearUserCredentials();
+        this.authenticationService.clearToken();
         this.$state.go('login');
     }
 
@@ -42,7 +44,7 @@ class AkHeaderController {
     }
 }
 
-AkHeaderController.$inject = ['userService', '$state'];
+AkHeaderController.$inject = ['userService', 'authenticationService', '$state'];
 
 export default {
     templateUrl: 'views/components/ak-header.html',
