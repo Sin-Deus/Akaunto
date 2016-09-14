@@ -12,12 +12,15 @@ const port = process.env.PORT || 8181;
 mongoose.connect(config.database);
 
 const jwtMiddleware = require('./app/middlewares/jwt');
+const corsMiddleware = require('./app/middlewares/cors');
 
 const usersRoute = require('./app/routes/users');
 const authenticationRoute = require('./app/routes/authentication');
 
 // Log all requests to the console.
 app.use(morgan('dev'));
+// Enable CORS.
+app.use(corsMiddleware);
 
 // Use body-parser to be able to retrieve POST parameters, ...
 app.use(bodyParser.json());
