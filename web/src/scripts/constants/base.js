@@ -1,6 +1,6 @@
-const baseURL = 'http://localhost:8080/akaunto/app_dev.php/';
+const baseURL = 'http://localhost:8181/';
 
 export default {
     baseURL,
-    apiBaseURL: `${ baseURL }api/v1/`
+    apiBaseURL: `${ baseURL }api/`
 };

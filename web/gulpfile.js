@@ -41,7 +41,7 @@ gulp.task('webserver', function () {
     return connect.server({
         'livereload': true,
         'root': [__dirname, paths.tmp],
-        'port': 8181
+        'port': 8282
     });
 });
 
@@ -103,7 +103,7 @@ gulp.task('watch', function () {
 
 gulp.task('open', function () {
     gulp.src(__filename)
-        .pipe(gulpOpen({'uri': 'http://localhost:8181'}));
+        .pipe(gulpOpen({'uri': 'http://localhost:8282'}));
 });
 
 /************* Main tasks *************/
@@ -155,6 +155,8 @@ gulp.task('test',
         new KarmaServer({
             configFile: __dirname + '/karma.conf.js',
             singleRun: true
-        }, done).start();
+        }, function () {
+            done();
+        }).start();
     }
 );

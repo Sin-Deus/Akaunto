@@ -7,10 +7,10 @@
         "fr": "Français"
     },
     "login": {
-        "username": {
-            "label": "Utilisateur",
+        "email": {
+            "label": "E-mail",
             "errors": {
-                "required": "Le nom d'utilisateur est obligatoire."
+                "required": "L'e-mail est obligatoire."
             }
         },
         "password": {

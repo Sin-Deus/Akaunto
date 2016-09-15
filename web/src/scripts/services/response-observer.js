@@ -10,9 +10,9 @@ function responseObserver($q, $injector) {
     return {
         responseError(errorResponse) {
             if (errorResponse.status === HTTP_FORBIDDEN) {
-                const userService = $injector.get('userService');
+                const authenticationService = $injector.get('authenticationService');
                 const $state = $injector.get('$state');
-                userService.clearUserCredentials();
+                authenticationService.clearToken();
                 $state.go('login');
             }
             return $q.reject(errorResponse);

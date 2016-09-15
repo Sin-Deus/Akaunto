@@ -3,7 +3,7 @@
  * @param {object} $httpProvider
  */
 function httpConfiguration($httpProvider) {
-    $httpProvider.interceptors.push('wsseInterceptor');
+    $httpProvider.interceptors.push('jwtInterceptor');
     $httpProvider.interceptors.push('responseObserver');
 }
 
