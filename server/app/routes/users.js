@@ -1,14 +1,19 @@
-'use strict';
-
 const User = require('../models/User');
+const HttpStatus = require('http-status-codes');
 
 module.exports = router => {
     router.route('/').get((req, res) => {
-        User.find({}, (err, users) => res.json(users));
+        User.find({}, (err, users) => {
+            if (err) {
+                res.sendStatus(HttpStatus.BAD_REQUEST);
+            } else {
+                res.json(users);
+            }
+        });
     });
 
     router.route('/').post((req, res) => {
-        let user = new User(req.body);
+        const user = new User(req.body);
 
         // Prevent non-admin users to create admins.
         if (!req.user.isAdmin) {
@@ -17,11 +22,11 @@ module.exports = router => {
 
         user.save(err => {
             if (err) {
-                res.sendStatus(400);
+                res.sendStatus(HttpStatus.BAD_REQUEST);
             } else {
-                res.statusCode(201).json(user);
+                res.statusCode(HttpStatus.CREATED).json(user);
             }
-        })
+        });
     });
 
     router.route('/me').get((req, res) => {
@@ -31,7 +36,7 @@ module.exports = router => {
     router.route('/:id').get((req, res) => {
         User.findOne({ _id: req.params.id }, (err, user) => {
             if (err || !user) {
-                res.sendStatus(404);
+                res.sendStatus(HttpStatus.NOT_FOUND);
             } else {
                 res.json(user);
             }
@@ -40,25 +45,25 @@ module.exports = router => {
 
     router.route('/:id').delete((req, res) => {
         if (!req.user.isAdmin) {
-            res.sendStatus(401);
+            res.sendStatus(HttpStatus.UNAUTHORIZED);
         } else {
-            User.findByIdAndRemove(req.params.id, (err) => {
+            User.findByIdAndRemove(req.params.id, err => {
                 if (err) {
-                    res.sendStatus(404);
+                    res.sendStatus(HttpStatus.NOT_FOUND);
                 } else {
-                    res.sendStatus(204);
+                    res.sendStatus(HttpStatus.NO_CONTENT);
                 }
             });
         }
     });
 
     router.route('/:id').put((req, res) => {
-        if (!req.user.isAdmin && (req.user._id !== req.params.id)) {
-            res.sendStatus(401);
+        if (!req.user.isAdmin && req.user._id !== req.params.id) {
+            res.sendStatus(HttpStatus.UNAUTHORIZED);
         } else {
             User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
                 if (err || !user) {
-                    res.sendStatus(400);
+                    res.sendStatus(HttpStatus.BAD_REQUEST);
                 } else {
                     res.json(user);
                 }

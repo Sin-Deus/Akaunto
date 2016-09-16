@@ -1,5 +1,4 @@
-'use strict';
-
+const HttpStatus = require('http-status-codes');
 const config = require('../../config');
 const express = require('express');
 const router = express.Router();
@@ -8,22 +7,24 @@ const jwt = require('jsonwebtoken');
 
 router.route('/').post((req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
-        if (err) { throw err; }
+        if (err) {
+            throw err;
+        }
 
         if (!user) {
-            res.sendStatus(401);
+            res.sendStatus(HttpStatus.FORBIDDEN);
         } else {
-            user.comparePassword(req.body.password, (err, isMatch) => {
-                if (err) {
-                    res.status(400).send(err);
+            user.comparePassword(req.body.password, (compareErr, isMatch) => {
+                if (compareErr) {
+                    res.status(HttpStatus.BAD_REQUEST).send(compareErr);
                 } else if (!isMatch) {
-                    res.sendStatus(400);
+                    res.sendStatus(HttpStatus.BAD_REQUEST);
                 } else {
-                    let token = jwt.sign(user, config.secret, {
+                    const token = jwt.sign(user, config.secret, {
                         expiresIn: 3600 // expires in 1 hour
                     });
 
-                    res.json({token: token});
+                    res.json({ token });
                 }
             });
         }

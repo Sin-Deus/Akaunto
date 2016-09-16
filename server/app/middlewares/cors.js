@@ -1,4 +1,4 @@
-'use strict';
+const HttpStatus = require('http-status-codes');
 
 module.exports = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -7,8 +7,8 @@ module.exports = (req, res, next) => {
 
     // Intercept OPTIONS method
     if ('OPTIONS' === req.method) {
-        res.sendStatus(200);
-    } else {
-        next();
+        return res.sendStatus(HttpStatus.OK);
     }
+
+    next();
 };

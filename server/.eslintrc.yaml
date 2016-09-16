@@ -1,5 +1,7 @@
 root: true
 extends: "fingerproof/es6"
+env:
+    node: true
 rules:
     indent: [2, 4]
     func-names: 0
@@ -7,6 +9,10 @@ rules:
     max-len: [1, 160, 4]
     max-params: [2, 8]
     brace-style: [2, "1tbs"]
+    id-length: [2, {"min": 1}]
+    no-invalid-this: 0
+    new-cap: 0
+    max-nested-callbacks: [2, 3]
 globals:
     sessionStorage: true
     document: true

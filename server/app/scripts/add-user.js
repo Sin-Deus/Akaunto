@@ -1,5 +1,3 @@
-'use strict';
-
 const config = require('../../config');
 const mongoose = require('mongoose');
 const prompt = require('prompt');
@@ -32,9 +30,11 @@ const schema = {
 prompt.start();
 
 prompt.get(schema, (err, result) => {
-    if (err) { throw err; }
+    if (err) {
+        throw err;
+    }
 
-    let user = new User({
+    const user = new User({
         email: result.email,
         firstName: result.firstName,
         lastName: result.lastName,
@@ -42,9 +42,12 @@ prompt.get(schema, (err, result) => {
         isAdmin: result.isAdmin
     });
 
-    user.save(err => {
-        if (err) { throw err; }
+    user.save(saveErr => {
+        if (saveErr) {
+            throw saveErr;
+        }
 
+        /* eslint-disable no-console */
         console.log(`User ${user.firstName} saved successfully`);
     });
 });
