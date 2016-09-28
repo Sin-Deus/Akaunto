@@ -33,6 +33,16 @@ module.exports = router => {
         res.json(req.user);
     });
 
+    router.route('/me').put((req, res) => {
+        User.findByIdAndUpdate(req.user._id, req.body, { new: true }, (err, user) => {
+            if (err || !user) {
+                res.sendStatus(HttpStatus.BAD_REQUEST);
+            } else {
+                res.json(user);
+            }
+        });
+    });
+
     router.route('/:id').get((req, res) => {
         User.findOne({ _id: req.params.id }, (err, user) => {
             if (err || !user) {
