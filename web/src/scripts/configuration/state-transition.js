@@ -9,8 +9,8 @@ function stateTransitionConfiguration($rootScope, utilsService) {
             utilsService.startLoading();
         }
     });
-    $rootScope.$on('$stateChangeSuccess', () => utilsService.stopLoading());
-    $rootScope.$on('$stateChangeError', () => utilsService.stopLoading());
+    $rootScope.$on('$stateChangeSuccess', utilsService.stopLoading);
+    $rootScope.$on('$stateChangeError', utilsService.stopLoading);
 }
 
 stateTransitionConfiguration.$inject = ['$rootScope', 'utilsService'];
