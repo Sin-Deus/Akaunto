@@ -8,13 +8,16 @@ class AkHeaderController {
      * @param {object} userService The user service.
      * @param {object} authenticationService The authentication service.
      * @param {object} $state The Angular UI router service.
+     * @param {object} $rootScope The Angular root scope.
      */
-    constructor(userService, authenticationService, $state) {
+    constructor(userService, authenticationService, $state, $rootScope) {
         this.userService = userService;
         this.authenticationService = authenticationService;
         this.$state = $state;
+        this.$rootScope = $rootScope;
 
         this._fetchUser();
+        this._listenToUserUpdate();
     }
 
     /**
@@ -24,6 +27,15 @@ class AkHeaderController {
      */
     _fetchUser() {
         this.userService.getMe().then(user => this.user = user);
+    }
+
+    /**
+     * Sets up an event listener on the root scope, listening to a change of the current user.
+     * @method
+     * @private
+     */
+    _listenToUserUpdate() {
+        this.$rootScope.$on('user:update', (event, user) => this.user = user);
     }
 
     /**
@@ -52,7 +64,7 @@ class AkHeaderController {
     }
 }
 
-AkHeaderController.$inject = ['userService', 'authenticationService', '$state'];
+AkHeaderController.$inject = ['userService', 'authenticationService', '$state', '$rootScope'];
 
 export default {
     templateUrl: 'views/components/ak-header.html',

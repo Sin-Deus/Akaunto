@@ -2,7 +2,7 @@
     <h2>
         <span translate>user.title</span>
     </h2>
-    <form name="userForm" novalidate ng-submit="userForm.$dirty && userForm.$valid && userController.updateUser()" layout="column">
+    <form name="userForm" novalidate ng-submit="userForm.$dirty && userForm.$valid && userController.update()" layout="column">
         <section layout="column" layout-gt-xs="row">
             <md-input-container flex>
                 <label translate>user.firstName.label</label>
@@ -21,14 +21,14 @@
         </section>
         <md-input-container>
             <label translate>user.password.label</label>
-            <input type="password" ng-model="userController.user.password" name="password" ng-required="true"/>
+            <input type="password" ng-model="userController.user.password" name="password" ng-required="!!userController.passwordMatch"/>
             <div ng-messages="userForm.password.$error">
                 <div ng-message="required" translate>user.password.errors.required</div>
             </div>
         </md-input-container>
         <md-input-container>
             <label translate>user.passwordMatch.label</label>
-            <input type="password" ng-model="userController.passwordMatch" name="passwordMatch" ng-required="true" match="userController.user.password"/>
+            <input type="password" ng-model="userController.passwordMatch" name="passwordMatch" ng-required="!!userController.password" match="userController.user.password"/>
             <div ng-messages="userForm.passwordMatch.$error">
                 <div ng-message="required" translate>user.passwordMatch.errors.required</div>
                 <div ng-message="match" translate>user.passwordMatch.errors.match</div>
