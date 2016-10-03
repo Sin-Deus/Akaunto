@@ -33,6 +33,25 @@ module.exports = router => {
         res.json(req.user);
     });
 
+    router.route('/me').put((req, res) => {
+        const callback = function () {
+            User.findByIdAndUpdate(req.user._id, req.body, { new: true }, (err, user) => {
+                if (err || !user) {
+                    res.sendStatus(HttpStatus.BAD_REQUEST);
+                } else {
+                    res.json(user);
+                }
+            });
+        };
+
+        if (req.body.password) {
+            User.encryptPassword(req.body, callback);
+        } else {
+            /* eslint-disable callback-return */
+            callback();
+        }
+    });
+
     router.route('/:id').get((req, res) => {
         User.findOne({ _id: req.params.id }, (err, user) => {
             if (err || !user) {
@@ -61,13 +80,22 @@ module.exports = router => {
         if (!req.user.isAdmin && req.user._id !== req.params.id) {
             res.sendStatus(HttpStatus.UNAUTHORIZED);
         } else {
-            User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
-                if (err || !user) {
-                    res.sendStatus(HttpStatus.BAD_REQUEST);
-                } else {
-                    res.json(user);
-                }
-            });
+            const callback = function () {
+                User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
+                    if (err || !user) {
+                        res.sendStatus(HttpStatus.BAD_REQUEST);
+                    } else {
+                        res.json(user);
+                    }
+                });
+            };
+
+            if (req.body.password) {
+                User.encryptPassword(req.body, callback);
+            } else {
+                /* eslint-disable callback-return */
+                callback();
+            }
         }
     });
 

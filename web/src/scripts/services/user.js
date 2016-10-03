@@ -26,6 +26,21 @@ function userService($http, baseConstants) {
                 method: 'GET',
                 url: `${ baseConstants.apiBaseURL }users/me`
             }).then(response => response.data);
+        },
+
+        /**
+         * Updates the currently logged user.
+         * @param {User} user The new user.
+         * @method
+         * @static
+         * @returns {User}
+         */
+        updateMe(user) {
+            return $http({
+                method: 'PUT',
+                url: `${ baseConstants.apiBaseURL }users/me`,
+                data: user
+            }).then(response => response.data);
         }
     };
 }

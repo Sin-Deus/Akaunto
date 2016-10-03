@@ -1,6 +1,7 @@
 const HttpStatus = require('http-status-codes');
 const config = require('../../config');
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 const _ = require('lodash');
 
 module.exports = (req, res, next) => {
@@ -12,8 +13,14 @@ module.exports = (req, res, next) => {
                 return res.sendStatus(HttpStatus.FORBIDDEN);
             }
 
-            req.user = _.omit(decoded._doc, 'password', 'accounts');
-            next();
+            User.findById(decoded._doc._id, (userErr, user) => {
+                if (userErr || !user) {
+                    res.sendStatus(HttpStatus.NOT_FOUND);
+                } else {
+                    req.user = _.omit(user, 'password', 'accounts');
+                    return next();
+                }
+            });
         });
     } else {
         return res.sendStatus(HttpStatus.FORBIDDEN);

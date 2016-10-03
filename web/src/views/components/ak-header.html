@@ -15,6 +15,12 @@
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item>
+                    <md-button ng-click="$ctrl.edit()">
+                        <md-icon md-menu-origin>edit</md-icon>
+                        <span translate>header.edit</span>
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
                     <md-button ng-click="$ctrl.logout()">
                         <md-icon md-menu-origin>lock_outline</md-icon>
                         <span translate>header.logout</span>

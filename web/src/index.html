@@ -18,7 +18,7 @@
     <body layout="column" bs-loading-overlay bs-loading-overlay-reference-id="root">
         <ak-header ng-if="!('login' | isState)" class="ak-header"></ak-header>
 
-        <div ui-view layout="row" layout-align="center center" layout-padding flex></div>
+        <md-content ui-view layout="row" layout-padding flex layout-align="center" class="ak-mainContent"></md-content>
 
         <locale-changer class="ak-localeChanger" ng-cloak></locale-changer>
 

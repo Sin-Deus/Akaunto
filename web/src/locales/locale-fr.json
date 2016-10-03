@@ -24,10 +24,42 @@
     },
     "header": {
         "menu": "Ouvrir le menu utilisateur",
-        "logout": "Se déconnecter"
+        "logout": "Se déconnecter",
+        "edit": "Modifier vos informations"
+    },
+    "user": {
+        "success": "Vos informations ont été correctement mises à jour.",
+        "title": "Modifier vos informations",
+        "submit": "Mettre à jour",
+        "firstName": {
+            "label": "Prénom",
+            "errors": {
+                "required": "Le prénom est obligatoire."
+            }
+        },
+        "lastName": {
+            "label": "Nom de famille",
+            "errors": {
+                "required": "Le nom de famille est obligatoire."
+            }
+        },
+        "password": {
+            "label": "Mot de passe",
+            "errors": {
+                "required": "Le mot de passe est obligatoire."
+            }
+        },
+        "passwordMatch": {
+            "label": "Confirmation du mot de passe",
+            "errors": {
+                "required": "La confirmation est obligatoire.",
+                "match": "La confirmation ne correspond pas au mot de passe."
+            }
+        }
     },
     "toasts": {
         "error": {
+            "standardMessage": "Une erreur est survenue. Merci de réessayer plus tard.",
             "action": "OK"
         }
     }

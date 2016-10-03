@@ -8,6 +8,7 @@ import 'angular-translate-storage-local';
 import 'angular-translate-storage-cookie';
 import 'angular-cookies';
 import 'angular-loading-overlay';
+import 'angular-validation-match';
 
 import baseConstants from './constants/base';
 
@@ -25,6 +26,7 @@ import utilsService from './services/utils';
 import jwtInterceptor from './services/jwt-interceptor';
 
 import LoginController from './controllers/login';
+import UserController from './controllers/user';
 
 import AkHeaderComponent from './components/ak-header';
 import LocaleChangerComponent from './components/locale-changer';
@@ -35,7 +37,8 @@ const app = angular.module('akaunto', [
     'ngMessages',
     'pascalprecht.translate',
     'ngCookies',
-    'bsLoadingOverlay'
+    'bsLoadingOverlay',
+    'validation.match'
 ]);
 
 app.constant('baseConstants', baseConstants);
@@ -51,6 +54,7 @@ app.factory('utilsService', utilsService);
 app.factory('authenticationService', authenticationService);
 app.factory('jwtInterceptor', jwtInterceptor);
 app.controller('LoginController', LoginController);
+app.controller('UserController', UserController);
 app.component('akHeader', AkHeaderComponent);
 app.component('localeChanger', LocaleChangerComponent);
 
