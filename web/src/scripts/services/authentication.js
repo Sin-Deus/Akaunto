@@ -20,7 +20,7 @@ function authenticationService(baseConstants, $http) {
         authenticate(email, password) {
             return $http({
                 method: 'POST',
-                data: { email: email, password: password },
+                data: { email, password },
                 url: `${ baseConstants.baseURL }authenticate`
             }).then(response => response.data && response.data.token);
         },
