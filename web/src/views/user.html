@@ -2,7 +2,7 @@
     <h2>
         <span translate>user.title</span>
     </h2>
-    <form name="userForm" novalidate ng-submit="userForm.$dirty && userForm.$valid && userController.update()" layout="column">
+    <form name="userForm" novalidate ng-submit="userForm.$dirty && userForm.$valid && userController.update(userForm)" layout="column">
         <section layout="column" layout-gt-xs="row">
             <md-input-container flex>
                 <label translate>user.firstName.label</label>

@@ -21,13 +21,14 @@ class UserController {
 
     /**
      * Updates the user remotely.
+     * @param {Object} userForm
      * @method
      */
-    update() {
+    update(userForm) {
         this.utilsService.startLoading();
         this.userService.updateMe(this.user)
             .then(
-                user => this._onSuccess(user),
+                user => this._onSuccess(user, userForm),
                 () => this.toastService.error('toasts.error.standardError')
             )
             .finally(this.utilsService.stopLoading);
@@ -36,12 +37,15 @@ class UserController {
     /**
      * Updates the user client-side.
      * @param {User} user
+     * @param {Object} userForm
      * @private
      */
-    _onSuccess(user) {
+    _onSuccess(user, userForm) {
         this.user = user;
         this.$rootScope.$emit('user:update', this.user);
         this.toastService.success('user.success');
+        Reflect.deleteProperty(this, 'passwordMatch');
+        userForm.$setPristine();
     }
 }
 
