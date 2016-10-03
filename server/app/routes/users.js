@@ -34,13 +34,22 @@ module.exports = router => {
     });
 
     router.route('/me').put((req, res) => {
-        User.findByIdAndUpdate(req.user._id, req.body, { new: true }, (err, user) => {
-            if (err || !user) {
-                res.sendStatus(HttpStatus.BAD_REQUEST);
-            } else {
-                res.json(user);
-            }
-        });
+        const callback = function () {
+            User.findByIdAndUpdate(req.user._id, req.body, { new: true }, (err, user) => {
+                if (err || !user) {
+                    res.sendStatus(HttpStatus.BAD_REQUEST);
+                } else {
+                    res.json(user);
+                }
+            });
+        };
+
+        if (req.body.password) {
+            User.encryptPassword(req.body, callback);
+        } else {
+            /* eslint-disable callback-return */
+            callback();
+        }
     });
 
     router.route('/:id').get((req, res) => {
@@ -71,13 +80,22 @@ module.exports = router => {
         if (!req.user.isAdmin && req.user._id !== req.params.id) {
             res.sendStatus(HttpStatus.UNAUTHORIZED);
         } else {
-            User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
-                if (err || !user) {
-                    res.sendStatus(HttpStatus.BAD_REQUEST);
-                } else {
-                    res.json(user);
-                }
-            });
+            const callback = function () {
+                User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
+                    if (err || !user) {
+                        res.sendStatus(HttpStatus.BAD_REQUEST);
+                    } else {
+                        res.json(user);
+                    }
+                });
+            };
+
+            if (req.body.password) {
+                User.encryptPassword(req.body, callback);
+            } else {
+                /* eslint-disable callback-return */
+                callback();
+            }
         }
     });
 

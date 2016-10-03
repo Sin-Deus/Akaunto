@@ -19,28 +19,41 @@ const UserSchema = new Schema({
     }]
 });
 
-UserSchema.pre('save', function (next) {
-    /* eslint-disable consistent-this */
-    const user = this;
-    if (!user.isModified('password')) {
-        return next();
-    }
-
+/**
+ * Encrypts the password of the given user.
+ * @param {object} user
+ * @param {string} user.password
+ * @param {function} [cb] An optional callback.
+ * @private
+ */
+function _encryptPassword(user, cb) {
     bcrypt.genSalt(SALT_WORK_FACTOR, (saltErr, salt) => {
         if (saltErr) {
-            return next(saltErr);
+            return cb && cb(saltErr);
         }
 
         bcrypt.hash(user.password, salt, (hashErr, hash) => {
             if (hashErr) {
-                return next(hashErr);
+                return cb && cb(hashErr);
             }
 
             user.password = hash;
-            next();
+            return cb && cb();
         });
     });
+}
+
+UserSchema.pre('save', function (next) {
+    if (!this.isModified('password')) {
+        return next();
+    }
+
+    _encryptPassword(this, next);
 });
+
+UserSchema.statics.encryptPassword = function (user, cb) {
+    _encryptPassword(user, cb);
+};
 
 UserSchema.methods.comparePassword = function (candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
