@@ -6,6 +6,8 @@
  * @return {{error: function}}
  */
 function toastService($mdToast, $translate, $q) {
+    const SUCCESS_DELAY = 2000;
+
     return {
 
         /**
@@ -24,7 +26,26 @@ function toastService($mdToast, $translate, $q) {
                     .action(messages[1])
                     .highlightAction(true)
                     .position('top right')
-                    .hideDelay(0));
+                    .hideDelay(0)
+                    .parent('.ak-mainContent'));
+            });
+        },
+
+        /**
+         * Shows a success toast.
+         * @param {string} messageKey The Angular Translate message key.
+         * @method
+         * @static
+         */
+        success(messageKey) {
+            $q.all([
+                $translate(messageKey)
+            ]).then(messages => {
+                $mdToast.show($mdToast.simple()
+                    .textContent(messages[0])
+                    .position('top right')
+                    .hideDelay(SUCCESS_DELAY)
+                    .parent('.ak-mainContent'));
             });
         }
     };
