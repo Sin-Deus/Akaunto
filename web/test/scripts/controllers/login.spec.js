@@ -17,6 +17,8 @@ describe('LoginController', () => {
         });
         baseConstants = _baseConstants_;
         $httpBackend = _$httpBackend_;
+
+        $httpBackend.whenGET('../locales/locale-en.json').respond({});
     }));
 
     it('should be defined', () => {
@@ -27,7 +29,7 @@ describe('LoginController', () => {
         spyOn(controller, '_storeTokenAndRedirect').and.callThrough();
         spyOn(controller.$state, 'go');
 
-        $httpBackend.expectGET(baseConstants.baseURL + 'authentication').respond('regrgergergerg');
+        $httpBackend.expectPOST(baseConstants.baseURL + 'authenticate').respond({ token: 'mytoken' });
 
         controller.login(username, password);
 

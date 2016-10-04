@@ -11,6 +11,8 @@ describe('UserService', () => {
         $httpBackend = _$httpBackend_;
         baseConstants = _baseConstants_;
         userService = _userService_;
+
+        $httpBackend.whenGET('../locales/locale-en.json').respond({});
     }));
 
     describe('getMe', () => {
