@@ -2,17 +2,19 @@
  * Service for user.
  * @param {function} $http
  * @param {object} baseConstants
- * @return {{getMe: function}}
+ * @return {{getMe: function, updateMe: function}}
  */
 function userService($http, baseConstants) {
-
     return {
 
         /**
          * @class User
          * @property {number} id
-         * @property {string} username
+         * @property {string} firstName
+         * @property {string} lastName
          * @property {string} email
+         * @property {string} locale
+         * @property {boolean} isAdmin
          */
 
         /**
@@ -33,7 +35,7 @@ function userService($http, baseConstants) {
          * @param {User} user The new user.
          * @method
          * @static
-         * @returns {User}
+         * @return {User}
          */
         updateMe(user) {
             return $http({

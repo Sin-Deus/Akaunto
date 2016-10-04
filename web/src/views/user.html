@@ -1,42 +1,54 @@
-<md-content flex-sm="100" flex-gt-sm="90" flex-gt-md="70" flex-gt-lg="50" class="md-whiteframe-z2 md-margin">
+<md-content flex-sm="100" flex-gt-sm="90" flex-gt-md="70" flex-gt-lg="50" class="md-whiteframe-z2 md-margin" layout="column">
     <h2>
         <span translate>user.title</span>
     </h2>
-    <form name="userForm" novalidate ng-submit="userForm.$dirty && userForm.$valid && userController.update(userForm)" layout="column">
-        <section layout="column" layout-gt-xs="row">
-            <md-input-container flex>
-                <label translate>user.firstName.label</label>
-                <input type="text" ng-model="userController.user.firstName" name="firstName" ng-required="true" autofocus />
-                <div ng-messages="userForm.firstName.$error">
-                    <div ng-message="required" translate>user.firstName.errors.required</div>
+    <form name="userForm" novalidate ng-submit="userForm.$dirty && userForm.$valid && userController.update(userForm)" layout="column" flex>
+        <md-content flex layout="column">
+            <section layout="column" layout-gt-xs="row">
+                <md-input-container>
+                    <label translate>user.firstName.label</label>
+                    <input type="text" ng-model="userController.user.firstName" name="firstName" ng-required="true" autofocus />
+                    <div ng-messages="userForm.firstName.$error">
+                        <div ng-message="required" translate>user.firstName.errors.required</div>
+                    </div>
+                </md-input-container>
+                <md-input-container>
+                    <label translate>user.lastName.label</label>
+                    <input type="text" ng-model="userController.user.lastName" name="lastName" ng-required="true" autofocus />
+                    <div ng-messages="userForm.lastName.$error">
+                        <div ng-message="required" translate>user.lastName.errors.required</div>
+                    </div>
+                </md-input-container>
+            </section>
+            <md-input-container>
+                <label translate>user.password.label</label>
+                <input type="password" ng-model="userController.user.password" name="password" ng-required="!!userController.passwordMatch"/>
+                <div ng-messages="userForm.password.$error">
+                    <div ng-message="required" translate>user.password.errors.required</div>
                 </div>
             </md-input-container>
-            <md-input-container flex>
-                <label translate>user.lastName.label</label>
-                <input type="text" ng-model="userController.user.lastName" name="lastName" ng-required="true" autofocus />
-                <div ng-messages="userForm.lastName.$error">
-                    <div ng-message="required" translate>user.lastName.errors.required</div>
+            <md-input-container>
+                <label translate>user.passwordMatch.label</label>
+                <input type="password" ng-model="userController.passwordMatch" name="passwordMatch" ng-required="!!userController.password" match="userController.user.password"/>
+                <div ng-messages="userForm.passwordMatch.$error">
+                    <div ng-message="required" translate>user.passwordMatch.errors.required</div>
+                    <div ng-message="match" translate>user.passwordMatch.errors.match</div>
                 </div>
             </md-input-container>
-        </section>
-        <md-input-container>
-            <label translate>user.password.label</label>
-            <input type="password" ng-model="userController.user.password" name="password" ng-required="!!userController.passwordMatch"/>
-            <div ng-messages="userForm.password.$error">
-                <div ng-message="required" translate>user.password.errors.required</div>
-            </div>
-        </md-input-container>
-        <md-input-container>
-            <label translate>user.passwordMatch.label</label>
-            <input type="password" ng-model="userController.passwordMatch" name="passwordMatch" ng-required="!!userController.password" match="userController.user.password"/>
-            <div ng-messages="userForm.passwordMatch.$error">
-                <div ng-message="required" translate>user.passwordMatch.errors.required</div>
-                <div ng-message="match" translate>user.passwordMatch.errors.match</div>
-            </div>
-        </md-input-container>
+            <md-input-container>
+                <label translate>user.locale.label</label>
+                <md-select ng-model="userController.user.locale" ng-change="userController.switchLocale()">
+                    <md-option ng-value="locale" ng-repeat="locale in userController.locales">{{ 'locale.' + locale | translate }}</md-option>
+                </md-select>
+            </md-input-container>
+            <small class="md-caption">
+                <span translate>user.update</span> <span am-time-ago="userController.user.update"></span>
+            </small>
+        </md-content>
         <md-input-container class="md-block">
             <md-button type="submit"
-                       ng-class="{'md-primary md-raised md-hue-1': (userForm.$dirty && userForm.$valid) }"
+                       class="md-primary md-raised md-hue-1"
+                       ng-disabled="userForm.$pristine || !userForm.$valid"
                        aria-label="{{ 'user.submit' | translate }}">
                 <span translate>user.submit</span>
             </md-button>

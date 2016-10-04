@@ -31,6 +31,7 @@
         "success": "Your information has been successfully updated.",
         "title": "Edit your information",
         "submit": "Update information",
+        "update": "Last updated",
         "firstName": {
             "label": "First name",
             "errors": {

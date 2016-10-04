@@ -9,6 +9,9 @@ import 'angular-translate-storage-cookie';
 import 'angular-cookies';
 import 'angular-loading-overlay';
 import 'angular-validation-match';
+import 'moment';
+import 'moment/locale/fr';
+import 'angular-moment';
 
 import baseConstants from './constants/base';
 
@@ -29,7 +32,6 @@ import LoginController from './controllers/login';
 import UserController from './controllers/user';
 
 import AkHeaderComponent from './components/ak-header';
-import LocaleChangerComponent from './components/locale-changer';
 
 const app = angular.module('akaunto', [
     'ui.router',
@@ -38,7 +40,8 @@ const app = angular.module('akaunto', [
     'pascalprecht.translate',
     'ngCookies',
     'bsLoadingOverlay',
-    'validation.match'
+    'validation.match',
+    'angularMoment'
 ]);
 
 app.constant('baseConstants', baseConstants);
@@ -56,6 +59,5 @@ app.factory('jwtInterceptor', jwtInterceptor);
 app.controller('LoginController', LoginController);
 app.controller('UserController', UserController);
 app.component('akHeader', AkHeaderComponent);
-app.component('localeChanger', LocaleChangerComponent);
 
 export default app;

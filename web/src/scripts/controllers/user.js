@@ -10,13 +10,19 @@ class UserController {
      * @param {object} toastService
      * @param {object} utilsService
      * @param {object} $rootScope
+     * @param {object} baseConstants
+     * @param {object} $translate
+     * @param {object} moment
      */
-    constructor(userResolve, userService, toastService, utilsService, $rootScope) {
+    constructor(userResolve, userService, toastService, utilsService, $rootScope, baseConstants, $translate, moment) {
         this.user = userResolve;
         this.userService = userService;
         this.toastService = toastService;
         this.utilsService = utilsService;
         this.$rootScope = $rootScope;
+        this.locales = baseConstants.locales;
+        this.$translate = $translate;
+        this.moment = moment;
     }
 
     /**
@@ -32,6 +38,11 @@ class UserController {
                 () => this.toastService.error('toasts.error.standardError')
             )
             .finally(this.utilsService.stopLoading);
+    }
+
+    switchLocale() {
+        this.$translate.use(this.user.locale);
+        this.moment.changeLocale(this.user.locale);
     }
 
     /**
@@ -54,7 +65,10 @@ UserController.$inject = [
     'userService',
     'toastService',
     'utilsService',
-    '$rootScope'
+    '$rootScope',
+    'baseConstants',
+    '$translate',
+    'amMoment'
 ];
 
 export default UserController;

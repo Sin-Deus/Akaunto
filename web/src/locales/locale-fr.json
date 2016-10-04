@@ -31,6 +31,7 @@
         "success": "Vos informations ont été correctement mises à jour.",
         "title": "Modifier vos informations",
         "submit": "Mettre à jour",
+        "update": "Dernière mise à jour",
         "firstName": {
             "label": "Prénom",
             "errors": {

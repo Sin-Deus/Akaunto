@@ -34,6 +34,7 @@ module.exports = router => {
     });
 
     router.route('/me').put((req, res) => {
+        Reflect.deleteProperty(req.body, 'update');
         const callback = function () {
             User.findByIdAndUpdate(req.user._id, req.body, { new: true }, (err, user) => {
                 if (err || !user) {
@@ -80,6 +81,7 @@ module.exports = router => {
         if (!req.user.isAdmin && req.user._id !== req.params.id) {
             res.sendStatus(HttpStatus.UNAUTHORIZED);
         } else {
+            Reflect.deleteProperty(req.body, 'update');
             const callback = function () {
                 User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
                     if (err || !user) {

@@ -10,6 +10,8 @@ const UserSchema = new Schema({
     lastName: String,
     password: { type: String, required: true },
     isAdmin: Boolean,
+    locale: String,
+    update: Date,
     accounts: [{
         owner: Boolean,
         account: {
@@ -44,11 +46,21 @@ function _encryptPassword(user, cb) {
 }
 
 UserSchema.pre('save', function (next) {
+    this.update = new Date();
+
     if (!this.isModified('password')) {
         return next();
     }
 
     _encryptPassword(this, next);
+});
+
+UserSchema.pre('update', function () {
+    this.update({}, { $set: { update: new Date() } });
+});
+
+UserSchema.pre('findOneAndUpdate', function () {
+    this.update({}, { $set: { update: new Date() } });
 });
 
 UserSchema.statics.encryptPassword = function (user, cb) {

@@ -19,6 +19,7 @@ System.config({
     "angular-material": "github:angular/bower-material@1.0.5",
     "angular-messages": "github:angular/bower-angular-messages@1.5.0",
     "angular-mocks": "github:angular/bower-angular-mocks@1.5.0",
+    "angular-moment": "npm:angular-moment@1.0.0-beta.6",
     "angular-translate": "npm:angular-translate@2.12.1",
     "angular-translate-loader-static-files": "npm:angular-translate-loader-static-files@2.12.1",
     "angular-translate-storage-cookie": "npm:angular-translate-storage-cookie@2.12.1",
@@ -30,6 +31,7 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "crypto-js": "npm:crypto-js@3.1.6",
     "material-design-icons": "npm:material-design-icons@2.2.0",
+    "moment": "npm:moment@2.15.1",
     "roboto-fontface": "npm:roboto-fontface@0.4.3",
     "wsse": "npm:wsse@2.3.0",
     "github:angular-ui/ui-router@0.2.18": {
@@ -88,6 +90,9 @@ System.config({
     },
     "github:jspm/nodelibs-vm@0.1.0": {
       "vm-browserify": "npm:vm-browserify@0.0.4"
+    },
+    "npm:angular-moment@1.0.0-beta.6": {
+      "moment": "npm:moment@2.15.1"
     },
     "npm:angular-translate-loader-static-files@2.12.1": {
       "angular": "npm:angular@1.5.8"
