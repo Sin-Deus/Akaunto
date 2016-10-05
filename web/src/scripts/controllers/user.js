@@ -47,12 +47,14 @@ class UserController {
      * @private
      */
     _onSuccess(user, userForm) {
-        this.$translate.use(this.user.locale);
-        this.moment.changeLocale(this.user.locale);
+        this.$translate.use(user.locale);
+        this.moment.changeLocale(user.locale);
         this.user = user;
         this.$rootScope.$emit('user:update', this.user);
         this.toastService.success('user.success');
-        Reflect.deleteProperty(this, 'passwordMatch');
+
+        /* eslint-disable prefer-reflect */
+        delete this.passwordMatch;
         userForm.$setPristine();
     }
 }

@@ -13,6 +13,7 @@ describe('UserService', () => {
         userService = _userService_;
 
         $httpBackend.whenGET('../locales/locale-en.json').respond({});
+        $httpBackend.whenGET('../locales/locale-fr.json').respond({});
     }));
 
     describe('getMe', () => {

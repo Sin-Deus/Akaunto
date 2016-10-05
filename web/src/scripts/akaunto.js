@@ -16,6 +16,7 @@ import 'angular-moment';
 import baseConstants from './constants/base';
 
 import httpConfiguration from './configuration/http';
+import momentConfiguration from './configuration/moment';
 import overlayConfiguration from './configuration/overlay';
 import stateConfiguration from './configuration/state';
 import stateTransitionConfiguration from './configuration/state-transition';
@@ -48,6 +49,7 @@ app.constant('baseConstants', baseConstants);
 app.config(httpConfiguration);
 app.config(stateConfiguration);
 app.config(translateConfiguration);
+app.run(momentConfiguration);
 app.run(overlayConfiguration);
 app.run(stateTransitionConfiguration);
 app.factory('responseObserver', responseObserver);

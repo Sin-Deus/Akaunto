@@ -19,6 +19,7 @@ describe('LoginController', () => {
         $httpBackend = _$httpBackend_;
 
         $httpBackend.whenGET('../locales/locale-en.json').respond({});
+        $httpBackend.whenGET('../locales/locale-fr.json').respond({});
     }));
 
     it('should be defined', () => {
