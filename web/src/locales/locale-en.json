@@ -4,7 +4,7 @@
     },
     "locale": {
         "en": "English",
-        "fr": "French"
+        "fr": "Français"
     },
     "login": {
         "email": {
@@ -31,6 +31,7 @@
         "success": "Your information has been successfully updated.",
         "title": "Edit your information",
         "submit": "Update information",
+        "cancel": "Cancel",
         "update": "Last updated",
         "firstName": {
             "label": "First name",
@@ -56,6 +57,9 @@
                 "required": "The password confirmation is required.",
                 "match": "The confirmation doesn't match the password."
             }
+        },
+        "locale": {
+            "label": "Language"
         }
     },
     "toasts": {

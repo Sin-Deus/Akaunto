@@ -3,7 +3,7 @@
         "title": "Akaunto"
     },
     "locale": {
-        "en": "Anglais",
+        "en": "English",
         "fr": "Français"
     },
     "login": {
@@ -31,6 +31,7 @@
         "success": "Vos informations ont été correctement mises à jour.",
         "title": "Modifier vos informations",
         "submit": "Mettre à jour",
+        "cancel": "Annuler",
         "update": "Dernière mise à jour",
         "firstName": {
             "label": "Prénom",
@@ -56,6 +57,9 @@
                 "required": "La confirmation est obligatoire.",
                 "match": "La confirmation ne correspond pas au mot de passe."
             }
+        },
+        "locale": {
+            "label": "Langage"
         }
     },
     "toasts": {

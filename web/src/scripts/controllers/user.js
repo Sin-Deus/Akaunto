@@ -40,11 +40,6 @@ class UserController {
             .finally(this.utilsService.stopLoading);
     }
 
-    switchLocale() {
-        this.$translate.use(this.user.locale);
-        this.moment.changeLocale(this.user.locale);
-    }
-
     /**
      * Updates the user client-side.
      * @param {User} user
@@ -52,6 +47,8 @@ class UserController {
      * @private
      */
     _onSuccess(user, userForm) {
+        this.$translate.use(this.user.locale);
+        this.moment.changeLocale(this.user.locale);
         this.user = user;
         this.$rootScope.$emit('user:update', this.user);
         this.toastService.success('user.success');
