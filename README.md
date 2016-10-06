@@ -14,5 +14,19 @@ From now on, running `docker-compose up` will be sufficient to start the server.
 ## Create a user from the command line
 
 To create a user from the command line, run the following command while the Docker container is running:
-`docker exec -ti Akaunto_node node app/scripts/add-user.js`
+```
+docker exec -ti Akaunto_node node app/scripts/add-user.js
+```
 A command line prompt will ask for some fields information, and then will save the user.
+
+## How to launch server-side tests
+
+Run the following command while the Docker container is running:
+```
+docker exec -ti Akaunto_node npm run test
+```
+Or, directly from the host machine, inside the `server/` directory:
+```
+npm run test
+```
+*Note that this method will only work if the Node installation of the host machine is the same as the container one.*
