@@ -43,6 +43,7 @@ app.use('/api', accountsRoute(protectedRouter));
 app.use('/api', operationsRoute(protectedRouter));
 
 // Start the server.
-app.listen(port);
-
-console.log(`Server started on port ${port}, listening...`);
+module.exports = app.listen(port, () => {
+    /* eslint-disable no-console */
+    console.log(`Server started on port ${port}, listening...`);
+});
