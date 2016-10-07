@@ -26,6 +26,7 @@ import responseObserver from './services/response-observer';
 import authenticationService from './services/authentication';
 import toastService from './services/toast';
 import userService from './services/user';
+import accountService from './services/account';
 import utilsService from './services/utils';
 import jwtInterceptor from './services/jwt-interceptor';
 
@@ -52,6 +53,7 @@ app.config(translateConfiguration);
 app.run(momentConfiguration);
 app.run(overlayConfiguration);
 app.run(stateTransitionConfiguration);
+app.factory('accountService', accountService);
 app.factory('responseObserver', responseObserver);
 app.factory('toastService', toastService);
 app.factory('userService', userService);
