@@ -27,6 +27,25 @@
         "logout": "Log out",
         "edit": "Edit your information"
     },
+    "home": {
+        "welcome": "Welcome, {{ firstName }}.",
+        "noAccount": "You have currently no account. To start, create an account:",
+        "createAccount": "Create an account",
+        "accounts": "Accounts",
+        "account": {
+            "edit": "Edit account",
+            "delete": {
+                "label": "Delete account",
+                "success": "The account {{ name }} has successfully been deleted.",
+                "confirm": {
+                    "title": "Delete account {{ name }}",
+                    "content": "Are you sure you want to delete the account {{ name }}?",
+                    "confirm": "Delete",
+                    "cancel": "Cancel"
+                }
+            }
+        }
+    },
     "user": {
         "success": "Your information has been successfully updated.",
         "title": "Edit your information",
