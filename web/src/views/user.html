@@ -1,4 +1,4 @@
-<md-content flex="100" flex-gt-sm="90" flex-gt-md="70" flex-gt-lg="50" class="md-whiteframe-z2 md-margin" layout="column">
+<md-content flex="100" flex-gt-sm="90" flex-gt-md="70" flex-gt-lg="50" class="md-whiteframe-z2 md-margin md-padding" layout="column">
     <h2>
         <span translate>user.title</span>
     </h2>
@@ -47,7 +47,8 @@
                 <span translate>user.update</span> <span am-time-ago="userController.user.update"></span>
             </small>
         </md-content>
-        <md-input-container class="md-block">
+        <md-input-container layout="row">
+            <span flex></span>
             <md-button type="submit"
                        class="md-primary md-raised md-hue-1"
                        ng-disabled="userForm.$pristine || !userForm.$valid"
