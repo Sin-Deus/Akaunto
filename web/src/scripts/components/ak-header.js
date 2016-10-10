@@ -54,22 +54,6 @@ class AkHeaderController {
         this.authenticationService.clearToken();
         this.$state.go('login');
     }
-
-    /**
-     * Navigates to the user edition page.
-     * @method
-     */
-    edit() {
-        this.$state.go('user');
-    }
-
-    /**
-     * Navigates to the home page.
-     * @method
-     */
-    goHome() {
-        this.$state.go('home');
-    }
 }
 
 AkHeaderController.$inject = ['userService', 'authenticationService', '$state', '$rootScope', '$translate', 'amMoment'];

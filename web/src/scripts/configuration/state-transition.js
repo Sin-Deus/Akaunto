@@ -2,11 +2,8 @@
  * Configuration for the router transitions.
  * @param {object} $rootScope
  * @param {object} utilsService
- * @param {object} $state
  */
-function stateTransitionConfiguration($rootScope, utilsService, $state) {
-    $rootScope.$state = $state;
-
+function stateTransitionConfiguration($rootScope, utilsService) {
     $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState) => {
         if (fromState.name) { // Prevents a null pointer in the Overlay library.
             utilsService.startLoading();
@@ -16,6 +13,6 @@ function stateTransitionConfiguration($rootScope, utilsService, $state) {
     $rootScope.$on('$stateChangeError', () => utilsService.stopLoading());
 }
 
-stateTransitionConfiguration.$inject = ['$rootScope', 'utilsService', '$state'];
+stateTransitionConfiguration.$inject = ['$rootScope', 'utilsService'];
 
 export default stateTransitionConfiguration;
