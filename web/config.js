@@ -30,6 +30,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "core-js": "npm:core-js@1.2.6",
     "crypto-js": "npm:crypto-js@3.1.6",
+    "lodash": "npm:lodash@4.16.4",
     "material-design-icons": "npm:material-design-icons@2.2.0",
     "moment": "npm:moment@2.15.1",
     "roboto-fontface": "npm:roboto-fontface@0.4.3",

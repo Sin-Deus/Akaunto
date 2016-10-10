@@ -67,6 +67,7 @@
       "angular-ui-router": "github:angular-ui/ui-router@^0.2.18",
       "angular-validation-match": "npm:angular-validation-match@^1.7.1",
       "crypto-js": "npm:crypto-js@^3.1.6",
+      "lodash": "npm:lodash@^4.16.4",
       "material-design-icons": "npm:material-design-icons@2.2.0",
       "moment": "npm:moment@^2.15.1",
       "roboto-fontface": "npm:roboto-fontface@0.4.3"
