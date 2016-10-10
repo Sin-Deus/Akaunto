@@ -9,7 +9,7 @@ function accountService($http, baseConstants) {
 
         /**
          * @class Account
-         * @property {number} id
+         * @property {number} _id
          * @property {string} name
          * @property {number} currentBalance
          * @property {Date} lastReconciliation
@@ -70,7 +70,7 @@ function accountService($http, baseConstants) {
         updateAccount(account) {
             return $http({
                 method: 'PUT',
-                url: `${ baseConstants.apiBaseURL }accounts/${ account.id }`,
+                url: `${ baseConstants.apiBaseURL }accounts/${ account._id }`,
                 data: account
             }).then(response => response.data);
         },
