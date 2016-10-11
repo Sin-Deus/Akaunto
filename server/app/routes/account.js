@@ -65,7 +65,7 @@ module.exports = router => {
             } else {
                 Account.findByIdAndUpdate(
                     req.params.id,
-                    _.merge(req.body, { creator: req.user._id }),
+                    _.merge(req.body, { creator: req.user._id, update: new Date() }),
                     { new: true },
                     (updateErr, updatedAccount) => {
                         if (updateErr) {
