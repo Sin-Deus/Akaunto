@@ -51,7 +51,6 @@
         "title": "Edit your information",
         "submit": "Update information",
         "cancel": "Cancel",
-        "update": "Last updated",
         "firstName": {
             "label": "First name",
             "errors": {
@@ -86,5 +85,8 @@
             "standardMessage": "An error has occurred. Please try again later.",
             "action": "OK"
         }
+    },
+    "components": {
+        "lastUpdate": "Last updated"
     }
 }

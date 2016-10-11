@@ -36,6 +36,7 @@ import HomeController from './controllers/home';
 import UserController from './controllers/user';
 
 import AkHeaderComponent from './components/ak-header';
+import LastUpdateComponent from './components/last-update';
 
 const app = angular.module('akaunto', [
     'ui.router',
@@ -67,5 +68,6 @@ app.controller('LoginController', LoginController);
 app.controller('HomeController', HomeController);
 app.controller('UserController', UserController);
 app.component('akHeader', AkHeaderComponent);
+app.component('lastUpdate', LastUpdateComponent);
 
 export default app;

@@ -51,7 +51,6 @@
         "title": "Modifier vos informations",
         "submit": "Mettre à jour",
         "cancel": "Annuler",
-        "update": "Dernière mise à jour",
         "firstName": {
             "label": "Prénom",
             "errors": {
@@ -86,5 +85,8 @@
             "standardMessage": "Une erreur est survenue. Merci de réessayer plus tard.",
             "action": "OK"
         }
+    },
+    "components": {
+        "lastUpdate": "Dernière mise à jour"
     }
 }
