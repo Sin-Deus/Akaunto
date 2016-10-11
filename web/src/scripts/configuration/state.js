@@ -34,6 +34,16 @@ function stateConfiguration($stateProvider, $urlRouterProvider) {
                     return accountService.getAccounts();
                 }]
             }
+        })
+        .state('accountForm', {
+            url: '/account-form/:accountId',
+            templateUrl: '/views/account-form.html',
+            controller: 'AccountFormController as accountFormController',
+            resolve: {
+                accountResolve: ['accountService', '$stateParams', function (accountService, $stateParams) {
+                    return $stateParams.accountId ? accountService.getAccount($stateParams.accountId) : {};
+                }]
+            }
         });
 }
 

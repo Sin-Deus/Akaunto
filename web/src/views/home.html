@@ -15,11 +15,11 @@
                           ng-click="goToAccount(account)"
                           class="secondary-button-padding">
                 <p>{{ account.name }}</p>
-                <md-button class="md-icon-button" aria-label="{{ 'home.account.edit' | translate }}" ng-click="homeController.editAccount(account)">
+                <md-button class="md-icon-button md-secondary" aria-label="{{ 'home.account.edit' | translate }}" ui-sref="accountForm({ accountId: account._id })">
                     <md-tooltip md-direction="bottom left">{{ 'home.account.edit' | translate }}</md-tooltip>
                     <md-icon md-menu-origin>edit</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" aria-label="{{ 'home.account.delete.label' | translate }}" ng-click="homeController.confirmDeleteAccount(account, $event)">
+                <md-button class="md-icon-button md-secondary" aria-label="{{ 'home.account.delete.label' | translate }}" ng-click="homeController.confirmDeleteAccount(account, $event)">
                     <md-tooltip md-direction="bottom left">{{ 'home.account.delete.label' | translate }}</md-tooltip>
                     <md-icon md-menu-origin>delete</md-icon>
                 </md-button>
@@ -29,7 +29,7 @@
 
     <div class="md-padding" layout="row">
         <span flex></span>
-        <md-button class="md-primary md-raised" aria-label="{{ 'home.createAccount' | translate }}" ng-click="homeController.createAccount()">
+        <md-button class="md-primary md-raised" aria-label="{{ 'home.createAccount' | translate }}" ui-sref="accountForm()">
             <span translate>home.createAccount</span>
         </md-button>
         <span flex></span>

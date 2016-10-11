@@ -80,6 +80,51 @@
             "label": "Langage"
         }
     },
+    "account": {
+        "success": {
+            "created": "Le compte {{ name }} a été correctement créé.",
+            "updated": "Le compte {{ name }} a été correctement mis à jour."
+        },
+        "title": {
+            "create": "Créer un compte",
+            "update": "Modifier le compte"
+        },
+        "submit": {
+            "create": "Créer le compte",
+            "update": "Modifier le compte"
+        },
+        "cancel": "Annuler",
+        "name": {
+            "label": "Nom",
+            "errors": {
+                "required": "Le nom est obligatoire."
+            }
+        },
+        "isSavings": {
+            "label": "Compte épargne"
+        },
+        "initialBalance": {
+            "label": "Solde initial",
+            "errors": {
+                "number": "Le solde doit être numérique."
+            }
+        },
+        "currency": {
+            "label": "Devise",
+            "EUR": {
+                "symbol": "€",
+                "name": "Euro"
+            },
+            "USD": {
+                "symbol": "$",
+                "name": "Dollar"
+            },
+            "JPY": {
+                "symbol": "¥",
+                "name": "Yen"
+            }
+        }
+    },
     "toasts": {
         "error": {
             "standardMessage": "Une erreur est survenue. Merci de réessayer plus tard.",

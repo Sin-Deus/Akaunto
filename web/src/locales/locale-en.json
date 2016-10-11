@@ -80,6 +80,51 @@
             "label": "Language"
         }
     },
+    "account": {
+        "success": {
+            "created": "The account {{ name }} has been successfully created.",
+            "updated": "The account {{ name }} has been successfully updated."
+        },
+        "title": {
+            "create": "Create account",
+            "update": "Edit account"
+        },
+        "submit": {
+            "create": "Create account",
+            "update": "Edit account"
+        },
+        "cancel": "Cancel",
+        "name": {
+            "label": "Name",
+            "errors": {
+                "required": "The name is required."
+            }
+        },
+        "isSavings": {
+            "label": "Savings"
+        },
+        "initialBalance": {
+            "label": "Initial balance",
+            "errors": {
+                "number": "The balance has to be numeric."
+            }
+        },
+        "currency": {
+            "label": "Currency",
+            "EUR": {
+                "symbol": "€",
+                "name": "Euro"
+            },
+            "USD": {
+                "symbol": "$",
+                "name": "Dollar"
+            },
+            "JPY": {
+                "symbol": "¥",
+                "name": "Yen"
+            }
+        }
+    },
     "toasts": {
         "error": {
             "standardMessage": "An error has occurred. Please try again later.",

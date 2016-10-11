@@ -12,6 +12,8 @@ function accountService($http, baseConstants) {
          * @property {number} _id
          * @property {string} name
          * @property {number} currentBalance
+         * @property {number} initialBalance
+         * @property {string} currency
          * @property {Date} lastReconciliation
          * @property {Date} update
          * @property {number} creator

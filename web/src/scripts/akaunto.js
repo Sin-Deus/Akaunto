@@ -34,6 +34,7 @@ import lodashWrapper from './services/lodash';
 import LoginController from './controllers/login';
 import HomeController from './controllers/home';
 import UserController from './controllers/user';
+import AccountFormController from './controllers/account-form';
 
 import AkHeaderComponent from './components/ak-header';
 import LastUpdateComponent from './components/last-update';
@@ -64,6 +65,7 @@ app.factory('utilsService', utilsService);
 app.factory('authenticationService', authenticationService);
 app.factory('jwtInterceptor', jwtInterceptor);
 app.factory('_', lodashWrapper);
+app.controller('AccountFormController', AccountFormController);
 app.controller('LoginController', LoginController);
 app.controller('HomeController', HomeController);
 app.controller('UserController', UserController);

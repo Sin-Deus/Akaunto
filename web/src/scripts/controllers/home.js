@@ -26,24 +26,6 @@ class HomeController {
     }
 
     /**
-     * Redirects to the account creation page.
-     * @method
-     */
-    createAccount() {
-        // TODO
-        this.accountService.createAccount({name: 'test'}).then(account => this.accounts.push(account));
-    }
-
-    /**
-     * Redirects to the account edition page.
-     * @param {Account} account
-     * @method
-     */
-    editAccount(account) {
-        // TODO
-    }
-
-    /**
      * Displays a confirmation modal prior to an account deletion.
      * @param {Account} account
      * @param {Event} $event
@@ -83,13 +65,13 @@ class HomeController {
      * @private
      */
     _deleteAccount(account) {
-        this.utilsService.startLoading();
+        // this.utilsService.startLoading();
         this.accountService.deleteAccount(account._id)
             .then(
                 () => this._onDeleteSuccess(account),
                 () => this.toastService.error('toasts.error.standardError')
-            )
-            .finally(this.utilsService.stopLoading);
+            );
+            // .finally(this.utilsService.stopLoading);
     }
 
     /**

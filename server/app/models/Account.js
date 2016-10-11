@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const AccountSchema = new Schema({
     name: String,
     isSavings: Boolean,
+    initialBalance: Number,
     currentBalance: Number,
+    currency: String,
     lastReconciliation: Date,
     update: Date,
     creator: {
