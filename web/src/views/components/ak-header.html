@@ -3,7 +3,7 @@
         <md-button class="md-icon-button">
             <md-icon>menu</md-icon>
         </md-button>
-        <h2 ng-click="$ctrl.goHome()" class="ak-header__title">
+        <h2 ui-sref="home()" class="ak-header__title">
             <span translate>application.title</span>
         </h2>
         <span flex></span>
@@ -15,7 +15,7 @@
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item>
-                    <md-button ng-click="$ctrl.edit()">
+                    <md-button ui-sref="user()">
                         <md-icon md-menu-origin>edit</md-icon>
                         <span translate>header.edit</span>
                     </md-button>

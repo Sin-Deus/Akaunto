@@ -13,10 +13,10 @@ System.config({
   },
 
   map: {
-    "angular": "github:angular/bower-angular@1.5.0",
+    "angular": "github:angular/bower-angular@1.5.8",
     "angular-cookies": "github:angular/bower-angular-cookies@1.5.0",
     "angular-loading-overlay": "npm:angular-loading-overlay@0.3.1",
-    "angular-material": "github:angular/bower-material@1.0.5",
+    "angular-material": "github:angular/bower-material@1.1.1",
     "angular-messages": "github:angular/bower-angular-messages@1.5.0",
     "angular-mocks": "github:angular/bower-angular-mocks@1.5.0",
     "angular-moment": "npm:angular-moment@1.0.0-beta.6",
@@ -30,33 +30,34 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "core-js": "npm:core-js@1.2.6",
     "crypto-js": "npm:crypto-js@3.1.6",
+    "lodash": "npm:lodash@4.16.4",
     "material-design-icons": "npm:material-design-icons@2.2.0",
     "moment": "npm:moment@2.15.1",
     "roboto-fontface": "npm:roboto-fontface@0.4.3",
     "wsse": "npm:wsse@2.3.0",
     "github:angular-ui/ui-router@0.2.18": {
-      "angular": "github:angular/bower-angular@1.5.0"
+      "angular": "github:angular/bower-angular@1.5.8"
     },
-    "github:angular/bower-angular-animate@1.5.0": {
-      "angular": "github:angular/bower-angular@1.5.0"
+    "github:angular/bower-angular-animate@1.5.8": {
+      "angular": "github:angular/bower-angular@1.5.8"
     },
-    "github:angular/bower-angular-aria@1.5.0": {
-      "angular": "github:angular/bower-angular@1.5.0"
+    "github:angular/bower-angular-aria@1.5.8": {
+      "angular": "github:angular/bower-angular@1.5.8"
     },
     "github:angular/bower-angular-cookies@1.5.0": {
-      "angular": "github:angular/bower-angular@1.5.0"
+      "angular": "github:angular/bower-angular@1.5.8"
     },
     "github:angular/bower-angular-messages@1.5.0": {
-      "angular": "github:angular/bower-angular@1.5.0"
+      "angular": "github:angular/bower-angular@1.5.8"
     },
     "github:angular/bower-angular-mocks@1.5.0": {
-      "angular": "github:angular/bower-angular@1.5.0"
+      "angular": "github:angular/bower-angular@1.5.8"
     },
-    "github:angular/bower-material@1.0.5": {
-      "angular": "github:angular/bower-angular@1.5.0",
-      "angular-animate": "github:angular/bower-angular-animate@1.5.0",
-      "angular-aria": "github:angular/bower-angular-aria@1.5.0",
-      "css": "github:systemjs/plugin-css@0.1.20"
+    "github:angular/bower-material@1.1.1": {
+      "angular": "github:angular/bower-angular@1.5.8",
+      "angular-animate": "github:angular/bower-angular-animate@1.5.8",
+      "angular-aria": "github:angular/bower-angular-aria@1.5.8",
+      "css": "github:systemjs/plugin-css@0.1.31"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"

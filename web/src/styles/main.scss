@@ -1,4 +1,4 @@
-@import "../../jspm_packages/github/angular/bower-material@1.0.5/angular-material.scss";
+@import "../../jspm_packages/github/angular/bower-material@1.1.1/angular-material.scss";
 @import "../../jspm_packages/npm/roboto-fontface@0.4.3/css/roboto-fontface.scss";
 @import "../../jspm_packages/npm/material-design-icons@2.2.0/iconfont/material-icons.css";
 
@@ -8,6 +8,6 @@
 @import "components/ak-header";
 @import "components/overlay";
 
-body {
+.ak-mainContent {
     background-color: #eee;
 }

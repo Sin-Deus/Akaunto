@@ -1,0 +1,37 @@
+<md-content flex="100" flex-gt-sm="90" flex-gt-md="70" flex-gt-lg="50" class="md-whiteframe-z2 md-margin" layout="column">
+    <h2 layout-padding>
+        <span translate translate-values="{ firstName: homeController.user.firstName }">home.welcome</span>
+    </h2>
+
+    <md-divider></md-divider>
+
+    <md-content ng-class="{ flex: homeController.accounts.length > 0}">
+        <md-list>
+            <md-subheader>
+                <span translate>home.accounts</span>
+            </md-subheader>
+            <p class="md-padding" translate ng-if="homeController.accounts.length === 0">home.noAccount</p>
+            <md-list-item ng-repeat="account in homeController.accounts track by account._id"
+                          ng-click="goToAccount(account)"
+                          class="secondary-button-padding">
+                <p>{{ account.name }}</p>
+                <md-button class="md-icon-button md-secondary" aria-label="{{ 'home.account.edit' | translate }}" ui-sref="accountForm({ accountId: account._id })">
+                    <md-tooltip md-direction="bottom left">{{ 'home.account.edit' | translate }}</md-tooltip>
+                    <md-icon md-menu-origin>edit</md-icon>
+                </md-button>
+                <md-button class="md-icon-button md-secondary" aria-label="{{ 'home.account.delete.label' | translate }}" ng-click="homeController.confirmDeleteAccount(account, $event)">
+                    <md-tooltip md-direction="bottom left">{{ 'home.account.delete.label' | translate }}</md-tooltip>
+                    <md-icon md-menu-origin>delete</md-icon>
+                </md-button>
+            </md-list-item>
+        </md-list>
+    </md-content>
+
+    <div class="md-padding" layout="row">
+        <span flex></span>
+        <md-button class="md-primary md-raised" aria-label="{{ 'home.createAccount' | translate }}" ui-sref="accountForm()">
+            <span translate>home.createAccount</span>
+        </md-button>
+        <span flex></span>
+    </div>
+</md-content>

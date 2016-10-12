@@ -1,0 +1,62 @@
+<md-content flex="100" flex-gt-sm="90" flex-gt-md="70" flex-gt-lg="50" class="md-whiteframe-z2 md-margin" layout="column">
+    <h2 layout-padding>
+        <span translate="account.title.{{ accountFormController.isCreation ? 'create' : 'update' }}"></span>
+    </h2>
+
+    <form name="accountForm" novalidate ng-submit="accountForm.$dirty && accountForm.$valid && accountFormController.update()" layout="column" flex layout-padding>
+        <md-content flex layout="column">
+            <md-input-container>
+                <label translate>account.name.label</label>
+                <input type="text" ng-model="accountFormController.account.name" name="name" ng-required="true" />
+                <div ng-messages="accountForm.name.$error">
+                    <div ng-message="required" translate>account.name.errors.required</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container>
+                <md-checkbox type="text" ng-model="accountFormController.account.isSavings" name="isSavings" aria-label="{{ 'account.isSavings.label' | translate }}">
+                    <span translate>account.isSavings.label</span>
+                </md-checkbox>
+            </md-input-container>
+
+            <section layout-gt-xs="row" layout="column">
+                <md-input-container flex>
+                    <label translate>account.initialBalance.label</label>
+                    <input type="number" ng-model="accountFormController.account.initialBalance" name="initialBalance" />
+                    <div ng-messages="accountForm.initialBalance.$error">
+                        <div ng-message="number" translate>account.initialBalance.errors.number</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label translate>account.currency.label</label>
+                    <md-select ng-model="accountFormController.account.currency" ng-required="true">
+                        <md-option ng-repeat="currency in accountFormController.currencies"
+                                   ng-value="currency"
+                                   translate="account.currency.{{ currency }}.name"></md-option>
+                    </md-select>
+                    <div ng-messages="accountForm.initialBalance.$error">
+                        <div ng-message="required" translate>account.currency.errors.required</div>
+                    </div>
+                </md-input-container>
+            </section>
+
+            <last-update model="accountFormController.account"></last-update>
+        </md-content>
+
+        <md-input-container layout="row">
+            <span flex></span>
+            <md-button type="submit"
+                       class="md-primary md-raised md-hue-1"
+                       ng-disabled="accountForm.$pristine || !accountForm.$valid"
+                       aria-label="{{ 'account.submit' | translate }}">
+                <span translate="account.submit.{{ accountFormController.isCreation ? 'create' : 'update' }}"></span>
+            </md-button>
+            <md-button class="md-raised"
+                       aria-label="{{ 'account.cancel' | translate }}"
+                       ui-sref="home()">
+                <span translate>account.cancel</span>
+            </md-button>
+        </md-input-container>
+    </form>
+</md-content>

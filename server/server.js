@@ -1,5 +1,3 @@
-'use strict';
-
 const config = require('./config');
 const express = require('express');
 const morgan = require('morgan');
@@ -15,6 +13,7 @@ const jwtMiddleware = require('./app/middlewares/jwt');
 const corsMiddleware = require('./app/middlewares/cors');
 
 const usersRoute = require('./app/routes/users');
+const accountsRoute = require('./app/routes/account');
 const authenticationRoute = require('./app/routes/authentication');
 
 // Log all requests to the console.
@@ -36,7 +35,8 @@ app.use('/authenticate', authenticationRoute);
 protectedRouter.use(jwtMiddleware);
 
 // API routes.
-app.use('/api/users', usersRoute(protectedRouter));
+app.use('/api', usersRoute(protectedRouter));
+app.use('/api', accountsRoute(protectedRouter));
 
 // Start the server.
 app.listen(port);

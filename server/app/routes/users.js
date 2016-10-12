@@ -2,7 +2,7 @@ const User = require('../models/User');
 const HttpStatus = require('http-status-codes');
 
 module.exports = router => {
-    router.route('/').get((req, res) => {
+    router.route('/users/').get((req, res) => {
         User.find({}, (err, users) => {
             if (err) {
                 res.sendStatus(HttpStatus.BAD_REQUEST);
@@ -12,7 +12,7 @@ module.exports = router => {
         });
     });
 
-    router.route('/').post((req, res) => {
+    router.route('/users/').post((req, res) => {
         const user = new User(req.body);
 
         // Prevent non-admin users to create admins.
@@ -29,11 +29,11 @@ module.exports = router => {
         });
     });
 
-    router.route('/me').get((req, res) => {
+    router.route('/users/me').get((req, res) => {
         res.json(req.user);
     });
 
-    router.route('/me').put((req, res) => {
+    router.route('/users/me').put((req, res) => {
         Reflect.deleteProperty(req.body, 'update');
         const callback = function () {
             User.findByIdAndUpdate(req.user._id, req.body, { new: true }, (err, user) => {
@@ -53,7 +53,7 @@ module.exports = router => {
         }
     });
 
-    router.route('/:id').get((req, res) => {
+    router.route('/users/:id').get((req, res) => {
         User.findOne({ _id: req.params.id }, (err, user) => {
             if (err || !user) {
                 res.sendStatus(HttpStatus.NOT_FOUND);
@@ -63,9 +63,9 @@ module.exports = router => {
         });
     });
 
-    router.route('/:id').delete((req, res) => {
+    router.route('/users/:id').delete((req, res) => {
         if (!req.user.isAdmin) {
-            res.sendStatus(HttpStatus.UNAUTHORIZED);
+            res.sendStatus(HttpStatus.FORBIDDEN);
         } else {
             User.findByIdAndRemove(req.params.id, err => {
                 if (err) {
@@ -77,9 +77,9 @@ module.exports = router => {
         }
     });
 
-    router.route('/:id').put((req, res) => {
-        if (!req.user.isAdmin && req.user._id !== req.params.id) {
-            res.sendStatus(HttpStatus.UNAUTHORIZED);
+    router.route('/users/:id').put((req, res) => {
+        if (!req.user.isAdmin && !req.user._id.equals(req.params.id)) {
+            res.sendStatus(HttpStatus.FORBIDDEN);
         } else {
             Reflect.deleteProperty(req.body, 'update');
             const callback = function () {

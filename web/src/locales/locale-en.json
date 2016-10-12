@@ -27,12 +27,30 @@
         "logout": "Log out",
         "edit": "Edit your information"
     },
+    "home": {
+        "welcome": "Welcome, {{ firstName }}.",
+        "noAccount": "You have currently no account. To start, create an account:",
+        "createAccount": "Create an account",
+        "accounts": "Accounts",
+        "account": {
+            "edit": "Edit account",
+            "delete": {
+                "label": "Delete account",
+                "success": "The account {{ name }} has successfully been deleted.",
+                "confirm": {
+                    "title": "Delete account {{ name }}",
+                    "content": "Are you sure you want to delete the account {{ name }}?",
+                    "confirm": "Delete",
+                    "cancel": "Cancel"
+                }
+            }
+        }
+    },
     "user": {
         "success": "Your information has been successfully updated.",
         "title": "Edit your information",
         "submit": "Update information",
         "cancel": "Cancel",
-        "update": "Last updated",
         "firstName": {
             "label": "First name",
             "errors": {
@@ -62,10 +80,58 @@
             "label": "Language"
         }
     },
+    "account": {
+        "success": {
+            "created": "The account {{ name }} has been successfully created.",
+            "updated": "The account {{ name }} has been successfully updated."
+        },
+        "title": {
+            "create": "Create account",
+            "update": "Edit account"
+        },
+        "submit": {
+            "create": "Create account",
+            "update": "Edit account"
+        },
+        "cancel": "Cancel",
+        "name": {
+            "label": "Name",
+            "errors": {
+                "required": "The name is required."
+            }
+        },
+        "isSavings": {
+            "label": "Savings"
+        },
+        "initialBalance": {
+            "label": "Initial balance",
+            "errors": {
+                "number": "The balance has to be numeric."
+            }
+        },
+        "currency": {
+            "label": "Currency",
+            "EUR": {
+                "symbol": "€",
+                "name": "Euro"
+            },
+            "USD": {
+                "symbol": "$",
+                "name": "Dollar"
+            },
+            "JPY": {
+                "symbol": "¥",
+                "name": "Yen"
+            }
+        }
+    },
     "toasts": {
         "error": {
             "standardMessage": "An error has occurred. Please try again later.",
             "action": "OK"
         }
+    },
+    "components": {
+        "lastUpdate": "Last updated"
     }
 }

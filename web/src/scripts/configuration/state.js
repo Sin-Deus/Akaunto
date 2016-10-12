@@ -24,10 +24,26 @@ function stateConfiguration($stateProvider, $urlRouterProvider) {
         })
         .state('home', {
             url: '/home',
-            template: '<h1>Home</h1><div>{{user|json}}</div>',
-            controller: ['$scope', 'userService', function ($scope, userService) {
-                userService.getMe().then(me => $scope.user = me);
-            }]
+            templateUrl: '/views/home.html',
+            controller: 'HomeController as homeController',
+            resolve: {
+                userResolve: ['userService', function (userService) {
+                    return userService.getMe();
+                }],
+                accountsResolve: ['accountService', function (accountService) {
+                    return accountService.getAccounts();
+                }]
+            }
+        })
+        .state('accountForm', {
+            url: '/account-form/:accountId',
+            templateUrl: '/views/account-form.html',
+            controller: 'AccountFormController as accountFormController',
+            resolve: {
+                accountResolve: ['accountService', '$stateParams', function (accountService, $stateParams) {
+                    return $stateParams.accountId ? accountService.getAccount($stateParams.accountId) : {};
+                }]
+            }
         });
 }
 

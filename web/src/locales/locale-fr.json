@@ -27,12 +27,30 @@
         "logout": "Se déconnecter",
         "edit": "Modifier vos informations"
     },
+    "home": {
+        "welcome": "Bienvenue, {{ firstName }}.",
+        "noAccount": "Vous n'avez aucun compte pour le moment. Pour commencer, créez un compte :",
+        "createAccount": "Créer un compte",
+        "accounts": "Comptes",
+        "account": {
+            "edit": "Modifier le compte",
+            "delete": {
+                "label": "Supprimer le compte",
+                "success": "Le compte {{ name }} a été correctement supprimé.",
+                "confirm": {
+                    "title": "Suppression du compte {{ name }}",
+                    "content": "Êtes-vous certain de vouloir supprimer le compte {{ name }}?",
+                    "confirm": "Supprimer",
+                    "cancel": "Annuler"
+                }
+            }
+        }
+    },
     "user": {
         "success": "Vos informations ont été correctement mises à jour.",
         "title": "Modifier vos informations",
         "submit": "Mettre à jour",
         "cancel": "Annuler",
-        "update": "Dernière mise à jour",
         "firstName": {
             "label": "Prénom",
             "errors": {
@@ -62,10 +80,58 @@
             "label": "Langage"
         }
     },
+    "account": {
+        "success": {
+            "created": "Le compte {{ name }} a été correctement créé.",
+            "updated": "Le compte {{ name }} a été correctement mis à jour."
+        },
+        "title": {
+            "create": "Créer un compte",
+            "update": "Modifier le compte"
+        },
+        "submit": {
+            "create": "Créer le compte",
+            "update": "Modifier le compte"
+        },
+        "cancel": "Annuler",
+        "name": {
+            "label": "Nom",
+            "errors": {
+                "required": "Le nom est obligatoire."
+            }
+        },
+        "isSavings": {
+            "label": "Compte épargne"
+        },
+        "initialBalance": {
+            "label": "Solde initial",
+            "errors": {
+                "number": "Le solde doit être numérique."
+            }
+        },
+        "currency": {
+            "label": "Devise",
+            "EUR": {
+                "symbol": "€",
+                "name": "Euro"
+            },
+            "USD": {
+                "symbol": "$",
+                "name": "Dollar"
+            },
+            "JPY": {
+                "symbol": "¥",
+                "name": "Yen"
+            }
+        }
+    },
     "toasts": {
         "error": {
             "standardMessage": "Une erreur est survenue. Merci de réessayer plus tard.",
             "action": "OK"
         }
+    },
+    "components": {
+        "lastUpdate": "Dernière mise à jour"
     }
 }

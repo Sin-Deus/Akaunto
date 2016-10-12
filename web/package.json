@@ -56,7 +56,7 @@
       "angular": "github:angular/bower-angular@1.5",
       "angular-cookies": "github:angular/bower-angular-cookies@^1.5.0",
       "angular-loading-overlay": "npm:angular-loading-overlay@^0.3.1",
-      "angular-material": "github:angular/bower-material@1.0.5",
+      "angular-material": "github:angular/bower-material@^1.1.1",
       "angular-messages": "github:angular/bower-angular-messages@^1.5.0",
       "angular-mocks": "github:angular/bower-angular-mocks@^1.5.0",
       "angular-moment": "npm:angular-moment@^1.0.0-beta.6",
@@ -67,6 +67,7 @@
       "angular-ui-router": "github:angular-ui/ui-router@^0.2.18",
       "angular-validation-match": "npm:angular-validation-match@^1.7.1",
       "crypto-js": "npm:crypto-js@^3.1.6",
+      "lodash": "npm:lodash@^4.16.4",
       "material-design-icons": "npm:material-design-icons@2.2.0",
       "moment": "npm:moment@^2.15.1",
       "roboto-fontface": "npm:roboto-fontface@0.4.3"

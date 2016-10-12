@@ -2,6 +2,7 @@ root: true
 extends: "fingerproof/es6"
 rules:
     indent: [2, 4]
+    id-length: [2, {"min": 1}]
     func-names: 0
     no-param-reassign: [2, {"props": false}]
     max-len: [1, 160, 4]
