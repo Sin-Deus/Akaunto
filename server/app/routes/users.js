@@ -1,9 +1,17 @@
 const User = require('../models/User');
 const HttpStatus = require('http-status-codes');
+const _ = require('lodash');
 
 module.exports = router => {
     router.route('/users/').get((req, res) => {
-        User.find({}, (err, users) => {
+        const filter = {};
+
+        if (req.query.filter) {
+            filter.$or = [];
+            _.each(['firstName', 'lastName'], attr => filter.$or.push({ [attr]: new RegExp(req.query.filter, 'i') }));
+        }
+
+        User.find(filter, (err, users) => {
             if (err) {
                 res.sendStatus(HttpStatus.BAD_REQUEST);
             } else {

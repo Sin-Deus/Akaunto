@@ -32,6 +32,8 @@
         "noAccount": "You have currently no account. To start, create an account:",
         "createAccount": "Create an account",
         "accounts": "Accounts",
+        "ownAccounts": "Own accounts",
+        "otherAccounts": "Other accounts",
         "account": {
             "edit": "Edit account",
             "delete": {
@@ -44,7 +46,9 @@
                     "cancel": "Cancel"
                 }
             }
-        }
+        },
+        "showOwnAccounts": "Show own accounts",
+        "showOtherAccounts": "Show other accounts"
     },
     "user": {
         "success": "Your information has been successfully updated.",
@@ -123,7 +127,9 @@
                 "symbol": "¥",
                 "name": "Yen"
             }
-        }
+        },
+        "users": "Users allowed to access this account",
+        "user": "Search a user"
     },
     "toasts": {
         "error": {

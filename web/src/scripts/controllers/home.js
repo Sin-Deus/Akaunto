@@ -11,18 +11,66 @@ class HomeController {
      * @param {object} toastService
      * @param {object} utilsService
      * @param {object} accountService
+     * @param {object} userService
      * @param {object} $mdDialog
      * @param {object} $translate
      */
-    constructor(_, userResolve, accountsResolve, toastService, utilsService, accountService, $mdDialog, $translate) {
+    /* eslint-disable max-statements */
+    constructor(_, userResolve, accountsResolve, toastService, utilsService, accountService, userService, $mdDialog, $translate) {
         this._ = _;
         this.user = userResolve;
-        this.accounts = accountsResolve;
         this.toastService = toastService;
         this.utilsService = utilsService;
         this.accountService = accountService;
+        this.userService = userService;
         this.$mdDialog = $mdDialog;
         this.$translate = $translate;
+
+        const filteredAccounts = this._filterAccounts(accountsResolve);
+        this.ownAccounts = filteredAccounts.ownAccounts;
+        this.otherAccounts = filteredAccounts.otherAccounts;
+    }
+
+    /**
+     *
+     * @param {Account[]} accounts
+     * @return {{ownAccounts: Account[], otherAccounts: Account[]}}
+     * @method
+     * @private
+     */
+    _filterAccounts(accounts) {
+        return {
+            ownAccounts: this._.filter(accounts, this._.bind(this.isUserCreatorOfAccount, this)),
+            otherAccounts: this._.filter(accounts, this._.bind(this.isUserNotCreatorOfAccount, this))
+        };
+    }
+
+    /**
+     * Checks if the current user is the creator of the account.
+     * @param {Account} account
+     * @return {boolean} True if the user is the creator, false otherwise.
+     * @method
+     */
+    isUserCreatorOfAccount(account) {
+        return this.accountService.isUserCreatorOfAccount(this.user, account);
+    }
+
+    /**
+     * Checks if the current user is the creator of the account.
+     * @param {Account} account
+     * @return {boolean} False if the user is the creator, true otherwise.
+     * @method
+     */
+    isUserNotCreatorOfAccount(account) {
+        return !this.isUserCreatorOfAccount(account);
+    }
+
+    /**
+     * Updates the user preferences.
+     * @method
+     */
+    onSwitch() {
+        this.userService.updateMe(this.user);
     }
 
     /**
@@ -65,13 +113,11 @@ class HomeController {
      * @private
      */
     _deleteAccount(account) {
-        // this.utilsService.startLoading();
         this.accountService.deleteAccount(account._id)
             .then(
                 () => this._onDeleteSuccess(account),
                 () => this.toastService.error('toasts.error.standardError')
             );
-            // .finally(this.utilsService.stopLoading);
     }
 
     /**
@@ -93,6 +139,7 @@ HomeController.$inject = [
     'toastService',
     'utilsService',
     'accountService',
+    'userService',
     '$mdDialog',
     '$translate'
 ];
