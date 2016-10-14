@@ -12,7 +12,11 @@ const AccountSchema = new Schema({
     creator: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    users: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 });
 
 AccountSchema.pre('save', function (next) {
