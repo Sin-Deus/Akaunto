@@ -12,6 +12,7 @@ import 'angular-validation-match';
 import 'moment';
 import 'moment/locale/fr';
 import 'angular-moment';
+import httpStatusCodes from 'http-status-codes';
 
 import baseConstants from './constants/base';
 
@@ -51,6 +52,7 @@ const app = angular.module('akaunto', [
 ]);
 
 app.constant('baseConstants', baseConstants);
+app.constant('httpStatusCodes', httpStatusCodes);
 app.config(httpConfiguration);
 app.config(stateConfiguration);
 app.config(translateConfiguration);
