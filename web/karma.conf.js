@@ -5,8 +5,8 @@ module.exports = function (config) {
         frameworks: ['jspm', 'jasmine'],
         files: ['node_modules/jasmine-async-sugar/jasmine-async-sugar.js'],
         jspm: {
-            loadFiles: ['test/scripts/**/*.js', 'src/scripts/**/*.js'],
-            serveFiles: ['src/scripts/*.js', 'src/scripts/**/*.js']
+            loadFiles: ['test/scripts/**/*.js', 'src/scripts/**/*.js', 'test/scripts/state-mock.js'],
+            serveFiles: ['src/scripts/*.js', 'src/scripts/**/*.js', 'test/scripts/state-mock.js']
         },
         browsers: ['PhantomJS'],
         reporters: ['coverage'],

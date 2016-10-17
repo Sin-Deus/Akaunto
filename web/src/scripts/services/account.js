@@ -89,6 +89,16 @@ function accountService($http, baseConstants) {
                 method: 'DELETE',
                 url: `${ baseConstants.apiBaseURL }accounts/${ accountId }`
             });
+        },
+
+        /**
+         * Checks if the specified user is the creator of the account.
+         * @param {User} user
+         * @param {Account} account
+         * @return {boolean} True if the user is the creator, false otherwise.
+         */
+        isUserCreatorOfAccount(user, account) {
+            return account.creator === user._id;
         }
     };
 }

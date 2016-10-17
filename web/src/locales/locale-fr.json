@@ -32,6 +32,8 @@
         "noAccount": "Vous n'avez aucun compte pour le moment. Pour commencer, créez un compte :",
         "createAccount": "Créer un compte",
         "accounts": "Comptes",
+        "ownAccounts": "Comptes personnels",
+        "otherAccounts": "Comptes invités",
         "account": {
             "edit": "Modifier le compte",
             "delete": {
@@ -44,7 +46,9 @@
                     "cancel": "Annuler"
                 }
             }
-        }
+        },
+        "showOwnAccounts": "Afficher les comptes personnels",
+        "showOtherAccounts": "Afficher les comptes invités"
     },
     "user": {
         "success": "Vos informations ont été correctement mises à jour.",
@@ -123,7 +127,9 @@
                 "symbol": "¥",
                 "name": "Yen"
             }
-        }
+        },
+        "users": "Utilisateurs ayant accès au compte",
+        "user": "Rechercher un utilisateur"
     },
     "toasts": {
         "error": {

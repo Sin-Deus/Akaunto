@@ -4,7 +4,10 @@ const _ = require('lodash');
 
 module.exports = router => {
     router.route('/accounts/').get((req, res) => {
-        Account.find({ creator: req.user._id }, (err, accounts) => {
+        Account.find({ $or: [
+                { creator: req.user._id },
+                { users: { $in: [req.user._id] }
+            }] }, (err, accounts) => {
             if (err) {
                 res.sendStatus(HttpStatus.BAD_REQUEST);
             } else {
@@ -27,15 +30,17 @@ module.exports = router => {
     });
 
     router.route('/accounts/:id').get((req, res) => {
-        Account.findOne({ _id: req.params.id }, (err, account) => {
-            if (err || !account) {
-                res.sendStatus(HttpStatus.NOT_FOUND);
-            } else if (!account.creator.equals(req.user._id)) {
-                res.sendStatus(HttpStatus.FORBIDDEN);
-            } else {
-                res.json(account);
-            }
-        });
+        Account.findOne({ _id: req.params.id })
+            .populate('users')
+            .exec((err, account) => {
+                if (err || !account) {
+                    res.sendStatus(HttpStatus.NOT_FOUND);
+                } else if (!account.creator.equals(req.user._id)) {
+                    res.sendStatus(HttpStatus.FORBIDDEN);
+                } else {
+                    res.json(account);
+                }
+            });
     });
 
     router.route('/accounts/:id').delete((req, res) => {

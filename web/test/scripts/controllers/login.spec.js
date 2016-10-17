@@ -9,6 +9,7 @@ describe('LoginController', () => {
     const password = 'password';
 
     beforeEach(module('akaunto'));
+    beforeEach(module('stateMock'));
 
     beforeEach(inject(function ($controller, $rootScope, _baseConstants_, _$httpBackend_) {
         $scope = $rootScope.$new();
@@ -28,7 +29,7 @@ describe('LoginController', () => {
 
     it('store the credentials and redirect to home', () => {
         spyOn(controller, '_storeTokenAndRedirect').and.callThrough();
-        spyOn(controller.$state, 'go');
+        controller.$state.expectTransitionTo('home');
 
         $httpBackend.expectPOST(baseConstants.baseURL + 'authenticate').respond({ token: 'mytoken' });
 
@@ -37,6 +38,6 @@ describe('LoginController', () => {
         $httpBackend.flush();
 
         expect(controller._storeTokenAndRedirect).toHaveBeenCalledWith('mytoken');
-        expect(controller.$state.go).toHaveBeenCalledWith('home');
+        expect(controller.$state.ensureAllTransitionsHappened());
     });
 });

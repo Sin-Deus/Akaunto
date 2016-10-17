@@ -5,33 +5,67 @@
 
     <md-divider></md-divider>
 
-    <md-content ng-class="{ flex: homeController.accounts.length > 0}">
+    <md-content ng-class="{ flex: homeController.user.showOwnAccounts && homeController.ownAccounts.length > 0}">
         <md-list>
             <md-subheader>
-                <span translate>home.accounts</span>
+                <md-switch ng-change="homeController.onSwitch()"
+                           ng-model="homeController.user.showOwnAccounts"
+                           aria-label="{{ 'home.showOwnAccounts' | translate }}">
+                    {{ 'home.ownAccounts' | translate }}
+                </md-switch>
             </md-subheader>
-            <p class="md-padding" translate ng-if="homeController.accounts.length === 0">home.noAccount</p>
-            <md-list-item ng-repeat="account in homeController.accounts track by account._id"
+            <p class="md-padding" translate ng-if="homeController.user.showOwnAccounts && homeController.ownAccounts.length === 0">home.noAccount</p>
+            <md-list-item ng-if="homeController.user.showOwnAccounts"
+                          ng-repeat="account in homeController.ownAccounts track by account._id"
                           ng-click="goToAccount(account)"
                           class="secondary-button-padding">
-                <p>{{ account.name }}</p>
+                <p>
+                    <md-icon class="ak-accountList__item__icon">
+                        {{ account.users.length > 0 ? 'group' : '' }}
+                    </md-icon>
+                    {{ account.name }}
+                </p>
                 <md-button class="md-icon-button md-secondary" aria-label="{{ 'home.account.edit' | translate }}" ui-sref="accountForm({ accountId: account._id })">
                     <md-tooltip md-direction="bottom left">{{ 'home.account.edit' | translate }}</md-tooltip>
-                    <md-icon md-menu-origin>edit</md-icon>
+                    <md-icon>edit</md-icon>
                 </md-button>
                 <md-button class="md-icon-button md-secondary" aria-label="{{ 'home.account.delete.label' | translate }}" ng-click="homeController.confirmDeleteAccount(account, $event)">
                     <md-tooltip md-direction="bottom left">{{ 'home.account.delete.label' | translate }}</md-tooltip>
-                    <md-icon md-menu-origin>delete</md-icon>
+                    <md-icon>delete</md-icon>
                 </md-button>
             </md-list-item>
         </md-list>
     </md-content>
 
-    <div class="md-padding" layout="row">
+    <div class="md-padding" layout="row" ng-if="homeController.user.showOwnAccounts">
         <span flex></span>
         <md-button class="md-primary md-raised" aria-label="{{ 'home.createAccount' | translate }}" ui-sref="accountForm()">
             <span translate>home.createAccount</span>
         </md-button>
         <span flex></span>
     </div>
+
+    <md-divider></md-divider>
+
+    <md-content ng-if="homeController.otherAccounts.length" ng-class="{ flex: homeController.user.showOtherAccounts }">
+        <md-list>
+            <md-subheader>
+                <md-switch ng-change="homeController.onSwitch()"
+                           ng-model="homeController.user.showOtherAccounts"
+                           aria-label="{{ 'home.showOtherAccounts' | translate }}">
+                    {{ 'home.otherAccounts' | translate }}
+                </md-switch>
+            </md-subheader>
+            <p class="md-padding" translate ng-if="homeController.otherAccounts.length === 0">home.noAccount</p>
+            <md-list-item ng-if="homeController.user.showOtherAccounts"
+                          ng-repeat="account in homeController.otherAccounts track by account._id"
+                          ng-click="goToAccount(account)"
+                          class="secondary-button-padding">
+                <p>
+                    <md-icon class="ak-accountList__item__icon">lock</md-icon>
+                    {{ account.name }}
+                </p>
+            </md-list-item>
+        </md-list>
+    </md-content>
 </md-content>

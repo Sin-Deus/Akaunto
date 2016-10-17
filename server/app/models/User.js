@@ -11,6 +11,14 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
     isAdmin: Boolean,
     locale: String,
+    showOwnAccounts: {
+        type: Boolean,
+        default: true
+    },
+    showOtherAccounts: {
+        type: Boolean,
+        default: true
+    },
     update: Date,
     accounts: [{
         owner: Boolean,

@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
     if (token) {
         jwt.verify(token, config.secret, (err, decoded) => {
             if (err) {
-                return res.sendStatus(HttpStatus.FORBIDDEN);
+                return res.sendStatus(HttpStatus.UNAUTHORIZED);
             }
 
             User.findById(decoded._doc._id, (userErr, user) => {
@@ -23,6 +23,6 @@ module.exports = (req, res, next) => {
             });
         });
     } else {
-        return res.sendStatus(HttpStatus.FORBIDDEN);
+        return res.sendStatus(HttpStatus.UNAUTHORIZED);
     }
 };

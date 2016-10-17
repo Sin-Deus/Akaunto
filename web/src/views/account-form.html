@@ -41,6 +41,28 @@
                 </md-input-container>
             </section>
 
+            <md-input-container>
+                <md-chips ng-model="accountFormController.account.users"
+                          md-autocomplete-snap
+                          md-require-match="true"
+                          placeholder="{{ 'account.users' | translate }}">
+                    <md-autocomplete
+                        md-selected-item="accountFormController.selectedItem"
+                        md-search-text="accountFormController.userSearchText"
+                        md-items="user in accountFormController.getUsers(accountFormController.userSearchText)"
+                        md-item-text="user.firstName"
+                        placeholder="{{ 'account.user' | translate }}">
+                        <span md-highlight-text="accountFormController.userSearchText">{{ user.firstName }} {{ user.lastName }}</span>
+                    </md-autocomplete>
+                    <md-chip-template>
+                        <span>
+                          <strong>{{ $chip.firstName }} {{ $chip.lastName }}</strong>
+                          <em>({{ $chip.email }})</em>
+                        </span>
+                    </md-chip-template>
+                </md-chips>
+            </md-input-container>
+
             <last-update model="accountFormController.account"></last-update>
         </md-content>
 
