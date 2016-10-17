@@ -9,6 +9,7 @@ describe('akHeaderComponent', () => {
     let $state;
 
     beforeEach(module('akaunto'));
+    beforeEach(module('stateMock'));
 
     beforeEach(inject(function (_$componentController_, $rootScope, _baseConstants_, _$httpBackend_, _$translate_, _moment_, _$state_) {
         baseConstants = _baseConstants_;
@@ -40,14 +41,5 @@ describe('akHeaderComponent', () => {
 
         expect($translate.use()).toEqual('fr');
         expect(moment.locale()).toEqual('fr');
-    });
-
-    it('should navigate to the home page', function () {
-        spyOn($state, 'go');
-
-        const controller = $componentController('akHeader', { $scope: {} });
-        controller.goHome();
-
-        expect($state.go).toHaveBeenCalledWith('home');
     });
 });
