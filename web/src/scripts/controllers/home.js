@@ -128,7 +128,9 @@ class HomeController {
      */
     _onDeleteSuccess(accountToDelete) {
         this.toastService.success('home.account.delete.success');
-        this._.remove(this.accounts, account => account._id === accountToDelete._id);
+        this._.each([this.ownAccounts, this.otherAccounts], accounts =>
+            this._.remove(accounts, account => account._id === accountToDelete._id)
+        );
     }
 }
 

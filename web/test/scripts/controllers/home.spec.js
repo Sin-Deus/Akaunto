@@ -50,4 +50,33 @@ describe('HomeController', () => {
         controller.onSwitch();
         $httpBackend.flush();
     });
+
+    it('should correctly delete an account', () => {
+        $httpBackend.expectDELETE(`${ baseConstants.apiBaseURL }accounts/2`).respond({});
+        controller._deleteAccount({ name: 'Account 2', _id: 2, creator: 42 });
+
+        $httpBackend.flush();
+
+        expect(controller.ownAccounts).toEqual([
+            { name: 'Account 1', _id: 1, creator: 42 },
+            { name: 'Account 4', _id: 4, creator: 42 }
+        ]);
+        expect(controller.otherAccounts).toEqual([
+            { name: 'Account 3', _id: 3, creator: 3 },
+            { name: 'Account 5', _id: 5, creator: 3 }
+        ]);
+
+        $httpBackend.expectDELETE(`${ baseConstants.apiBaseURL }accounts/5`).respond({});
+        controller._deleteAccount({ name: 'Account 5', _id: 5, creator: 3 });
+
+        $httpBackend.flush();
+
+        expect(controller.ownAccounts).toEqual([
+            { name: 'Account 1', _id: 1, creator: 42 },
+            { name: 'Account 4', _id: 4, creator: 42 }
+        ]);
+        expect(controller.otherAccounts).toEqual([
+            { name: 'Account 3', _id: 3, creator: 3 }
+        ]);
+    });
 });
