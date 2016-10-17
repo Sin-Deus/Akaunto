@@ -22,7 +22,8 @@ var argv = require('yargs').argv,
 
 var paths = {
     'tmp': '.tmp',
-    'dist': 'dist'
+    'dist': 'dist',
+    'server': '../server/app/public'
 };
 
 /************* Sub tasks *************/
@@ -35,6 +36,11 @@ gulp.task('clean:tmp', function () {
 gulp.task('clean:dist', function () {
     return gulp.src(paths.dist, {'read': false})
         .pipe(clean());
+});
+
+gulp.task('clean:server', function () {
+    return gulp.src(paths.server, {'read': false})
+        .pipe(clean({'force': true}));
 });
 
 gulp.task('webserver', function () {
@@ -94,6 +100,11 @@ gulp.task('copy:icons', function () {
         .pipe(gulpIf(argv.production, gulp.dest(paths.dist + '/styles'), gulp.dest(paths.tmp + '/styles')));
 });
 
+gulp.task('copy:server', function () {
+    return gulp.src([paths.dist + '/*', paths.dist + '/**/*'])
+        .pipe(gulp.dest(paths.server));
+});
+
 gulp.task('watch', function () {
     gulp.watch('src/styles/**/*.scss', ['sass']);
     gulp.watch(['src/*.html', 'src/**/*.html'], ['copy:html']);
@@ -146,6 +157,18 @@ gulp.task('default',
                 'copy:fonts',
                 'copy:icons'
             ]
+        );
+    }
+);
+
+gulp.task('deploy', 
+    function () {
+        argv.production = true;
+    
+        return runSequence(
+            'clean:server',
+            'default',        
+            'copy:server'
         );
     }
 );
