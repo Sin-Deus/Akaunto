@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 const Schema = mongoose.Schema;
 
 const OperationSchema = new Schema({
@@ -24,6 +25,7 @@ OperationSchema.index({ account: 1, month: -1 });
 
 OperationSchema.pre('save', function (next) {
     this.update = new Date();
+    this.month = moment(this.date).format('YYYYMM');
     next();
 });
 
