@@ -6,29 +6,22 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 router.route('/').post((req, res) => {
-    User.findOne({ email: req.body.email }, (err, user) => {
-        if (err) {
-            throw err;
-        }
+    User.findOne({ email: req.body.email })
+        .exec()
+        .fail(() => res.sendStatus(HttpStatus.NOT_FOUND))
+        .then(user => user.comparePassword(req.body.password))
+        .fail(err => res.status(HttpStatus.BAD_REQUEST).send(err))
+        .then(result => {
+            if (!result.isMatch) {
+                res.sendStatus(HttpStatus.BAD_REQUEST);
+            } else {
+                const token = jwt.sign(result.user, config.secret, {
+                    expiresIn: 3600 // expires in 1 hour
+                });
 
-        if (!user) {
-            res.sendStatus(HttpStatus.FORBIDDEN);
-        } else {
-            user.comparePassword(req.body.password, (compareErr, isMatch) => {
-                if (compareErr) {
-                    res.status(HttpStatus.BAD_REQUEST).send(compareErr);
-                } else if (!isMatch) {
-                    res.sendStatus(HttpStatus.BAD_REQUEST);
-                } else {
-                    const token = jwt.sign(user, config.secret, {
-                        expiresIn: 3600 // expires in 1 hour
-                    });
-
-                    res.json({ token });
-                }
-            });
-        }
-    });
+                res.json({ token });
+            }
+        });
 });
 
 module.exports = router;

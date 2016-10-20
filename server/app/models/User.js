@@ -80,13 +80,21 @@ UserSchema.statics.encryptPassword = function (user) {
     return _encryptPassword(user);
 };
 
-UserSchema.methods.comparePassword = function (candidatePassword, cb) {
+UserSchema.methods.comparePassword = function (candidatePassword) {
+    const deferred = Q.defer();
+
+    /* eslint-disable consistent-this */
+    const user = this;
+
     bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
         if (err) {
-            return cb(err);
+            deferred.reject(err);
+        } else {
+            deferred.resolve({ user, isMatch });
         }
-        cb(null, isMatch);
     });
+
+    return deferred.promise;
 };
 
 UserSchema.set('toJSON', {
