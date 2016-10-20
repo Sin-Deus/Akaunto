@@ -1,6 +1,28 @@
 const User = require('../models/User');
 const HttpStatus = require('http-status-codes');
 const _ = require('lodash');
+const Q = require('q');
+
+/**
+ * Updates the given user with the request body, optionally encrypting the password if it's present.
+ * @param {string} userId
+ * @param {object} req
+ * @param {object} res
+ * @return {Promise<Object>}
+ * @private
+ */
+function _updateUser(userId, req, res) {
+    return Q.fcall(() => {
+        Reflect.deleteProperty(req.body, 'update');
+        if (req.body.password) {
+            return User.encryptPassword(req.body);
+        }
+        return req.body;
+    })
+        .then(user => User.findByIdAndUpdate(userId, user, { new: true }).exec())
+        .fail(() => res.sendStatus(HttpStatus.BAD_REQUEST))
+        .then(user => res.json(user));
+}
 
 module.exports = router => {
     router.route('/users/').get((req, res) => {
@@ -11,13 +33,10 @@ module.exports = router => {
             _.each(['firstName', 'lastName'], attr => filter.$or.push({ [attr]: new RegExp(req.query.filter, 'i') }));
         }
 
-        User.find(filter, (err, users) => {
-            if (err) {
-                res.sendStatus(HttpStatus.BAD_REQUEST);
-            } else {
-                res.json(users);
-            }
-        });
+        User.find(filter)
+            .exec()
+            .fail(() => res.sendStatus(HttpStatus.BAD_REQUEST))
+            .then(users => res.json(users));
     });
 
     router.route('/users/').post((req, res) => {
@@ -28,13 +47,9 @@ module.exports = router => {
             user.isAdmin = false;
         }
 
-        user.save(err => {
-            if (err) {
-                res.sendStatus(HttpStatus.BAD_REQUEST);
-            } else {
-                res.statusCode(HttpStatus.CREATED).json(user);
-            }
-        });
+        user.save()
+            .fail(() => res.sendStatus(HttpStatus.BAD_REQUEST))
+            .then(newUser => res.statusCode(HttpStatus.CREATED).json(newUser));
     });
 
     router.route('/users/me').get((req, res) => {
@@ -42,46 +57,24 @@ module.exports = router => {
     });
 
     router.route('/users/me').put((req, res) => {
-        Reflect.deleteProperty(req.body, 'update');
-        const callback = function () {
-            User.findByIdAndUpdate(req.user._id, req.body, { new: true }, (err, user) => {
-                if (err || !user) {
-                    res.sendStatus(HttpStatus.BAD_REQUEST);
-                } else {
-                    res.json(user);
-                }
-            });
-        };
-
-        if (req.body.password) {
-            User.encryptPassword(req.body, callback);
-        } else {
-            /* eslint-disable callback-return */
-            callback();
-        }
+        _updateUser(req.user._id, req, res);
     });
 
     router.route('/users/:id').get((req, res) => {
-        User.findOne({ _id: req.params.id }, (err, user) => {
-            if (err || !user) {
-                res.sendStatus(HttpStatus.NOT_FOUND);
-            } else {
-                res.json(user);
-            }
-        });
+        User.findOne({ _id: req.params.id })
+            .exec()
+            .fail(() => res.sendStatus(HttpStatus.NOT_FOUND))
+            .then(user => res.json(user));
     });
 
     router.route('/users/:id').delete((req, res) => {
         if (!req.user.isAdmin) {
             res.sendStatus(HttpStatus.FORBIDDEN);
         } else {
-            User.findByIdAndRemove(req.params.id, err => {
-                if (err) {
-                    res.sendStatus(HttpStatus.NOT_FOUND);
-                } else {
-                    res.sendStatus(HttpStatus.NO_CONTENT);
-                }
-            });
+            User.findByIdAndRemove(req.params.id)
+                .exec()
+                .fail(() => res.sendStatus(HttpStatus.NOT_FOUND))
+                .then(() => res.sendStatus(HttpStatus.NO_CONTENT));
         }
     });
 
@@ -89,23 +82,7 @@ module.exports = router => {
         if (!req.user.isAdmin && !req.user._id.equals(req.params.id)) {
             res.sendStatus(HttpStatus.FORBIDDEN);
         } else {
-            Reflect.deleteProperty(req.body, 'update');
-            const callback = function () {
-                User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
-                    if (err || !user) {
-                        res.sendStatus(HttpStatus.BAD_REQUEST);
-                    } else {
-                        res.json(user);
-                    }
-                });
-            };
-
-            if (req.body.password) {
-                User.encryptPassword(req.body, callback);
-            } else {
-                /* eslint-disable callback-return */
-                callback();
-            }
+            _updateUser(req.params.id, req, res);
         }
     });
 

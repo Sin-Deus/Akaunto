@@ -32,8 +32,10 @@
     "http-status-codes": "^1.0.6",
     "jsonwebtoken": "^7.1.9",
     "lodash": "^4.15.0",
+    "moment": "^2.15.1",
     "mongoose": "^4.6.0",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "eslint": "^1.10.3",

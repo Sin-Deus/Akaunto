@@ -3,17 +3,20 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const q = require('q');
 const app = express();
 const protectedRouter = express.Router();
 
 const port = process.env.PORT || 8181;
+mongoose.Promise = q.Promise;
 mongoose.connect(config.database);
 
 const jwtMiddleware = require('./app/middlewares/jwt');
 const corsMiddleware = require('./app/middlewares/cors');
 
 const usersRoute = require('./app/routes/users');
-const accountsRoute = require('./app/routes/account');
+const accountsRoute = require('./app/routes/accounts');
+const operationsRoute = require('./app/routes/operations');
 const authenticationRoute = require('./app/routes/authentication');
 
 // Log all requests to the console.
@@ -37,6 +40,7 @@ protectedRouter.use(jwtMiddleware);
 // API routes.
 app.use('/api', usersRoute(protectedRouter));
 app.use('/api', accountsRoute(protectedRouter));
+app.use('/api', operationsRoute(protectedRouter));
 
 // Start the server.
 app.listen(port);
