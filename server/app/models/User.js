@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
+const Q = require('q');
 const Schema = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
 
@@ -33,24 +34,28 @@ const UserSchema = new Schema({
  * Encrypts the password of the given user.
  * @param {object} user
  * @param {string} user.password
- * @param {function} [cb] An optional callback.
+ * @return {Promise<User>}
  * @private
  */
-function _encryptPassword(user, cb) {
+function _encryptPassword(user) {
+    const deferred = Q.defer();
+
     bcrypt.genSalt(SALT_WORK_FACTOR, (saltErr, salt) => {
         if (saltErr) {
-            return cb && cb(saltErr);
+            deferred.reject(saltErr);
+        } else {
+            bcrypt.hash(user.password, salt, (hashErr, hash) => {
+                if (hashErr) {
+                    deferred.reject(hashErr);
+                } else {
+                    user.password = hash;
+                    deferred.resolve(user);
+                }
+            });
         }
-
-        bcrypt.hash(user.password, salt, (hashErr, hash) => {
-            if (hashErr) {
-                return cb && cb(hashErr);
-            }
-
-            user.password = hash;
-            return cb && cb();
-        });
     });
+
+    return deferred.promise;
 }
 
 UserSchema.pre('save', function (next) {
@@ -60,7 +65,7 @@ UserSchema.pre('save', function (next) {
         return next();
     }
 
-    _encryptPassword(this, next);
+    _encryptPassword(this).then(next);
 });
 
 UserSchema.pre('update', function () {
@@ -71,8 +76,8 @@ UserSchema.pre('findOneAndUpdate', function () {
     this.update({}, { $set: { update: new Date() } });
 });
 
-UserSchema.statics.encryptPassword = function (user, cb) {
-    _encryptPassword(user, cb);
+UserSchema.statics.encryptPassword = function (user) {
+    return _encryptPassword(user);
 };
 
 UserSchema.methods.comparePassword = function (candidatePassword, cb) {
