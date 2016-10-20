@@ -1,6 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 let chai = require('chai');
+let expect = require('chai').expect;
 let chaiHttp = require('chai-http');
 let server = require('../server');
 let User = require('../app/models/User');
@@ -24,7 +25,7 @@ describe('Authentication', () => {
             chai.request(server)
                 .post('/authenticate')
                 .end((err, res) => {
-                    res.should.have.status(404);
+                    expect(res.status).to.be.equal(404);
                     done();
                 });
         });
@@ -34,7 +35,7 @@ describe('Authentication', () => {
                 .post('/authenticate')
                 .send({ email: 'unusedemail@gmail.com', password: 'password' })
                 .end((err, res) => {
-                    res.should.have.status(404);
+                    expect(res.status).to.be.equal(404);
                     done();
                 });
         });
@@ -44,7 +45,7 @@ describe('Authentication', () => {
                 .post('/authenticate')
                 .send({ email: 'test@test.com', password: 'password' })
                 .end((err, res) => {
-                    res.should.have.status(400);
+                    expect(res.status).to.be.equal(400);
                     done();
                 });
         });
@@ -54,9 +55,9 @@ describe('Authentication', () => {
                 .post('/authenticate')
                 .send({ email: 'test@test.com', password: 'p@ssw0rd' })
                 .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('token');
+                    expect(res.status).to.be.equal(200);
+                    expect(res.body).to.be.an('object');
+                    expect(res.body).to.have.property('token');
                     done();
                 });
         });
