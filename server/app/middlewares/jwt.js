@@ -1,5 +1,5 @@
 const HttpStatus = require('http-status-codes');
-const config = require('../../config');
+const config = require('config');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const _ = require('lodash');

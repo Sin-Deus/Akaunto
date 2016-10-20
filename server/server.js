@@ -1,4 +1,4 @@
-const config = require('./config');
+const config = require('config');
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -9,7 +9,7 @@ const protectedRouter = express.Router();
 
 const port = process.env.PORT || 8181;
 mongoose.Promise = q.Promise;
-mongoose.connect(config.database);
+mongoose.connect(config.DBHost);
 
 const jwtMiddleware = require('./app/middlewares/jwt');
 const corsMiddleware = require('./app/middlewares/cors');
@@ -19,10 +19,12 @@ const accountsRoute = require('./app/routes/accounts');
 const operationsRoute = require('./app/routes/operations');
 const authenticationRoute = require('./app/routes/authentication');
 
-// Log all requests to the console.
-app.use(morgan('dev'));
-// Enable CORS.
-app.use(corsMiddleware);
+if ('production' !== config.util.getEnv('NODE_ENV')) {
+    // Log all requests to the console.
+    app.use(morgan('dev'));
+    // Enable CORS.
+    app.use(corsMiddleware);
+}
 
 // Use body-parser to be able to retrieve POST parameters, ...
 app.use(bodyParser.json());
