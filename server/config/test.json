@@ -1,0 +1,4 @@
+{
+    "DBHost": "mongodb:27017/akaunto_test",
+    "secret": "thisIsNotSoSecretPleaseChangeIt"
+}

@@ -23,3 +23,13 @@ genghis:
   - mongodb:db
   ports:
   - 5678:5678
+
+test:
+  build: ./docker/node
+  volumes:
+  - ./server:/usr/src/app
+  - ./docker/node/test.sh:/usr/src/test.sh
+  links:
+  - mongodb:mongodb
+  command: bash /usr/src/test.sh
+  container_name: Akaunto_test

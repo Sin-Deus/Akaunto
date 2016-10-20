@@ -21,12 +21,7 @@ A command line prompt will ask for some fields information, and then will save t
 
 ## How to launch server-side tests
 
-Run the following command while the Docker container is running:
+Run the following command:
 ```
-docker exec -ti Akaunto_node npm run test
+docker-compose up test
 ```
-Or, directly from the host machine, inside the `server/` directory:
-```
-npm run test
-```
-*Note that this method will only work if the Node installation of the host machine is the same as the container one.*
