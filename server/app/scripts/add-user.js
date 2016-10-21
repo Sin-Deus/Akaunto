@@ -1,9 +1,9 @@
-const config = require('../../config');
+const config = require('config');
 const mongoose = require('mongoose');
 const prompt = require('prompt');
 const User = require('../models/User');
 
-mongoose.connect(config.database);
+mongoose.connect(config.DBHost);
 
 const schema = {
     properties: {
