@@ -20,12 +20,13 @@ describe('Authentication', () => {
 
     after(() => User.remove({}).exec());
 
-    describe('/POST authenticate', () => {
+    describe('POST /authenticate', () => {
         it('should respond to the request', done => {
             chai.request(server)
                 .post('/authenticate')
                 .end((err, res) => {
                     expect(res.status).to.be.equal(404);
+                    expect(res.body).to.be.empty;
                     done();
                 });
         });
@@ -36,6 +37,7 @@ describe('Authentication', () => {
                 .send({ email: 'unusedemail@gmail.com', password: 'password' })
                 .end((err, res) => {
                     expect(res.status).to.be.equal(404);
+                    expect(res.body).to.be.empty;
                     done();
                 });
         });
@@ -46,6 +48,7 @@ describe('Authentication', () => {
                 .send({ email: 'test@test.com', password: 'password' })
                 .end((err, res) => {
                     expect(res.status).to.be.equal(400);
+                    expect(res.body).to.be.empty;
                     done();
                 });
         });
