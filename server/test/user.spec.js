@@ -308,8 +308,46 @@ describe('User', () => {
             });
 
             describe('update password', () => {
-                it('should update the password, and invalidate the token', done => {
-                    done();
+                it('should update the password', done => {
+                    chai.request(server)
+                        .put('/api/users/me')
+                        .set('x-access-token', adminToken)
+                        .send({ password: 'newPassword' })
+                        .end((err, res) => {
+                            expect(res.status).to.be.equal(200);
+                            expect(res.body).to.be.an('object');
+                            expect(res.body._id).to.be.equal(adminUser._id.toString());
+                            done();
+                        });
+                });
+
+                it('should still authenticate the user with the previous token', done => {
+                    chai.request(server)
+                        .get('/api/users')
+                        .set('x-access-token', adminToken)
+                        .end((err, res) => {
+                            expect(res.status).to.be.equal(200);
+                            expect(res.body).to.be.an('array');
+                            done();
+                        });
+                });
+
+                it('should correctly authenticate the user with the new password', done => {
+                    chai.request(server)
+                        .post('/authenticate')
+                        .send({ email: 'admin@test.com', password: 'newPassword' })
+                        .end((err, res) => {
+                            let token = res.body.token;
+
+                            chai.request(server)
+                                .get('/api/users')
+                                .set('x-access-token', token)
+                                .end((err, res) => {
+                                    expect(res.status).to.be.equal(200);
+                                    expect(res.body).to.be.an('array');
+                                    done();
+                                });
+                        });
                 });
             });
         });
