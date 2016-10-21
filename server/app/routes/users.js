@@ -14,6 +14,7 @@ const Q = require('q');
 function _updateUser(userId, req, res) {
     return Q.fcall(() => {
         Reflect.deleteProperty(req.body, 'update');
+        Reflect.deleteProperty(req.body, 'isAdmin');
         if (req.body.password) {
             return User.encryptPassword(req.body);
         }
@@ -63,6 +64,12 @@ module.exports = router => {
     router.route('/users/:id').get((req, res) => {
         User.findOne({ _id: req.params.id })
             .exec()
+            .then(user => {
+                if (!user) {
+                    throw new Error();
+                }
+                return user;
+            })
             .fail(() => res.sendStatus(HttpStatus.NOT_FOUND))
             .then(user => res.json(user));
     });
@@ -73,6 +80,13 @@ module.exports = router => {
         } else {
             User.findByIdAndRemove(req.params.id)
                 .exec()
+                .fail(() => res.sendStatus(HttpStatus.BAD_REQUEST))
+                .then(user => {
+                    if (!user) {
+                        throw new Error();
+                    }
+                    return user;
+                })
                 .fail(() => res.sendStatus(HttpStatus.NOT_FOUND))
                 .then(() => res.sendStatus(HttpStatus.NO_CONTENT));
         }
