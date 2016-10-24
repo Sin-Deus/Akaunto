@@ -26,3 +26,4 @@ Run the following command:
 ```
 docker-compose up test
 ```
+An HTML report will then be generated inside the `server/report/` folder.
