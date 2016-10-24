@@ -6,6 +6,8 @@ let chaiHttp = require('chai-http');
 let server = require('../server');
 let User = require('../app/models/User');
 let should = chai.should();
+let jwt = require('jsonwebtoken');
+let config = require('config');
 
 chai.use(chaiHttp);
 
@@ -64,5 +66,20 @@ describe('Authentication', () => {
                     done();
                 });
         });
+
+        it('should not find any user with a forged id inside the token', done => {
+            const token = jwt.sign({ _doc: { _id: '5808e3f676c536002176f467' } }, config.secret, {
+                expiresIn: 3600 // expires in 1 hour
+            });
+
+            chai.request(server)
+                .get('/api/users')
+                .set('x-access-token', token)
+                .end((err, res) => {
+                    expect(res.status).to.be.equal(404);
+                    expect(res.body).to.be.empty;
+                    done();
+                });
+        })
     })
 });
