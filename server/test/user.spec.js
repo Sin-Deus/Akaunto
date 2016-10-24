@@ -353,6 +353,267 @@ describe('User', () => {
         });
     });
 
+    describe('PUT /users/:id', () => {
+        it('should not respond to unauthenticated requests', done => {
+            chai.request(server)
+                .put(`/api/users/${ adminUser._id }`)
+                .send({ firstName: 'Admin' })
+                .end((err, res) => {
+                    expect(res.status).to.be.equal(401);
+                    expect(res.body).to.be.empty;
+                    done();
+                });
+        });
+
+        describe('authenticated', () => {
+            it('should update the same user, as an admin', done => {
+                chai.request(server)
+                    .put(`/api/users/${ adminUser._id }`)
+                    .set('x-access-token', adminToken)
+                    .send({ firstName: 'Admin', lastName: 'McAdmin', locale: 'fr', showOtherAccounts: false })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(200);
+                        expect(res.body).to.be.an('object');
+                        expect(res.body._id).to.be.equal(adminUser._id.toString());
+                        expect(res.body.email).to.be.equal('admin@test.com');
+                        expect(res.body.showOwnAccounts).to.be.equal(true);
+                        expect(res.body.showOtherAccounts).to.be.equal(false);
+                        expect(res.body.isAdmin).to.be.equal(true);
+                        expect(res.body.firstName).to.be.equal('Admin');
+                        expect(res.body.lastName).to.be.equal('McAdmin');
+                        expect(res.body.locale).to.be.equal('fr');
+                        expect(res.body.password).to.be.an('undefined');
+                        done();
+                    });
+            });
+            
+            it('should update another user, as an admin', done => {
+                chai.request(server)
+                    .put(`/api/users/${ plainUser._id }`)
+                    .set('x-access-token', adminToken)
+                    .send({ firstName: 'Pl', lastName: 'Ain' })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(200);
+                        expect(res.body).to.be.an('object');
+                        expect(res.body._id).to.be.equal(plainUser._id.toString());
+                        expect(res.body.email).to.be.equal('plain@test.com');
+                        expect(res.body.isAdmin).to.be.equal(false);
+                        expect(res.body.firstName).to.be.equal('Pl');
+                        expect(res.body.lastName).to.be.equal('Ain');
+                        expect(res.body.password).to.be.an('undefined');
+                        done();
+                    });
+            });
+
+            it('should not update another user, as a plain', done => {
+                chai.request(server)
+                    .put(`/api/users/${ adminUser._id }`)
+                    .set('x-access-token', plainToken)
+                    .send({ firstName: 'Ad', lastName: 'min' })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(403);
+                        expect(res.body).to.be.empty;
+                        done();
+                    });
+            });
+            
+            it('should update the same user, as a plain user', done => {
+                chai.request(server)
+                    .put(`/api/users/${ plainUser._id }`)
+                    .set('x-access-token', plainToken)
+                    .send({ firstName: 'James', lastName: 'Bond', locale: 'fr', showOtherAccounts: false })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(200);
+                        expect(res.body).to.be.an('object');
+                        expect(res.body._id).to.be.equal(plainUser._id.toString());
+                        expect(res.body.email).to.be.equal('plain@test.com');
+                        expect(res.body.showOtherAccounts).to.be.equal(false);
+                        expect(res.body.isAdmin).to.be.equal(false);
+                        expect(res.body.firstName).to.be.equal('James');
+                        expect(res.body.lastName).to.be.equal('Bond');
+                        expect(res.body.locale).to.be.equal('fr');
+                        expect(res.body.password).to.be.an('undefined');
+                        done();
+                    });
+            });
+
+            it('should not update the isAdmin property for an admin user', done => {
+                chai.request(server)
+                    .put(`/api/users/${ adminUser._id }`)
+                    .set('x-access-token', adminToken)
+                    .send({ firstName: 'Admin2', locale: 'en', isAdmin: false })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(200);
+                        expect(res.body).to.be.an('object');
+                        expect(res.body._id).to.be.equal(adminUser._id.toString());
+                        expect(res.body.email).to.be.equal('admin@test.com');
+                        expect(res.body.isAdmin).to.be.equal(true);
+                        expect(res.body.firstName).to.be.equal('Admin2');
+                        expect(res.body.lastName).to.be.equal('McAdmin');
+                        expect(res.body.locale).to.be.equal('en');
+                        expect(res.body.password).to.be.an('undefined');
+                        done();
+                    });
+            });
+
+            it('should not update the isAdmin property for a plain user', done => {
+                chai.request(server)
+                    .put(`/api/users/${ plainUser._id }`)
+                    .set('x-access-token', plainToken)
+                    .send({ firstName: 'Plain', locale: 'en', isAdmin: true })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(200);
+                        expect(res.body).to.be.an('object');
+                        expect(res.body._id).to.be.equal(plainUser._id.toString());
+                        expect(res.body.email).to.be.equal('plain@test.com');
+                        expect(res.body.isAdmin).to.be.equal(false);
+                        expect(res.body.firstName).to.be.equal('Plain');
+                        expect(res.body.password).to.be.an('undefined');
+                        done();
+                    });
+            });
+
+            it('should not update their id', done => {
+                chai.request(server)
+                    .put(`/api/users/${ adminUser._id }`)
+                    .set('x-access-token', adminToken)
+                    .send({ _id: '5808e3f676c536002176f467' })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(400);
+                        expect(res.body).to.be.empty;
+                        done();
+                    });
+            });
+
+            describe('update password', () => {
+                it('should update the password', done => {
+                    chai.request(server)
+                        .put(`/api/users/${ adminUser._id }`)
+                        .set('x-access-token', adminToken)
+                        .send({ password: 'newPassword' })
+                        .end((err, res) => {
+                            expect(res.status).to.be.equal(200);
+                            expect(res.body).to.be.an('object');
+                            expect(res.body._id).to.be.equal(adminUser._id.toString());
+                            done();
+                        });
+                });
+
+                it('should still authenticate the user with the previous token', done => {
+                    chai.request(server)
+                        .get('/api/users')
+                        .set('x-access-token', adminToken)
+                        .end((err, res) => {
+                            expect(res.status).to.be.equal(200);
+                            expect(res.body).to.be.an('array');
+                            done();
+                        });
+                });
+
+                it('should correctly authenticate the user with the new password', done => {
+                    chai.request(server)
+                        .post('/authenticate')
+                        .send({ email: 'admin@test.com', password: 'newPassword' })
+                        .end((err, res) => {
+                            let token = res.body.token;
+
+                            chai.request(server)
+                                .get('/api/users')
+                                .set('x-access-token', token)
+                                .end((err, res) => {
+                                    expect(res.status).to.be.equal(200);
+                                    expect(res.body).to.be.an('array');
+                                    done();
+                                });
+                        });
+                });
+            });
+        });
+    });
+
+    describe('POST /users', () => {
+        it('should not respond to unauthenticated requests', done => {
+            chai.request(server)
+                .post('/api/users')
+                .send({ firstName: 'Jack' })
+                .end((err, res) => {
+                    expect(res.status).to.be.equal(401);
+                    expect(res.body).to.be.empty;
+                    done();
+                });
+        });
+
+        describe('authenticated', () => {
+            it('should not create another user with missing password and e-mail', done => {
+                chai.request(server)
+                    .post('/api/users')
+                    .set('x-access-token', adminToken)
+                    .send({ firstName: 'Jack' })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(400);
+                        expect(res.body).to.be.empty;
+                        done();
+                    });
+            });
+            
+            it('should not create another user with missing password', done => {
+                chai.request(server)
+                    .post('/api/users')
+                    .set('x-access-token', adminToken)
+                    .send({ firstName: 'Jack', email: 'jack@test.com' })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(400);
+                        expect(res.body).to.be.empty;
+                        done();
+                    });
+            });
+            
+            it('should not create another user with missing e-mail', done => {
+                chai.request(server)
+                    .post('/api/users')
+                    .set('x-access-token', adminToken)
+                    .send({ firstName: 'Jack', password: 'pass' })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(400);
+                        expect(res.body).to.be.empty;
+                        done();
+                    });
+            });
+
+            it('should not create another user, as a plain user', done => {
+                chai.request(server)
+                    .post('/api/users')
+                    .set('x-access-token', plainToken)
+                    .send({ firstName: 'Jack', password: 'pass', email: 'jack@test.com' })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(403);
+                        expect(res.body).to.be.empty;
+                        done();
+                    });
+            });
+
+            it('should create another user', done => {
+                chai.request(server)
+                    .post('/api/users')
+                    .set('x-access-token', adminToken)
+                    .send({ firstName: 'Jack', password: 'pass', email: 'jack@test.com' })
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(201);
+                        expect(res.body).to.be.an('object');
+                        expect(res.body.email).to.be.equal('jack@test.com');
+                        expect(res.body.showOwnAccounts).to.be.equal(true);
+                        expect(res.body.showOtherAccounts).to.be.equal(true);
+                        expect(res.body.isAdmin).to.be.an('undefined');
+                        expect(res.body.firstName).to.be.equal('Jack');
+                        expect(res.body.lastName).to.be.an('undefined');
+                        expect(res.body.locale).to.be.an('undefined');
+                        expect(res.body.password).to.be.an('undefined');
+                        done();
+                    });
+            });
+        });
+    });
+
     describe('DELETE /users/:id', () => {
         it('should not respond to unauthenticated requests', done => {
             chai.request(server)

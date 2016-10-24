@@ -41,16 +41,14 @@ module.exports = router => {
     });
 
     router.route('/users/').post((req, res) => {
-        const user = new User(req.body);
-
-        // Prevent non-admin users to create admins.
         if (!req.user.isAdmin) {
-            user.isAdmin = false;
+            res.sendStatus(HttpStatus.FORBIDDEN);
+        } else {
+            new User(req.body)
+                .save()
+                .fail(() => res.sendStatus(HttpStatus.BAD_REQUEST))
+                .then(user => res.status(HttpStatus.CREATED).json(user));
         }
-
-        user.save()
-            .fail(() => res.sendStatus(HttpStatus.BAD_REQUEST))
-            .then(newUser => res.statusCode(HttpStatus.CREATED).json(newUser));
     });
 
     router.route('/users/me').get((req, res) => {
