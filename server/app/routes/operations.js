@@ -15,6 +15,12 @@ function _checkAccount(res, accountId, userId, returnValue) {
     return Account
         .findOne({ _id: accountId })
         .exec()
+        .then(account => {
+            if (!account) {
+                throw new Error();
+            }
+            return account;
+        })
         .fail(() => res.sendStatus(HttpStatus.NOT_FOUND))
         .then(account => {
             if (!account.isAllowedUser(userId)) {
@@ -28,7 +34,11 @@ function _checkAccount(res, accountId, userId, returnValue) {
 module.exports = router => {
     router.route('/accounts/:accountId/operations/').get((req, res) => {
         _checkAccount(res, req.params.accountId, req.user._id)
-            .then(account => Operation.find({ account: account._id }))
+            .then(account => Operation
+                .find({ account: account._id })
+                .sort('-date')
+                .exec()
+            )
             .fail(() => res.sendStatus(HttpStatus.BAD_REQUEST))
             .then(operations => res.json(operations));
     });
