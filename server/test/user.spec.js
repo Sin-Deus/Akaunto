@@ -19,7 +19,9 @@ describe('User', () => {
         return new User({
             email: 'admin@test.com',
             password: 'p@ssw0rd',
-            isAdmin: true
+            isAdmin: true,
+            firstName: 'Bruce',
+            lastName: 'Wayne'
         })
             .save()
             .then(user => {
@@ -31,7 +33,9 @@ describe('User', () => {
         return new User({
             email: 'plain@test.com',
             password: 'p@ssword',
-            isAdmin: false
+            isAdmin: false,
+            firstName: 'Bruce',
+            lastName: 'Banner'
         })
             .save()
             .then(user => {
@@ -86,6 +90,33 @@ describe('User', () => {
                         done();
                     });
             });
+
+            it('should return the filtered list of users', done => {
+                chai.request(server)
+                    .get('/api/users?filter=Wayne')
+                    .set('x-access-token', adminToken)
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(200);
+                        expect(res.body).to.be.an('array');
+                        expect(res.body.length).to.be.equal(1);
+                        expect(res.body[0].email).to.be.equal('admin@test.com');
+                        done();
+                    });
+            });
+
+            it('should return the filtered list of users', done => {
+                chai.request(server)
+                    .get('/api/users?filter=Bruce')
+                    .set('x-access-token', adminToken)
+                    .end((err, res) => {
+                        expect(res.status).to.be.equal(200);
+                        expect(res.body).to.be.an('array');
+                        expect(res.body.length).to.be.equal(2);
+                        expect(res.body[0].email).to.be.equal('admin@test.com');
+                        expect(res.body[1].email).to.be.equal('plain@test.com');
+                        done();
+                    });
+            });
         });
     });
 
@@ -113,8 +144,8 @@ describe('User', () => {
                         expect(res.body.showOtherAccounts).to.be.equal(true);
                         expect(res.body.isAdmin).to.be.equal(true);
                         expect(res.body.password).to.be.an('undefined');
-                        expect(res.body.firstName).to.be.an('undefined');
-                        expect(res.body.lastName).to.be.an('undefined');
+                        expect(res.body.firstName).to.be.equal('Bruce');
+                        expect(res.body.lastName).to.be.equal('Wayne');
                         done();
                     });
             });
@@ -131,8 +162,8 @@ describe('User', () => {
                         expect(res.body.showOtherAccounts).to.be.equal(true);
                         expect(res.body.isAdmin).to.be.equal(false);
                         expect(res.body.password).to.be.an('undefined');
-                        expect(res.body.firstName).to.be.an('undefined');
-                        expect(res.body.lastName).to.be.an('undefined');
+                        expect(res.body.firstName).to.be.equal('Bruce');
+                        expect(res.body.lastName).to.be.equal('Banner');
                         done();
                     });
             });
@@ -287,7 +318,7 @@ describe('User', () => {
                         expect(res.body.lastName).to.be.equal('McAdmin');
                         expect(res.body.locale).to.be.equal('en');
                         expect(res.body.password).to.be.an('undefined');
-                        
+
                         User.findById(adminUser._id)
                             .exec()
                             .then(user => {
@@ -296,7 +327,7 @@ describe('User', () => {
                                 expect(user.firstName).to.be.equal('Admin2');
                                 expect(user.lastName).to.be.equal('McAdmin');
                                 expect(user.locale).to.be.equal('en');
-                       
+
                                 done();
                             }).fail(err => console.log(err));
                     });
@@ -439,7 +470,7 @@ describe('User', () => {
                             }).fail(err => console.log(err));
                     });
             });
-            
+
             it('should update another user, as an admin', done => {
                 chai.request(server)
                     .put(`/api/users/${ plainUser._id }`)
@@ -492,7 +523,7 @@ describe('User', () => {
                             }).fail(err => console.log(err));
                     });
             });
-            
+
             it('should update the same user, as a plain user', done => {
                 chai.request(server)
                     .put(`/api/users/${ plainUser._id }`)
@@ -677,7 +708,7 @@ describe('User', () => {
                             }).fail(err => console.log(err));
                     });
             });
-            
+
             it('should not create another user with missing password', done => {
                 chai.request(server)
                     .post('/api/users')
@@ -696,7 +727,7 @@ describe('User', () => {
                             }).fail(err => console.log(err));
                     });
             });
-            
+
             it('should not create another user with missing e-mail', done => {
                 chai.request(server)
                     .post('/api/users')
