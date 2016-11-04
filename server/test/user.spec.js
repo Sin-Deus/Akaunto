@@ -255,7 +255,20 @@ describe('User', () => {
                         expect(res.body.lastName).to.be.equal('McAdmin');
                         expect(res.body.locale).to.be.equal('fr');
                         expect(res.body.password).to.be.an('undefined');
-                        done();
+
+                        User.findById(adminUser._id)
+                            .exec()
+                            .then(user => {
+                                expect(user.email).to.be.equal('admin@test.com');
+                                expect(user.showOwnAccounts).to.be.equal(true);
+                                expect(user.showOtherAccounts).to.be.equal(false);
+                                expect(user.isAdmin).to.be.equal(true);
+                                expect(user.firstName).to.be.equal('Admin');
+                                expect(user.lastName).to.be.equal('McAdmin');
+                                expect(user.locale).to.be.equal('fr');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
 
@@ -274,7 +287,18 @@ describe('User', () => {
                         expect(res.body.lastName).to.be.equal('McAdmin');
                         expect(res.body.locale).to.be.equal('en');
                         expect(res.body.password).to.be.an('undefined');
-                        done();
+                        
+                        User.findById(adminUser._id)
+                            .exec()
+                            .then(user => {
+                                expect(user.email).to.be.equal('admin@test.com');
+                                expect(user.isAdmin).to.be.equal(true);
+                                expect(user.firstName).to.be.equal('Admin2');
+                                expect(user.lastName).to.be.equal('McAdmin');
+                                expect(user.locale).to.be.equal('en');
+                       
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
 
@@ -291,7 +315,16 @@ describe('User', () => {
                         expect(res.body.isAdmin).to.be.equal(false);
                         expect(res.body.firstName).to.be.equal('Plain');
                         expect(res.body.password).to.be.an('undefined');
-                        done();
+
+                        User.findById(plainUser._id)
+                            .exec()
+                            .then(user => {
+                                expect(user.email).to.be.equal('plain@test.com');
+                                expect(user.isAdmin).to.be.equal(false);
+                                expect(user.firstName).to.be.equal('Plain');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
 
@@ -303,7 +336,14 @@ describe('User', () => {
                     .end((err, res) => {
                         expect(res.status).to.be.equal(400);
                         expect(res.body).to.be.empty;
-                        done();
+
+                        User.findById(adminUser._id)
+                            .exec()
+                            .then(user => {
+                                expect(user.email).to.be.equal('admin@test.com');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
 
@@ -383,7 +423,20 @@ describe('User', () => {
                         expect(res.body.lastName).to.be.equal('McAdmin');
                         expect(res.body.locale).to.be.equal('fr');
                         expect(res.body.password).to.be.an('undefined');
-                        done();
+
+                        User.findById(adminUser._id)
+                            .exec()
+                            .then(user => {
+                                expect(user.email).to.be.equal('admin@test.com');
+                                expect(user.showOwnAccounts).to.be.equal(true);
+                                expect(user.showOtherAccounts).to.be.equal(false);
+                                expect(user.isAdmin).to.be.equal(true);
+                                expect(user.firstName).to.be.equal('Admin');
+                                expect(user.lastName).to.be.equal('McAdmin');
+                                expect(user.locale).to.be.equal('fr');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
             
@@ -401,7 +454,17 @@ describe('User', () => {
                         expect(res.body.firstName).to.be.equal('Pl');
                         expect(res.body.lastName).to.be.equal('Ain');
                         expect(res.body.password).to.be.an('undefined');
-                        done();
+
+                        User.findById(plainUser._id)
+                            .exec()
+                            .then(user => {
+                                expect(user.email).to.be.equal('plain@test.com');
+                                expect(user.isAdmin).to.be.equal(false);
+                                expect(user.firstName).to.be.equal('Pl');
+                                expect(user.lastName).to.be.equal('Ain');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
 
@@ -413,7 +476,20 @@ describe('User', () => {
                     .end((err, res) => {
                         expect(res.status).to.be.equal(403);
                         expect(res.body).to.be.empty;
-                        done();
+
+                        User.findById(adminUser._id)
+                            .exec()
+                            .then(user => {
+                                expect(user.email).to.be.equal('admin@test.com');
+                                expect(user.showOwnAccounts).to.be.equal(true);
+                                expect(user.showOtherAccounts).to.be.equal(false);
+                                expect(user.isAdmin).to.be.equal(true);
+                                expect(user.firstName).to.be.equal('Admin');
+                                expect(user.lastName).to.be.equal('McAdmin');
+                                expect(user.locale).to.be.equal('fr');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
             
@@ -433,7 +509,19 @@ describe('User', () => {
                         expect(res.body.lastName).to.be.equal('Bond');
                         expect(res.body.locale).to.be.equal('fr');
                         expect(res.body.password).to.be.an('undefined');
-                        done();
+
+                        User.findById(plainUser._id)
+                            .exec()
+                            .then(user => {
+                                expect(user.email).to.be.equal('plain@test.com');
+                                expect(user.showOtherAccounts).to.be.equal(false);
+                                expect(user.isAdmin).to.be.equal(false);
+                                expect(user.firstName).to.be.equal('James');
+                                expect(user.lastName).to.be.equal('Bond');
+                                expect(user.locale).to.be.equal('fr');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
 
@@ -452,7 +540,18 @@ describe('User', () => {
                         expect(res.body.lastName).to.be.equal('McAdmin');
                         expect(res.body.locale).to.be.equal('en');
                         expect(res.body.password).to.be.an('undefined');
-                        done();
+
+                        User.findById(adminUser._id)
+                            .exec()
+                            .then(user => {
+                                expect(user.email).to.be.equal('admin@test.com');
+                                expect(user.isAdmin).to.be.equal(true);
+                                expect(user.firstName).to.be.equal('Admin2');
+                                expect(user.lastName).to.be.equal('McAdmin');
+                                expect(user.locale).to.be.equal('en');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
 
@@ -469,7 +568,16 @@ describe('User', () => {
                         expect(res.body.isAdmin).to.be.equal(false);
                         expect(res.body.firstName).to.be.equal('Plain');
                         expect(res.body.password).to.be.an('undefined');
-                        done();
+
+                        User.findById(plainUser._id)
+                            .exec()
+                            .then(user => {
+                                expect(user.email).to.be.equal('plain@test.com');
+                                expect(user.isAdmin).to.be.equal(false);
+                                expect(user.firstName).to.be.equal('Plain');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
 
@@ -481,7 +589,14 @@ describe('User', () => {
                     .end((err, res) => {
                         expect(res.status).to.be.equal(400);
                         expect(res.body).to.be.empty;
-                        done();
+
+                        User.findById(adminUser._id)
+                            .exec()
+                            .then(user => {
+                                expect(user.email).to.be.equal('admin@test.com');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
 
@@ -552,7 +667,14 @@ describe('User', () => {
                     .end((err, res) => {
                         expect(res.status).to.be.equal(400);
                         expect(res.body).to.be.empty;
-                        done();
+
+                        User.findOne({ firstName: 'Jack' })
+                            .exec()
+                            .then(user => {
+                                expect(user).to.be.a('null');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
             
@@ -564,7 +686,14 @@ describe('User', () => {
                     .end((err, res) => {
                         expect(res.status).to.be.equal(400);
                         expect(res.body).to.be.empty;
-                        done();
+
+                        User.findOne({ firstName: 'Jack' })
+                            .exec()
+                            .then(user => {
+                                expect(user).to.be.a('null');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
             
@@ -576,7 +705,14 @@ describe('User', () => {
                     .end((err, res) => {
                         expect(res.status).to.be.equal(400);
                         expect(res.body).to.be.empty;
-                        done();
+
+                        User.findOne({ firstName: 'Jack' })
+                            .exec()
+                            .then(user => {
+                                expect(user).to.be.a('null');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
 
@@ -588,7 +724,14 @@ describe('User', () => {
                     .end((err, res) => {
                         expect(res.status).to.be.equal(403);
                         expect(res.body).to.be.empty;
-                        done();
+
+                        User.findOne({ firstName: 'Jack' })
+                            .exec()
+                            .then(user => {
+                                expect(user).to.be.a('null');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
 
@@ -608,7 +751,21 @@ describe('User', () => {
                         expect(res.body.lastName).to.be.an('undefined');
                         expect(res.body.locale).to.be.an('undefined');
                         expect(res.body.password).to.be.an('undefined');
-                        done();
+
+                        User.findOne({ firstName: 'Jack' })
+                            .exec()
+                            .then(user => {
+                                expect(user).to.be.an('object');
+                                expect(user.email).to.be.equal('jack@test.com');
+                                expect(user.showOwnAccounts).to.be.equal(true);
+                                expect(user.showOtherAccounts).to.be.equal(true);
+                                expect(user.isAdmin).to.be.an('undefined');
+                                expect(user.firstName).to.be.equal('Jack');
+                                expect(user.lastName).to.be.an('undefined');
+                                expect(user.locale).to.be.an('undefined');
+
+                                done();
+                            }).fail(err => console.log(err));
                     });
             });
         });
@@ -651,19 +808,14 @@ describe('User', () => {
                         .end((err, res) => {
                             expect(res.status).to.be.equal(400);
                             expect(res.body).to.be.empty;
-                            done();
-                        });
-                });
 
-                it('should still exist', done => {
-                    chai.request(server)
-                        .get(`/api/users/${ user._id }`)
-                        .set('x-access-token', adminToken)
-                        .end((err, res) => {
-                            expect(res.status).to.be.equal(200);
-                            expect(res.body).to.be.an('object');
-                            expect(res.body.email).to.be.equal('todelete@test.com');
-                            done();
+                            User.findById(user._id)
+                                .exec()
+                                .then(foundUser => {
+                                    expect(foundUser).to.be.an('object');
+
+                                    done();
+                                }).fail(err => console.log(err));
                         });
                 });
             });
@@ -694,19 +846,14 @@ describe('User', () => {
                         .end((err, res) => {
                             expect(res.status).to.be.equal(404);
                             expect(res.body).to.be.empty;
-                            done();
-                        });
-                });
 
-                it('should still exist', done => {
-                    chai.request(server)
-                        .get(`/api/users/${ user._id }`)
-                        .set('x-access-token', adminToken)
-                        .end((err, res) => {
-                            expect(res.status).to.be.equal(200);
-                            expect(res.body).to.be.an('object');
-                            expect(res.body.email).to.be.equal('todelete@test.com');
-                            done();
+                            User.findById(user._id)
+                                .exec()
+                                .then(foundUser => {
+                                    expect(foundUser).to.be.an('object');
+
+                                    done();
+                                }).fail(err => console.log(err));
                         });
                 });
             });
@@ -737,18 +884,14 @@ describe('User', () => {
                         .end((err, res) => {
                             expect(res.status).to.be.equal(204);
                             expect(res.body).to.be.empty;
-                            done();
-                        });
-                });
 
-                it('should not exist anymore', done => {
-                    chai.request(server)
-                        .get(`/api/users/${ user._id }`)
-                        .set('x-access-token', adminToken)
-                        .end((err, res) => {
-                            expect(res.status).to.be.equal(404);
-                            expect(res.body).to.be.empty;
-                            done();
+                            User.findById(user._id)
+                                .exec()
+                                .then(foundUser => {
+                                    expect(foundUser).to.be.a('null');
+
+                                    done();
+                                }).fail(err => console.log(err));
                         });
                 });
             });
@@ -779,19 +922,14 @@ describe('User', () => {
                         .end((err, res) => {
                             expect(res.status).to.be.equal(403);
                             expect(res.body).to.be.empty;
-                            done();
-                        });
-                });
 
-                it('should still exist', done => {
-                    chai.request(server)
-                        .get(`/api/users/${ user._id }`)
-                        .set('x-access-token', adminToken)
-                        .end((err, res) => {
-                            expect(res.status).to.be.equal(200);
-                            expect(res.body).to.be.an('object');
-                            expect(res.body.email).to.be.equal('todelete@test.com');
-                            done();
+                            User.findById(user._id)
+                                .exec()
+                                .then(foundUser => {
+                                    expect(foundUser).to.be.an('object');
+
+                                    done();
+                                }).fail(err => console.log(err));
                         });
                 });
             });
