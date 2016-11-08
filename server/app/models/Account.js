@@ -3,7 +3,10 @@ const _ = require('lodash');
 const Schema = mongoose.Schema;
 
 const AccountSchema = new Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true
+    },
     isSavings: Boolean,
     initialBalance: Number,
     currentBalance: Number,
@@ -12,7 +15,8 @@ const AccountSchema = new Schema({
     update: Date,
     creator: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     users: [{
         type: Schema.Types.ObjectId,
@@ -23,6 +27,10 @@ const AccountSchema = new Schema({
 AccountSchema.pre('save', function (next) {
     this.update = new Date();
     next();
+});
+
+AccountSchema.pre('findOneAndUpdate', function () {
+    this.update({}, { $set: { update: new Date() } });
 });
 
 AccountSchema.methods.isAllowedUser = function (userId) {

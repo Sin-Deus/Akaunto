@@ -11,7 +11,7 @@ node:
   container_name: Akaunto_node
 
 mongodb:
-  image: mongo
+  image: mongo:2.6.12
   volumes:
   - ./docker/db:/data/db
   container_name: Akaunto_mongodb
@@ -23,3 +23,14 @@ genghis:
   - mongodb:db
   ports:
   - 5678:5678
+
+# Container to run server-side tests
+test:
+  build: ./docker/node
+  volumes:
+  - ./server:/usr/src/app
+  - ./docker/node/test.sh:/usr/src/test.sh
+  links:
+  - mongodb:mongodb
+  command: bash /usr/src/test.sh
+  container_name: Akaunto_test

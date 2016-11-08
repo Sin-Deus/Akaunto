@@ -4,7 +4,7 @@
   "description": "Server-side application for the Akaunto service",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec test --reporter mochawesome --reporter-options reportDir=report",
     "start": "node server.js"
   },
   "repository": {
@@ -28,6 +28,7 @@
   "dependencies": {
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
+    "config": "^1.21.0",
     "express": "^4.14.0",
     "http-status-codes": "^1.0.6",
     "jsonwebtoken": "^7.1.9",
@@ -35,11 +36,16 @@
     "moment": "^2.15.1",
     "mongoose": "^4.6.0",
     "morgan": "^1.7.0",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "prompt": "^1.0.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "eslint": "^1.10.3",
     "eslint-config-fingerproof": "^1.0.0",
-    "prompt": "^1.0.0"
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.0",
+    "mochawesome": "^1.5.3"
   }
 }

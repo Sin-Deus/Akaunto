@@ -13,11 +13,13 @@ const OperationSchema = new Schema({
     update: Date,
     creator: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     account: {
         type: Schema.Types.ObjectId,
-        ref: 'Account'
+        ref: 'Account',
+        required: true
     }
 });
 
