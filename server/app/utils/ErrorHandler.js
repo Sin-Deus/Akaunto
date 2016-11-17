@@ -6,5 +6,7 @@ module.exports.handle = (err, res) => {
         res.sendStatus(HttpStatus.NOT_FOUND);
     } else if (err instanceof Errors.ForbiddenError) {
         res.sendStatus(HttpStatus.FORBIDDEN);
+    } else {
+        res.sendStatus(HttpStatus.BAD_REQUEST);
     }
 };
