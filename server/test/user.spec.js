@@ -200,18 +200,18 @@ describe('User', () => {
         });
 
         describe('authenticated', () => {
-            it('should not found a user with an invalid id', done => {
+            it('should not find a user with an invalid id', done => {
                 chai.request(server)
                     .get(`/api/users/1234`)
                     .set('x-access-token', adminToken)
                     .end((err, res) => {
-                        expect(res.status).to.be.equal(404);
+                        expect(res.status).to.be.equal(400);
                         expect(res.body).to.be.empty;
                         done();
                     });
             });
 
-            it('should not found the requested user', done => {
+            it('should not find the requested user', done => {
                 chai.request(server)
                     .get(`/api/users/5808e3f676c536002176f467`)
                     .set('x-access-token', adminToken)
